@@ -1,0 +1,45 @@
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  margin: 0;
+  padding: 0 10px;
+  width: 100%;
+  height: 75px;
+}
+
+.nav-container {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.footer-container div {
+  position: relative;
+  display: flex;
+  flex-basis: 55px;
+  list-style: none;
+  margin: auto 0;
+  height: 50px;
+}
+
+.item-container img {
+  margin: auto;
+  height: 20px;
+}
+
+.item-container.active img {
+  filter: invert(100%);
+  transition: 0.95s;
+}
+
+.footer-container #marker {
+  position: absolute;
+  left: 0;
+  height: 50px;
+  width: 55px;
+  background-color: #191f42;
+  bottom: 12px;
+  transition: 0.5s;
+  border-radius: 10px;
+}

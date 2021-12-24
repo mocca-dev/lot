@@ -1,5 +1,6 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [footerItems] = useState([
@@ -10,42 +11,9 @@ function App() {
     { icon: 'notification', route: '/notification', initial: false },
   ]);
 
-  const [xOffset, setXOffset] = useState('');
-
-  useEffect(() => {
-    setXOffset(document.querySelector('.initial-item').offsetLeft);
-  }, []);
-
-  const positionMarker = (e) => {
-    const { currentTarget } = e;
-
-    if (currentTarget.tagName === 'DIV') {
-      document.querySelectorAll('.item-container').forEach((item) => {
-        item.classList.remove('active');
-      });
-      setXOffset(currentTarget.offsetLeft + 'px');
-
-      currentTarget.classList.toggle('active');
-    }
-  };
-
   return (
     <div className="App">
-      <footer className="footer-container">
-        <nav className="nav-container">
-          <div id="marker" style={{ left: xOffset }}></div>
-          {footerItems.map((item) => (
-            <div
-              className={
-                'item-container ' + (item.initial ? 'initial-item active' : '')
-              }
-              onClick={(e) => positionMarker(e)}
-            >
-              <img src={`/icons/${item.icon}.svg`} alt="" />
-            </div>
-          ))}
-        </nav>
-      </footer>
+      <Footer items={footerItems} />
     </div>
   );
 }
