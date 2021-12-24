@@ -4,11 +4,11 @@ import Footer from './components/Footer/Footer';
 
 function App() {
   const [footerItems] = useState([
-    { icon: 'map', route: '/map', initial: false },
-    { icon: 'bookmark', route: '/bookmark', initial: false },
+    { icon: 'map', route: '/map' },
+    { icon: 'bookmark', route: '/bookmark' },
     { icon: 'search', route: '/search', initial: true },
-    { icon: 'new', route: '/new', initial: false },
-    { icon: 'notification', route: '/notification', initial: false },
+    { icon: 'new', route: '/new' },
+    { icon: 'notification', route: '/notification' },
   ]);
 
   return (
