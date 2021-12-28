@@ -15,7 +15,7 @@ header .left-img.big-size {
 
 header .profile-pic {
   height: 45px;
-  border-radius: 50%;
+  border-radius: 12px;
 }
 
 .title {

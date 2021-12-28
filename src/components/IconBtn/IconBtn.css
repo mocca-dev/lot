@@ -1,0 +1,10 @@
+.icon-button-container {
+  border: none;
+  background-color: #f8f8f8;
+  padding: 15px 17px;
+  border-radius: 10px;
+}
+
+.icon-button-container img {
+  height: 1rem;
+}
