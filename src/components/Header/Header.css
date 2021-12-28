@@ -1,0 +1,24 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+header .left-img {
+  height: 24px;
+}
+
+header .left-img.big-size {
+  height: 35px;
+}
+
+header .profile-pic {
+  height: 45px;
+  border-radius: 50%;
+}
+
+.title {
+  font-size: 1.55rem;
+  text-align: left;
+}

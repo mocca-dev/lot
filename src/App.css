@@ -8,6 +8,13 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  padding: 0 10px;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+
 .App {
   text-align: center;
 }
