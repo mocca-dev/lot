@@ -26,8 +26,9 @@ const Footer = ({ items }) => {
     <footer className="footer-container">
       <nav className="nav-container">
         <div id="marker" style={{ left: xOffset }}></div>
-        {items.map((item) => (
+        {items.map((item, id) => (
           <div
+            key={id}
             className={
               'item-container ' + (item.initial ? 'initial-item active' : '')
             }

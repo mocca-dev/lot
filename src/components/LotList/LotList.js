@@ -3,14 +3,13 @@ import './LotList.css';
 const LotList = ({ list }) => {
   return (
     <div className="results-container">
-      {list.map((result) => (
-        <div className="result-container">
+      {list.map((result, id) => (
+        <div className="result-container" key={id}>
           <img
             className="result-img"
             src="/icons/item-mock.png"
             height="68px"
             alt=""
-            srcset=""
           />
           <span className="result-detail">
             <strong>{result.title}</strong>
@@ -22,12 +21,7 @@ const LotList = ({ list }) => {
             </span>
             <span className="since">{result.since} días atrás</span>
           </span>
-          <img
-            className="right-arrow"
-            src="/icons/left-arrow.svg"
-            alt="goto"
-            srcset=""
-          />
+          <img className="right-arrow" src="/icons/left-arrow.svg" alt="goto" />
         </div>
       ))}
     </div>
