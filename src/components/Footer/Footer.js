@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import './Footer.css';
 
@@ -12,7 +13,7 @@ const Footer = ({ items }) => {
   const positionMarker = (e) => {
     const { currentTarget } = e;
 
-    if (currentTarget.tagName === 'DIV') {
+    if (currentTarget.tagName === 'A') {
       document.querySelectorAll('.item-container').forEach((item) => {
         item.classList.remove('active');
       });
@@ -27,15 +28,16 @@ const Footer = ({ items }) => {
       <nav className="nav-container">
         <div id="marker" style={{ left: xOffset }}></div>
         {items.map((item, id) => (
-          <div
+          <Link
             key={id}
             className={
               'item-container ' + (item.initial ? 'initial-item active' : '')
             }
             onClick={(e) => positionMarker(e)}
+            to={item.route}
           >
             <img src={`/icons/${item.icon}.svg`} alt="" />
-          </div>
+          </Link>
         ))}
       </nav>
     </footer>

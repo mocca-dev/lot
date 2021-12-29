@@ -9,22 +9,27 @@ import Main from './routes/Main/Main';
 function App() {
   const [footerItems] = useState([
     { icon: 'map', route: '/map' },
-    { icon: 'bookmark', route: '/bookmark' },
-    { icon: 'search', route: '/search', initial: true },
+    { icon: 'bookmark', route: '/bookmarks' },
+    { icon: 'search', route: '/', initial: true },
     { icon: 'new', route: '/new' },
-    { icon: 'notification', route: '/notification' },
+    { icon: 'notification', route: '/notifications' },
   ]);
 
   return (
-    <div className="App">
-      <Header />
-      <BrowserRouter>
+    <BrowserRouter>
+      <div className="App">
+        <Header />
         <Routes>
           <Route path="/" element={<Main />}></Route>
+          <Route path="/profile" element={<Main />}></Route>
+          <Route path="/bookmarks" element={<Main />}></Route>
+          <Route path="/notifications" element={<Main />}></Route>
+          <Route path="/new" element={<Main />}></Route>
+          <Route path="/map" element={<Main />}></Route>
         </Routes>
-      </BrowserRouter>
-      <Footer items={footerItems} />
-    </div>
+        <Footer items={footerItems} />
+      </div>
+    </BrowserRouter>
   );
 }
 
