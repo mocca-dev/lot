@@ -27,7 +27,7 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
-  grid-template-areas: 'header' 'sub-header' 'main' 'footer';
+  grid-template-areas: 'header' 'sub-header' 'non-scroll-main' 'main' 'footer';
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -44,6 +44,10 @@ header {
 .sub-header {
   grid-area: sub-header;
   margin-bottom: 20px;
+}
+
+.non-scroll-main {
+  grid-area: non-scroll-main;
 }
 
 main {

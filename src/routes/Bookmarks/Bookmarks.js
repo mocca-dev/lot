@@ -1,5 +1,15 @@
+import { useContext, useEffect } from 'react';
+import Store from '../../store';
+
 const Bookmarks = () => {
-  return <h2>Bookmarks</h2>;
+  const { dispatch } = useContext(Store);
+
+  useEffect(() => {
+    dispatch({ type: 'SET_SUB_HEADER', payload: 'Guardados' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return <main>Bookmarks</main>;
 };
 
 export default Bookmarks;

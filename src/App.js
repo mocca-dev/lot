@@ -1,6 +1,8 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Store from './store';
+import appReducer from './reducer';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
@@ -20,21 +22,32 @@ function App() {
     { icon: 'notification', route: '/notifications' },
   ]);
 
+  const [state, dispatch] = useReducer(appReducer, {
+    subHeader: 'Buscar cocheras',
+    showLogo: true,
+    showFooter: true,
+  });
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
-          <Route path="/bookmarks" element={<Bookmarks />}></Route>
-          <Route path="/notifications" element={<Notifications />}></Route>
-          <Route path="/new" element={<New />}></Route>
-          <Route path="/map" element={<Map />}></Route>
-        </Routes>
-        <Footer items={footerItems} />
-      </div>
-    </BrowserRouter>
+    <Store.Provider value={{ state, dispatch }}>
+      <BrowserRouter>
+        <div className="App">
+          <Header />
+          <span className="sub-header">
+            <h2 className="title">{state.subHeader}</h2>
+          </span>
+          <Routes>
+            <Route path="/" element={<Main />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/bookmarks" element={<Bookmarks />}></Route>
+            <Route path="/notifications" element={<Notifications />}></Route>
+            <Route path="/new" element={<New />}></Route>
+            <Route path="/map" element={<Map />}></Route>
+          </Routes>
+          {state.showFooter && <Footer items={footerItems} />}
+        </div>
+      </BrowserRouter>
+    </Store.Provider>
   );
 }
 

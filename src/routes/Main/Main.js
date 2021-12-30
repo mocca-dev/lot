@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import Store from '../../store';
 
 import LotList from '../../components/LotList/LotList';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -62,10 +63,17 @@ const Main = () => {
       since: '12',
     },
   ]);
+
+  const { dispatch } = useContext(Store);
+
+  useEffect(() => {
+    dispatch({ type: 'SET_SUB_HEADER', payload: 'Buscar cocheras' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
-      <span className="sub-header">
-        <h2 className="title">Buscar cocheras</h2>
+      <span className="non-scroll-main">
         <SearchBar />
         <span className="result-counter">
           Mostrando {results?.length} de 10
