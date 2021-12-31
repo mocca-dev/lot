@@ -13,11 +13,15 @@ const LotList = ({ list }) => {
           />
           <span className="result-detail">
             <strong>{result.title}</strong>
-            <span>{result.address}</span>
+            <span>
+              <img src="/icons/map.svg" height="13px" alt="" />
+              {result.address}
+            </span>
           </span>
           <span className="result-price">
             <span>
-              {result.price} <span className="frecuency">/día</span>
+              ${result.price}
+              <span className="frecuency">/día</span>
             </span>
             <span className="since">{result.since} días atrás</span>
           </span>
