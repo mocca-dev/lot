@@ -17,7 +17,7 @@ function App() {
   const [footerItems] = useState([
     { icon: 'map', route: '/map' },
     { icon: 'bookmark', route: '/bookmarks' },
-    { icon: 'search', route: '/', initial: true },
+    { icon: 'search', route: '/' },
     { icon: 'new', route: '/new' },
     { icon: 'notification', route: '/notifications' },
   ]);
@@ -26,6 +26,7 @@ function App() {
     subHeader: 'Buscar cocheras',
     showLogo: true,
     showFooter: true,
+    initialMarker: 'search',
   });
 
   return (

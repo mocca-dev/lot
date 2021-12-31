@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import Store from '../../store';
 
 import './Footer.css';
 
 const Footer = ({ items }) => {
+  const { dispatch, state } = useContext(Store);
   const [xOffset, setXOffset] = useState('');
 
   useEffect(() => {
-    setXOffset(document.querySelector('.initial-item').offsetLeft);
-  }, []);
-
-  const positionMarker = (e) => {
-    const { currentTarget } = e;
-
-    if (currentTarget.tagName === 'A') {
+    if (state.initialMarker) {
+      const markerNode = document.querySelector(`#${state.initialMarker}`);
       document.querySelectorAll('.item-container').forEach((item) => {
         item.classList.remove('active');
       });
-      setXOffset(currentTarget.offsetLeft + 'px');
+      markerNode?.classList.toggle('active');
+      setXOffset(markerNode?.offsetLeft);
+    }
+  }, [setXOffset, state.initialMarker]);
 
-      currentTarget.classList.toggle('active');
+  const positionMarker = (e, itemName) => {
+    if (e.currentTarget.tagName === 'A') {
+      dispatch({
+        type: 'SET_MARKER_POS',
+        payload: itemName,
+      });
     }
   };
 
@@ -30,10 +36,9 @@ const Footer = ({ items }) => {
         {items.map((item, id) => (
           <Link
             key={id}
-            className={
-              'item-container ' + (item.initial ? 'initial-item active' : '')
-            }
-            onClick={(e) => positionMarker(e)}
+            className={'item-container ' + (item.initial ? 'initial-item' : '')}
+            id={item.icon}
+            onClick={(e) => positionMarker(e, item.icon)}
             to={item.route}
           >
             <img src={`/icons/${item.icon}.svg`} alt="" />

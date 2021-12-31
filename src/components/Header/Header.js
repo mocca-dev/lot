@@ -11,7 +11,6 @@ const Header = () => {
 
   const location = useLocation();
   useEffect(() => {
-    console.log(location.pathname);
     if (location.pathname !== '/profile') {
       dispatch({ type: 'SHOW_FOOTER' });
       dispatch({ type: 'SHOW_LOGO' });
@@ -23,6 +22,10 @@ const Header = () => {
 
   const goBackOrHome = () => {
     if (state.showLogo) {
+      dispatch({
+        type: 'SET_MARKER_POS',
+        payload: 'search',
+      });
       navigate('/');
     } else {
       navigate(-1);
