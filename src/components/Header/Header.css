@@ -3,7 +3,7 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  margin-top: 7px;
+  margin-top: 4px;
 }
 
 header .left-img {
@@ -22,4 +22,8 @@ header .profile-pic {
 .title {
   font-size: 1.55rem;
   text-align: left;
+}
+
+.height50 {
+  height: 50px;
 }

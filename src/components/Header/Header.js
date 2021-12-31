@@ -40,7 +40,7 @@ const Header = () => {
         alt="back"
         onClick={() => goBackOrHome()}
       />
-      <Link to="/profile">
+      <Link to="/profile" className="height50">
         <img
           className="profile-pic"
           src="/icons/profile-mock.png"
