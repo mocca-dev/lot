@@ -43,11 +43,12 @@ header {
 
 .sub-header {
   grid-area: sub-header;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .non-scroll-main {
   grid-area: non-scroll-main;
+  margin-bottom: 20px;
 }
 
 main {
