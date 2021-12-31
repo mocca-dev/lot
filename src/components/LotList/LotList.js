@@ -8,7 +8,7 @@ const LotList = ({ list }) => {
           <img
             className="result-img"
             src="/icons/item-mock.png"
-            height="68px"
+            height="65px"
             alt=""
           />
           <span className="result-detail">
