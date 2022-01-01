@@ -1,0 +1,39 @@
+.menu {
+  z-index: 102;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background-color: white;
+  padding: 15px 20px;
+  box-shadow: 0px 5px 20px 5px rgb(25 31 66 / 15%);
+  border-radius: 15px;
+}
+
+.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu ul li {
+  font-size: 1rem;
+  padding: 8px 0;
+}
+
+.menu ul li {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: black;
+}
+
+.menu-backdrop {
+  z-index: 101;
+  position: absolute;
+  top: -4px;
+  left: -10px;
+  width: 100vw;
+  height: 100vh;
+  /* backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(50, 50, 50, 0.25); */
+}

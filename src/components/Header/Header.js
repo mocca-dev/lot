@@ -1,22 +1,27 @@
-import React, { useEffect, useContext } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useContext, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Store from '../../store';
+import Menu from '../Menu/Menu';
 
 import './Header.css';
 
 const Header = () => {
   const { dispatch, state } = useContext(Store);
   const navigate = useNavigate();
+  const [showRight, setShowRight] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const location = useLocation();
   useEffect(() => {
-    if (location.pathname !== '/profile') {
+    if (location.pathname !== '/profile' && location.pathname !== '/mylots') {
       dispatch({ type: 'SHOW_FOOTER' });
       dispatch({ type: 'SHOW_LOGO' });
+      setShowRight(true);
     } else {
       dispatch({ type: 'HIDE_FOOTER' });
       dispatch({ type: 'HIDE_LOGO' });
+      setShowRight(false);
     }
   }, [dispatch, location]);
 
@@ -33,21 +38,28 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <img
-        className={'left-img ' + (state.showLogo ? 'big-size' : 'normal-size')}
-        src={state.showLogo ? '/icons/logo512.png' : '/icons/left-arrow.svg'}
-        alt="back"
-        onClick={() => goBackOrHome()}
-      />
-      <Link to="/profile" className="height50">
+    <>
+      <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
+      <header>
         <img
-          className="profile-pic"
-          src="/icons/profile-mock.png"
-          alt="profile"
+          className={
+            'left-img ' + (state.showLogo ? 'big-size' : 'normal-size')
+          }
+          src={state.showLogo ? '/icons/logo.png' : '/icons/left-arrow.svg'}
+          alt="back"
+          onClick={() => goBackOrHome()}
         />
-      </Link>
-    </header>
+        {showRight && (
+          <div onClick={() => setShowMenu(true)} className="height50">
+            <img
+              className="profile-pic"
+              src="/icons/profile-mock.png"
+              alt="profile"
+            />
+          </div>
+        )}
+      </header>
+    </>
   );
 };
 
