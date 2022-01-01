@@ -1,0 +1,25 @@
+.profile-screen-container {
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 220px);
+}
+
+.profile-screen-container .profile-pic {
+  height: 100px;
+  width: 100px;
+  border-radius: 15px;
+}
+
+.profile-screen-container .content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-screen-container .content-container h2 {
+  margin-bottom: 0;
+}
+
+.footer-profile-profile {
+  margin-bottom: 20px;
+}

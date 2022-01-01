@@ -1,5 +1,6 @@
 :root {
   --radius-squircle: 12px;
+  --primary-bg: #191f42;
 }
 
 html {
@@ -53,7 +54,7 @@ header {
 
 main {
   grid-area: main;
-  padding: 0 5px 10px 5px;
+  padding: 0 5px 10px 0;
   overflow-y: scroll;
 }
 

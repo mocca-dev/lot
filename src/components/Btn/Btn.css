@@ -1,0 +1,11 @@
+.btn-container {
+  padding: 15px 0;
+  background: none;
+  border: none;
+  background-color: var(--primary-bg);
+  border-radius: var(--radius-squircle);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+}
