@@ -12,6 +12,7 @@ import Map from './routes/Map/Map';
 import Notifications from './routes/Notifications/Notifications';
 import Bookmarks from './routes/Bookmarks/Bookmarks';
 import Profile from './routes/Profile/Profile';
+import MyLots from './routes/MyLots/MyLots';
 
 function App() {
   const [footerItems] = useState([
@@ -44,6 +45,7 @@ function App() {
             <Route path="/notifications" element={<Notifications />}></Route>
             <Route path="/new" element={<New />}></Route>
             <Route path="/map" element={<Map />}></Route>
+            <Route path="/mylots" element={<MyLots />}></Route>
           </Routes>
           {state.showFooter && <Footer items={footerItems} />}
         </div>
