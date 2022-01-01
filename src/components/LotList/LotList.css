@@ -43,6 +43,7 @@
 .result-container .result-price .since {
   font-weight: normal;
   font-size: 0.75rem;
+  color: grey;
 }
 
 .result-container .right-arrow {
