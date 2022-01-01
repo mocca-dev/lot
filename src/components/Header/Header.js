@@ -21,7 +21,7 @@ const Header = () => {
     } else {
       dispatch({ type: 'HIDE_FOOTER' });
       dispatch({ type: 'HIDE_LOGO' });
-      setShowRight(false);
+      if (location.pathname !== '/mylots') setShowRight(false);
     }
   }, [dispatch, location]);
 
