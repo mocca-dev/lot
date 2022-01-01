@@ -54,7 +54,6 @@ header {
 
 main {
   grid-area: main;
-  padding: 0 5px 10px 0;
   overflow-y: scroll;
 }
 
