@@ -12,6 +12,10 @@ function appReducer(state, action) {
       return { ...state, showLogo: true };
     case 'HIDE_LOGO':
       return { ...state, showLogo: false };
+    case 'SET_MODAL':
+      return { ...state, modal: action.payload };
+    case 'HIDE_MODAL':
+      return { ...state, modal: { ...state.modal, show: false } };
     default:
       return state;
   }
