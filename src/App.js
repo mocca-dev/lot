@@ -6,6 +6,7 @@ import appReducer from './reducer';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
+import Modal from './components/Modal/Modal';
 import Main from './routes/Main/Main';
 import New from './routes/New/New';
 import Map from './routes/Map/Map';
@@ -28,6 +29,15 @@ function App() {
     showLogo: true,
     showFooter: true,
     initialMarker: 'search',
+    modal: {
+      show: false,
+      title: '',
+      content: '',
+      btns: {
+        left: { action: null, text: 'cancelar' },
+        right: { action: null, text: 'aceptar' },
+      },
+    },
   });
 
   return (
@@ -50,6 +60,10 @@ function App() {
           {state.showFooter && <Footer items={footerItems} />}
         </div>
       </BrowserRouter>
+      <Modal
+        config={state.modal}
+        hide={() => dispatch({ type: 'HIDE_MODAL' })}
+      />
     </Store.Provider>
   );
 }
