@@ -6,7 +6,7 @@ import './Profile.css';
 
 const showConfirmModal = (dispatch) => {
   const modalConfig = {
-    title: 'Está seguro de cerrar sesión?',
+    title: '¿Está seguro de cerrar sesión?',
     show: true,
     type: undefined,
     url: '',
