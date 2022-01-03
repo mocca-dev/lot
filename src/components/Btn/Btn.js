@@ -1,7 +1,11 @@
 import './Btn.css';
 
-const Btn = ({ label }) => {
-  return <button className="btn-container">{label}</button>;
+const Btn = ({ label, onClick }) => {
+  return (
+    <button className="btn-container" onClick={onClick}>
+      {label}
+    </button>
+  );
 };
 
 export default Btn;
