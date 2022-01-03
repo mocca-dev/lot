@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+
 import Store from '../../store';
 
 const Map = () => {
@@ -9,7 +10,7 @@ const Map = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <main>Map</main>;
+  return <main></main>;
 };
 
 export default Map;
