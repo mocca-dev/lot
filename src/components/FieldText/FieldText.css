@@ -5,4 +5,18 @@
   border: none;
   background-color: #f8f8f8;
   font-size: 1rem;
+  font-family: 'Montserrat';
+}
+
+.fieldtext-container.border {
+  background-color: white;
+  border: 1px solid #bdbdbd;
+}
+
+.fieldtext-container.marginTop {
+  margin-top: 5px;
+}
+
+.spacer {
+  height: 15px;
 }
