@@ -8,12 +8,53 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "/logos/logo-72.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "72x72"
     },
     {
-      "src": "logo512.png",
+      "src": "/logos/logo-96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/logos/logo-120.png",
+      "type": "image/png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "/logos/logo-128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/logos/logo-144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/logos/logo-152.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "/logos/logo-180.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "/logos/logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/logos/logo-384.png",
+      "type": "image/png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "/logos/logo-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
