@@ -1,7 +1,8 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import FieldText from '../../components/FieldText/FieldText';
 import Btn from '../../components/Btn/Btn';
 import Store from '../../store';
+import RadioGroup from '../../components/RadioGroup/RadioGroup';
 
 const showConfirmModal = (dispatch) => {
   const modalConfig = {
@@ -30,6 +31,28 @@ const showConfirmModal = (dispatch) => {
 
 const New = () => {
   const { dispatch } = useContext(Store);
+  const [availability, setAvailability] = useState('');
+  const [typeOfVehicle, setTypeOfVehicle] = useState('');
+  const [typeOfCoverage, setTypeOfCoverage] = useState('');
+  const availabilityList = [
+    { label: 'Hr', value: 0 },
+    { label: 'Día', value: 1 },
+    { label: 'Semana', value: 2 },
+    { label: '15 Días', value: 3 },
+    { label: 'Mes', value: 4 },
+  ];
+  const typeOfVehicleList = [
+    { label: 'Moto', value: 0 },
+    { label: 'Auto', value: 1 },
+    { label: 'Camioneta', value: 2 },
+    { label: 'Tariler', value: 3 },
+    { label: 'Cautri', value: 4 },
+  ];
+  const typeOfCoverageList = [
+    { label: 'Sin techo', value: 0 },
+    { label: 'Con techo', value: 1 },
+    { label: 'Cubierta', value: 2 },
+  ];
 
   useEffect(() => {
     dispatch({ type: 'SET_SUB_HEADER', payload: 'Nueva publicación' });
@@ -49,20 +72,26 @@ const New = () => {
           isGhost={true}
           label="Contacto"
         />
-        <FieldText
-          placeholder="ej: (555) 555-5555"
-          isGhost={true}
-          label="Disponibilidad"
+        <div>Disponibilidad</div>
+        <RadioGroup
+          list={availabilityList}
+          setSelected={setAvailability}
+          selected={availability}
+          name="availability"
         />
-        <FieldText
-          placeholder="ej: (555) 555-5555"
-          isGhost={true}
-          label="Tipo de vehículos"
+        <div>Tipo de vehículos</div>
+        <RadioGroup
+          list={typeOfVehicleList}
+          setSelected={setTypeOfVehicle}
+          selected={typeOfVehicle}
+          name="typeOfVehicles"
         />
-        <FieldText
-          placeholder="ej: (555) 555-5555"
-          isGhost={true}
-          label="Tipo de cobertura"
+        <div>Tipo de cobertura</div>
+        <RadioGroup
+          list={typeOfCoverageList}
+          setSelected={setTypeOfCoverage}
+          selected={typeOfCoverage}
+          name="typeOfCoverage"
         />
         <FieldText
           placeholder="ej: (555) 555-5555"

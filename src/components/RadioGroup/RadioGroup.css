@@ -1,0 +1,6 @@
+.radio-group-container {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 5px;
+}
