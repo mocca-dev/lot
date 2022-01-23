@@ -27,8 +27,12 @@ body {
   min-height: -webkit-fill-available;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 70px 96px 1fr auto;
   grid-template-areas: 'header' 'sub-header' 'non-scroll-main' 'main' 'footer';
+}
+
+.App.without-non-scroll-main {
+  grid-template-rows: auto 70px 1fr auto;
 }
 
 @supports (-webkit-touch-callout: none) {

@@ -26,6 +26,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch({ type: 'SET_SUB_HEADER', payload: 'Buscar cocheras' });
+    dispatch({ type: 'SHOW_FIXED_CONTENT' });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

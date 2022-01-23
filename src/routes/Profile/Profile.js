@@ -34,6 +34,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch({ type: 'SET_SUB_HEADER', payload: 'Perfil' });
+    dispatch({ type: 'HIDE_FIXED_CONTENT' });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

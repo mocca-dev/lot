@@ -32,6 +32,7 @@ function App() {
     subHeader: 'Buscar cocheras',
     showLogo: true,
     showFooter: true,
+    showFixedContent: true,
     initialMarker: 'search',
     modal: {
       show: false,
@@ -47,7 +48,11 @@ function App() {
   return (
     <Store.Provider value={{ state, dispatch }}>
       <BrowserRouter>
-        <div className="App">
+        <div
+          className={
+            'App' + (!state.showFixedContent ? ' without-non-scroll-main' : '')
+          }
+        >
           <Header />
           <span className="sub-header">
             <h2 className="title">{state.subHeader}</h2>
