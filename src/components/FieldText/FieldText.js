@@ -1,19 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { Field } from 'formik';
+import React from 'react';
 
 import './FieldText.css';
 
-const FieldText = ({ placeholder, isGhost, label, type = 'text' }) => {
-  const [name, setName] = useState('');
-
-  useEffect(() => {
-    if (label) setName(label.split(' ')[0]);
-  }, [label]);
-
+const FieldText = ({ placeholder, isGhost, label, type = 'text', name }) => {
   return (
     <>
       {label && <label>{label}</label>}
       {type === 'text' ? (
-        <input
+        <Field
           className={
             'fieldtext-container ' +
             (isGhost ? 'border ' : '') +
@@ -25,7 +20,8 @@ const FieldText = ({ placeholder, isGhost, label, type = 'text' }) => {
           placeholder={placeholder}
         />
       ) : (
-        <textarea
+        <Field
+          as="textarea"
           className={
             'fieldtext-container ' +
             (isGhost ? 'border ' : '') +
@@ -35,7 +31,7 @@ const FieldText = ({ placeholder, isGhost, label, type = 'text' }) => {
           name={name}
           rows="4"
           cols="50"
-        ></textarea>
+        ></Field>
       )}
       <div className="spacer"></div>
     </>

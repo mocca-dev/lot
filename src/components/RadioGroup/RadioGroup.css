@@ -1,5 +1,8 @@
 .radio-group-container {
   display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   justify-content: space-between;
   text-align: center;
   margin-top: 5px;
