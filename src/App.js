@@ -1,8 +1,10 @@
 import './App.css';
 import { useState, useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Store from './store';
 import appReducer from './reducer';
+import { makeServer } from './server';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
@@ -14,6 +16,8 @@ import Notifications from './routes/Notifications/Notifications';
 import Bookmarks from './routes/Bookmarks/Bookmarks';
 import Profile from './routes/Profile/Profile';
 import MyLots from './routes/MyLots/MyLots';
+
+makeServer();
 
 function App() {
   const [footerItems] = useState([

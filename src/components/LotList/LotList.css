@@ -30,6 +30,13 @@
   min-width: 45%;
 }
 
+.result-container .result-detail strong {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 95%;
+}
+
 .result-container .result-price {
   font-size: 1.3rem;
   font-weight: 600;
@@ -50,4 +57,16 @@
   height: 20px;
   padding-right: 10px;
   transform: rotate(180deg);
+}
+
+.spinner-container {
+  display: flex;
+}
+
+.spinner-container svg {
+  margin: auto;
+}
+
+.no-items-container {
+  text-align: center;
 }

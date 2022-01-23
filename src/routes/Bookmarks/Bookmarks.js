@@ -5,67 +5,24 @@ import LotList from '../../components/LotList/LotList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { FormikProvider, useFormik, Form } from 'formik';
 
+const fetchParkData = (setResults, setIsFetching) => {
+  setIsFetching(true);
+  fetch('api/parkinglots')
+    .then((response) => response.json())
+    .then((data) => {
+      setResults(data);
+      setIsFetching(false);
+    });
+};
+
 const Bookmarks = () => {
   const { dispatch } = useContext(Store);
+  const [results, setResults] = useState([]);
+  const [isFetching, setIsFetching] = useState([]);
 
-  const [results] = useState([
-    {
-      img: '',
-      title: 'Title Test',
-      address: 'Brown 247',
-      date: '',
-      price: '86',
-      since: '12',
-    },
-    {
-      img: '',
-      title: 'Title Test2',
-      address: 'Brown 247',
-      date: '',
-      price: '86',
-      since: '12',
-    },
-    {
-      img: '',
-      title: 'Title Test3',
-      address: 'Brown 247',
-      date: '',
-      price: '86',
-      since: '12',
-    },
-    {
-      img: '',
-      title: 'Title Test3',
-      address: 'Brown 247',
-      date: '',
-      price: '86',
-      since: '12',
-    },
-    {
-      img: '',
-      title: 'Title Test3',
-      address: 'Brown 247',
-      date: '',
-      price: '86',
-      since: '12',
-    },
-    {
-      img: '',
-      title: 'Title Test3',
-      address: 'Brown 247',
-      date: '',
-      price: '86',
-      since: '12',
-    },
-    {
-      img: '',
-      title: 'Title Test3',
-      address: 'Brown 247',
-      date: '',
-      price: '86',
-      since: '12',
-    },
-  ]);
+  useEffect(() => {
+    fetchParkData(setResults, setIsFetching);
+  }, []);
 
   useEffect(() => {
     dispatch({ type: 'SET_SUB_HEADER', payload: 'Guardados' });
@@ -94,7 +51,7 @@ const Bookmarks = () => {
         </span>
       </span>
       <main>
-        <LotList list={results} />
+        <LotList list={results} isLoading={isFetching} />
       </main>
     </>
   );
