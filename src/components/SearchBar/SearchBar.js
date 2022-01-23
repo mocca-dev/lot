@@ -6,7 +6,7 @@ import './SearchBar.css';
 const SearchBar = () => {
   return (
     <div className="search-container">
-      <FieldText placeholder={'ej.: Siempre Viva 123'} />
+      <FieldText placeholder={'ej.: Siempre Viva 123'} name="searchText" />
       <IconBtn />
     </div>
   );

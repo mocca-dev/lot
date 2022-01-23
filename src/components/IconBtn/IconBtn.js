@@ -4,7 +4,7 @@ import './IconBtn.css';
 
 const IconBtn = () => {
   return (
-    <button className="icon-button-container">
+    <button type="submit" className="icon-button-container">
       <img src="/icons/search.svg" alt="search" />
     </button>
   );

@@ -3,6 +3,7 @@ import Store from '../../store';
 
 import LotList from '../../components/LotList/LotList';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import { FormikProvider, useFormik, Form } from 'formik';
 
 const Main = () => {
   const [results] = useState([
@@ -71,10 +72,23 @@ const Main = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const formik = useFormik({
+    initialValues: {
+      searchText: '',
+    },
+    onSubmit: async (values) => {
+      console.log(JSON.stringify(values, null, 2));
+    },
+  });
+
   return (
     <>
       <span className="non-scroll-main">
-        <SearchBar />
+        <FormikProvider value={formik}>
+          <Form>
+            <SearchBar />
+          </Form>
+        </FormikProvider>
         <span className="result-counter">
           Mostrando {results?.length} de 10
         </span>
