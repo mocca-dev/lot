@@ -1,24 +1,26 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Store from '../../store';
 
 import './Footer.css';
 
 const Footer = ({ items }) => {
-  const { dispatch, state } = useContext(Store);
+  const { dispatch } = useContext(Store);
   const [xOffset, setXOffset] = useState('');
+  const location = useLocation();
 
   useEffect(() => {
-    if (state.initialMarker) {
-      const markerNode = document.querySelector(`#${state.initialMarker}`);
-      document.querySelectorAll('.item-container').forEach((item) => {
-        item.classList.remove('active');
-      });
-      markerNode?.classList.toggle('active');
-      setXOffset(markerNode?.offsetLeft);
-    }
-  }, [setXOffset, state.initialMarker]);
+    let { pathname } = location;
+    if (pathname === '/') pathname = '/search';
+    const markerNode = document.querySelector(`#${pathname.replace('/', '')}`);
+
+    document.querySelectorAll('.item-container').forEach((item) => {
+      item.classList.remove('active');
+    });
+    markerNode?.classList.toggle('active');
+    setXOffset(markerNode?.offsetLeft);
+  }, [setXOffset, location]);
 
   const positionMarker = (e, itemName) => {
     if (e.currentTarget.tagName === 'A') {
