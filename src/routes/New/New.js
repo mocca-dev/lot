@@ -1,63 +1,64 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import FieldText from '../../components/FieldText/FieldText';
 import Btn from '../../components/Btn/Btn';
-import Store from '../../store';
 import RadioGroup from '../../components/RadioGroup/RadioGroup';
 import { Form, FormikProvider, useFormik } from 'formik';
+import { hideModal, setModal } from '../../reducers/modal/modalSlice';
+import { set } from '../../reducers/subHeader/subHeaderSlice';
 
+const availabilityList = [
+  { label: 'Hr', value: '0' },
+  { label: 'Día', value: '1' },
+  { label: 'Semana', value: '2' },
+  { label: '15 Días', value: '3' },
+  { label: 'Mes', value: '4' },
+];
+const typeOfVehicleList = [
+  { label: 'Moto', value: '0' },
+  { label: 'Auto', value: '1' },
+  { label: 'Camioneta', value: '2' },
+  { label: 'Tariler', value: '3' },
+  { label: 'Cautri', value: '4' },
+];
+const typeOfCoverageList = [
+  { label: 'Sin techo', value: '0' },
+  { label: 'Con techo', value: '1' },
+  { label: 'Cubierta', value: '2' },
+];
+
+// () => {
+//   resolve();
+//   dispatch(hideModal());
+// }
 const showConfirmModal = (dispatch) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const modalConfig = {
       title: '¿Está seguro que desea publicar?',
       show: true,
       type: undefined,
-      url: '',
       btns: {
         left: {
-          action: () => dispatch({ type: 'HIDE_MODAL' }),
+          action: null, //() => dispatch(hideModal()),
           text: 'Cancelar',
         },
         right: {
-          action: () => {
-            // setUser(null);
-            // localStorage.setItem('user', null);
-            // history.push('/ingreso');
-            resolve();
-            dispatch({ type: 'HIDE_MODAL' });
-          },
+          action: null,
           text: 'Aceptar',
         },
       },
     };
-    dispatch({ type: 'SET_MODAL', payload: modalConfig });
+    dispatch(setModal(modalConfig));
   });
 };
 
 const New = () => {
-  const { dispatch } = useContext(Store);
-  const availabilityList = [
-    { label: 'Hr', value: '0' },
-    { label: 'Día', value: '1' },
-    { label: 'Semana', value: '2' },
-    { label: '15 Días', value: '3' },
-    { label: 'Mes', value: '4' },
-  ];
-  const typeOfVehicleList = [
-    { label: 'Moto', value: '0' },
-    { label: 'Auto', value: '1' },
-    { label: 'Camioneta', value: '2' },
-    { label: 'Tariler', value: '3' },
-    { label: 'Cautri', value: '4' },
-  ];
-  const typeOfCoverageList = [
-    { label: 'Sin techo', value: '0' },
-    { label: 'Con techo', value: '1' },
-    { label: 'Cubierta', value: '2' },
-  ];
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Nueva publicación' });
-    dispatch({ type: 'HIDE_FIXED_CONTENT' });
+    dispatch(set('Nueva publicación'));
+    // dispatch({ type: 'HIDE_FIXED_CONTENT' });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

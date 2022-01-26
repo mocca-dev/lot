@@ -1,13 +1,15 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import Store from '../../store';
+import { set } from '../../reducers/subHeader/subHeaderSlice';
 
 const Map = () => {
-  const { dispatch } = useContext(Store);
+  const { dispatch } = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Mapa' });
-    dispatch({ type: 'HIDE_FIXED_CONTENT' });
+    dispatch(set('Mapa'));
+    // dispatch({ type: 'SET_SUB_HEADER', payload: 'Mapa' });
+    // dispatch({ type: 'HIDE_FIXED_CONTENT' });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

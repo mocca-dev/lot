@@ -1,10 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import LotList from '../../components/LotList/LotList';
-import Store from '../../store';
+import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
+import { set } from '../../reducers/subHeader/subHeaderSlice';
 
 const MyLots = () => {
-  const { dispatch } = useContext(Store);
+  const dispatch = useDispatch();
   const [results] = useState([
     {
       img: '',
@@ -65,8 +67,8 @@ const MyLots = () => {
   ]);
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Mis publicaciones' });
-    dispatch({ type: 'HIDE_FIXED_CONTENT' });
+    dispatch(set('Mis publicaciones'));
+    dispatch(hideFixedContent());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

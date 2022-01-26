@@ -1,6 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { set } from '../../reducers/subHeader/subHeaderSlice';
 import NotificationList from '../../components/NotificationList/NotificationList';
-import Store from '../../store';
 
 const fetchNotificationsData = (setResults, setIsFetching) => {
   setIsFetching(true);
@@ -13,13 +15,13 @@ const fetchNotificationsData = (setResults, setIsFetching) => {
 };
 
 const Notifications = () => {
-  const { dispatch } = useContext(Store);
+  const dispatch = useDispatch();
   const [results, setResults] = useState();
   const [isFetching, setIsFetching] = useState([]);
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Notificaciones' });
-    dispatch({ type: 'HIDE_FIXED_CONTENT' });
+    dispatch(set('Notificaciones'));
+    // dispatch({ type: 'HIDE_FIXED_CONTENT' });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

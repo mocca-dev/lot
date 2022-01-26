@@ -4,7 +4,7 @@ import SimpleModalTemplate from './SimpleModalTemplate';
 // import ContactSharedModalTemplate from './ContactSharedModalTemplate/ContactSharedModalTemplate';
 // import LocationModalTemplate from './LocationModalTemplate/LocationModalTemplate';
 
-const TypeOfModalRender = (config) => {
+const TypeOfModalRender = (config, hide) => {
   switch (config.type) {
     case undefined:
       return (
@@ -12,6 +12,7 @@ const TypeOfModalRender = (config) => {
           title={config.title}
           btns={config.btns}
           content={config.content}
+          hide={hide}
         />
       );
     // case 'contact':
@@ -29,7 +30,8 @@ const TypeOfModalRender = (config) => {
 };
 
 const Modal = ({ config, hide }) => {
-  const { show } = config;
+  const { show } = config.modal;
+  console.log(config);
   // , title, btns, url, content
   const wrapperRef = useRef(null);
 
@@ -50,13 +52,15 @@ const Modal = ({ config, hide }) => {
     };
   });
 
-  return (
-    show && (
-      <span className="modal-wrapper">
-        <span ref={wrapperRef} className="modal-backdrop" />
-        <div className="modal-container">{TypeOfModalRender(config)}</div>
-      </span>
-    )
+  return show ? (
+    <span className="modal-wrapper">
+      <span ref={wrapperRef} className="modal-backdrop" />
+      <div className="modal-container">
+        {TypeOfModalRender(config.modal, hide)}
+      </div>
+    </span>
+  ) : (
+    <></>
   );
 };
 

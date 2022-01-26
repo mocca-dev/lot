@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
-import Store from '../../store';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import LotList from '../../components/LotList/LotList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { FormikProvider, useFormik, Form } from 'formik';
+import { set } from '../../reducers/subHeader/subHeaderSlice';
 
 const fetchParkData = (setResults, setIsFetching) => {
   setIsFetching(true);
@@ -16,7 +17,7 @@ const fetchParkData = (setResults, setIsFetching) => {
 };
 
 const Bookmarks = () => {
-  const { dispatch } = useContext(Store);
+  const dispatch = useDispatch();
   const [results, setResults] = useState([]);
   const [isFetching, setIsFetching] = useState([]);
 
@@ -25,7 +26,8 @@ const Bookmarks = () => {
   }, []);
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Guardados' });
+    dispatch(set('Guardados'));
+    // dispatch({ type: 'SET_SUB_HEADER', payload: 'Guardados' });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
