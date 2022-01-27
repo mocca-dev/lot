@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { set } from '../../reducers/subHeader/subHeaderSlice';
 import NotificationList from '../../components/NotificationList/NotificationList';
+import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 
 const fetchNotificationsData = (setResults, setIsFetching) => {
   setIsFetching(true);
@@ -21,7 +22,7 @@ const Notifications = () => {
 
   useEffect(() => {
     dispatch(set('Notificaciones'));
-    // dispatch({ type: 'HIDE_FIXED_CONTENT' });
+    dispatch(hideFixedContent());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

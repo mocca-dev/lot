@@ -38,8 +38,8 @@ export const {
   hideFixedContent,
 } = showFlags.actions;
 
-export const selecLogo = (state) => state.logo.value;
-export const selecFooter = (state) => state.footer.value;
-export const selecFixedContent = (state) => state.fixedContent.value;
+export const selecLogo = (state) => state.showFlags.logo;
+export const selecFooter = (state) => state.showFlags.footer;
+export const selecFixedContent = (state) => state.showFlags.fixedContent;
 
 export default showFlags.reducer;

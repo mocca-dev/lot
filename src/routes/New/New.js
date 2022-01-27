@@ -5,8 +5,9 @@ import FieldText from '../../components/FieldText/FieldText';
 import Btn from '../../components/Btn/Btn';
 import RadioGroup from '../../components/RadioGroup/RadioGroup';
 import { Form, FormikProvider, useFormik } from 'formik';
-import { hideModal, setModal } from '../../reducers/modal/modalSlice';
+import { setModal } from '../../reducers/modal/modalSlice';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
+import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 
 const availabilityList = [
   { label: 'Hr', value: '0' },
@@ -28,29 +29,23 @@ const typeOfCoverageList = [
   { label: 'Cubierta', value: '2' },
 ];
 
-// () => {
-//   resolve();
-//   dispatch(hideModal());
-// }
-const showConfirmModal = (dispatch) => {
-  return new Promise((resolve) => {
-    const modalConfig = {
-      title: '¿Está seguro que desea publicar?',
-      show: true,
-      type: undefined,
-      btns: {
-        left: {
-          action: null, //() => dispatch(hideModal()),
-          text: 'Cancelar',
-        },
-        right: {
-          action: null,
-          text: 'Aceptar',
-        },
+const showConfirmModal = (dispatch, payload) => {
+  const modalConfig = {
+    title: '¿Está seguro que desea publicar?',
+    show: true,
+    type: 'CONFIRM',
+    payload,
+    action: 'POST_NEW',
+    btns: {
+      left: {
+        text: 'Cancelar',
       },
-    };
-    dispatch(setModal(modalConfig));
-  });
+      right: {
+        text: 'Aceptar',
+      },
+    },
+  };
+  dispatch(setModal(modalConfig));
 };
 
 const New = () => {
@@ -58,7 +53,7 @@ const New = () => {
 
   useEffect(() => {
     dispatch(set('Nueva publicación'));
-    // dispatch({ type: 'HIDE_FIXED_CONTENT' });
+    dispatch(hideFixedContent());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -71,9 +66,8 @@ const New = () => {
       typeOfCoverage: '',
       description: '',
     },
-    onSubmit: async (values) => {
-      await showConfirmModal(dispatch);
-      console.log(JSON.stringify(values, null, 2));
+    onSubmit: (values) => {
+      showConfirmModal(dispatch, values);
     },
   });
 

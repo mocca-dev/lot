@@ -24,7 +24,6 @@ export const modalSlice = createSlice({
       state.modal = action.payload;
     },
     hideModal: (state) => {
-      console.log('hide', state.modal);
       state.modal.show = false;
     },
   },

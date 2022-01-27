@@ -41,7 +41,7 @@ const Menu = ({ showMenu, setShowMenu }) => {
 
   const menuClickItem = (action) => {
     setShowMenu(false);
-    console.log(typeof action);
+
     if (typeof action === 'string') {
       navigate(action);
     } else {

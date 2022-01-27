@@ -1,6 +1,9 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Btn from '../../components/Btn/Btn';
-import Store from '../../store';
+import { setModal } from '../../reducers/modal/modalSlice';
+import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
+import { set } from '../../reducers/subHeader/subHeaderSlice';
 
 import './Profile.css';
 
@@ -8,33 +11,27 @@ const showConfirmModal = (dispatch) => {
   const modalConfig = {
     title: '¿Está seguro de cerrar sesión?',
     show: true,
-    type: undefined,
+    type: 'CONFIRM',
+    action: 'SIGN_OUT',
     url: '',
     btns: {
       left: {
-        action: () => dispatch({ type: 'HIDE_MODAL' }),
         text: 'Cancelar',
       },
       right: {
-        action: () => {
-          // setUser(null);
-          // localStorage.setItem('user', null);
-          // history.push('/ingreso');
-          dispatch({ type: 'HIDE_MODAL' });
-        },
         text: 'Aceptar',
       },
     },
   };
-  dispatch({ type: 'SET_MODAL', payload: modalConfig });
+  dispatch(setModal(modalConfig));
 };
 
 const Profile = () => {
-  const { dispatch } = useContext(Store);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Perfil' });
-    dispatch({ type: 'HIDE_FIXED_CONTENT' });
+    dispatch(set('Perfil'));
+    dispatch(hideFixedContent());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
