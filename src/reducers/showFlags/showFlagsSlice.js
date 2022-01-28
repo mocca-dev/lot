@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const showFlags = createSlice({
-  name: 'counter',
+  name: 'showFLags',
   initialState: {
     logo: true,
     footer: true,
