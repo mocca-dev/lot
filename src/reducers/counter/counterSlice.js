@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 export const fecthCounter = createAsyncThunk(
   'counter/fecthCounter',
   async (payload) => {
-    console.log(payload);
     return 44;
   }
 );

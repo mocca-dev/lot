@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { fecthCounter } from '../../reducers/counter/counterSlice';
+// import { useDispatch } from 'react-redux';
 
 const ConfirmModalTemplate = ({
   title,
@@ -10,7 +9,7 @@ const ConfirmModalTemplate = ({
   payload,
   action,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   return (
     <>
       <h4>{title}</h4>
@@ -33,12 +32,10 @@ const ConfirmModalTemplate = ({
               onClick={() => {
                 switch (action) {
                   case 'POST_NEW':
-                    dispatch(fecthCounter(payload));
                     hide();
                     break;
                   case 'SIGN_OUT':
                     console.log('Sign Out');
-                    // dispatch(fecthCounter(payload));
                     hide();
                     break;
                   default:
