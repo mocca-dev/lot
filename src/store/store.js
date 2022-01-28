@@ -5,6 +5,7 @@ import postsReducer from '../reducers/posts/postsSlice';
 import showFlagsReducer from '../reducers/showFlags/showFlagsSlice';
 import subHeaderReducer from '../reducers/subHeader/subHeaderSlice';
 import bookmarksReducer from '../reducers/bookmarks/bookmarksSlice';
+import lotReducer from '../reducers/lot/lotSlice';
 
 export default configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
     showFlags: showFlagsReducer,
     posts: postsReducer,
     bookmarks: bookmarksReducer,
+    lot: lotReducer,
   },
 });

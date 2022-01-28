@@ -1,5 +1,14 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  hideFooter,
+  hideLogo,
+  selecLogo,
+  showFooter,
+  showLogo,
+} from '../../reducers/showFlags/showFlagsSlice';
 
 import Store from '../../store';
 import Menu from '../Menu/Menu';
@@ -7,26 +16,32 @@ import Menu from '../Menu/Menu';
 import './Header.css';
 
 const Header = () => {
-  const { dispatch, state } = useContext(Store);
+  const { dispatch } = useContext(Store);
+  const disp = useDispatch();
   const navigate = useNavigate();
+  const isShowingLogo = useSelector(selecLogo);
   const [showRight, setShowRight] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
   const location = useLocation();
   useEffect(() => {
-    if (location.pathname !== '/profile' && location.pathname !== '/mylots') {
-      dispatch({ type: 'SHOW_FOOTER' });
-      dispatch({ type: 'SHOW_LOGO' });
+    if (
+      location.pathname !== '/profile' &&
+      location.pathname !== '/mylots' &&
+      location.pathname !== '/lot'
+    ) {
+      disp(showFooter());
+      disp(showLogo());
       setShowRight(true);
     } else {
-      dispatch({ type: 'HIDE_FOOTER' });
-      dispatch({ type: 'HIDE_LOGO' });
+      disp(hideFooter());
+      disp(hideLogo());
       if (location.pathname !== '/mylots') setShowRight(false);
     }
-  }, [dispatch, location]);
+  }, [disp, location]);
 
   const goBackOrHome = () => {
-    if (state.showLogo) {
+    if (isShowingLogo) {
       dispatch({
         type: 'SET_MARKER_POS',
         payload: 'search',
@@ -42,10 +57,8 @@ const Header = () => {
       <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
       <header>
         <img
-          className={
-            'left-img ' + (state.showLogo ? 'big-size' : 'normal-size')
-          }
-          src={state.showLogo ? '/icons/logo.png' : '/icons/left-arrow.svg'}
+          className={'left-img ' + (isShowingLogo ? 'big-size' : 'normal-size')}
+          src={isShowingLogo ? '/icons/logo.png' : '/icons/left-arrow.svg'}
           alt="back"
           onClick={() => goBackOrHome()}
         />

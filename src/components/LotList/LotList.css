@@ -11,6 +11,8 @@
   border-radius: var(--radius-squircle);
   font-size: 1rem;
   align-items: center;
+  text-decoration: none;
+  color: black;
 }
 
 .result-container .result-img {

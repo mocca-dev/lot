@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { SpinnerCircularFixed } from 'spinners-react';
 
 import './LotList.css';
@@ -25,8 +26,8 @@ const LotList = ({ list, isLoading }) => {
 
   return (
     <div className="results-container">
-      {list?.map((result, id) => (
-        <div className="result-container" key={id}>
+      {list?.map((lot, id) => (
+        <Link to="/lot" className="result-container" key={id}>
           <img
             className="result-img"
             src="/icons/item-mock.png"
@@ -34,21 +35,21 @@ const LotList = ({ list, isLoading }) => {
             alt=""
           />
           <span className="result-detail">
-            <strong>{result.title}</strong>
+            <strong>{lot.title}</strong>
             <span>
               <img src="/icons/map.svg" height="13px" alt="" />
-              {result.address}
+              {lot.address}
             </span>
           </span>
           <span className="result-price">
             <span>
-              ${result.price}
+              ${lot.price}
               <span className="frecuency">/día</span>
             </span>
-            <span className="since">{result.since} días atrás</span>
+            <span className="since">{lot.since} días atrás</span>
           </span>
           <img className="right-arrow" src="/icons/left-arrow.svg" alt="goto" />
-        </div>
+        </Link>
       ))}
     </div>
   );

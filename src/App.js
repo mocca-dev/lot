@@ -18,12 +18,17 @@ import MyLots from './routes/MyLots/MyLots';
 import SubHeader from './components/SubHeader/SubHeader';
 import ModalWrapper from './components/Modal/ModalWrapper/ModalWrapper';
 import { useSelector } from 'react-redux';
-import { selecFixedContent } from './reducers/showFlags/showFlagsSlice';
+import {
+  selecFixedContent,
+  selecFooter,
+} from './reducers/showFlags/showFlagsSlice';
+import Lot from './routes/Lot/Lot';
 
 makeServer();
 
 function App() {
   const fixedContent = useSelector(selecFixedContent);
+  const showFooter = useSelector(selecFooter);
   const [footerItems] = useState([
     // { icon: 'map', route: '/map' },
     { icon: 'bookmark', route: '/bookmark' },
@@ -65,8 +70,9 @@ function App() {
             <Route path="/new" element={<New />}></Route>
             <Route path="/map" element={<Map />}></Route>
             <Route path="/mylots" element={<MyLots />}></Route>
+            <Route path="/lot" element={<Lot />}></Route>
           </Routes>
-          {state.showFooter && <Footer items={footerItems} />}
+          {showFooter && <Footer items={footerItems} />}
         </div>
       </BrowserRouter>
       <ModalWrapper />
