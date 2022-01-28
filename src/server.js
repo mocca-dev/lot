@@ -58,6 +58,24 @@ const PARKING_LOTS_LIST = [
     since: '12',
   },
 ];
+const BOOKMARKED_LOTS_LIST = [
+  {
+    img: '',
+    title: 'Cochera en alquiler',
+    address: 'Passo 455',
+    date: '',
+    price: '100',
+    since: '12',
+  },
+  {
+    img: '',
+    title: 'Cocheras cubiertas',
+    address: 'Alsina 954',
+    date: '',
+    price: '45',
+    since: '12',
+  },
+];
 
 const NOTIFICATION_LIST = [
   {
@@ -109,6 +127,7 @@ export function makeServer() {
     routes() {
       this.timing = 1000;
       this.get('api/parkinglots', () => PARKING_LOTS_LIST);
+      this.get('api/bookmarkedlots', () => BOOKMARKED_LOTS_LIST);
       this.get('api/notifications', () => NOTIFICATION_LIST);
     },
   });

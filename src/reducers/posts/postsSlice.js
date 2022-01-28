@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const fecthPosts = createAsyncThunk('counter/fecthPosts', async () => {
+export const fecthPosts = createAsyncThunk('posts/fecthPosts', async () => {
   return fetch('api/parkinglots').then((response) => response.json());
 });
 

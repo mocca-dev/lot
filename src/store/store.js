@@ -4,6 +4,7 @@ import modalReducer from '../reducers/modal/modalSlice';
 import postsReducer from '../reducers/posts/postsSlice';
 import showFlagsReducer from '../reducers/showFlags/showFlagsSlice';
 import subHeaderReducer from '../reducers/subHeader/subHeaderSlice';
+import bookmarksReducer from '../reducers/bookmarks/bookmarksSlice';
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     modal: modalReducer,
     showFlags: showFlagsReducer,
     posts: postsReducer,
+    bookmarks: bookmarksReducer,
   },
 });
