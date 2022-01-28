@@ -9,11 +9,9 @@ export const modalSlice = createSlice({
       type: undefined,
       btns: {
         left: {
-          action: null,
           text: 'Cancelar',
         },
         right: {
-          action: null,
           text: 'Aceptar',
         },
       },
