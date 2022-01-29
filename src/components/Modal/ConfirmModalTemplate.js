@@ -1,5 +1,6 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { createNewLot } from '../../reducers/lot/lotSlice';
 
 const ConfirmModalTemplate = ({
   title,
@@ -9,7 +10,8 @@ const ConfirmModalTemplate = ({
   payload,
   action,
 }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
   return (
     <>
       <h4>{title}</h4>
@@ -32,6 +34,7 @@ const ConfirmModalTemplate = ({
               onClick={() => {
                 switch (action) {
                   case 'POST_NEW':
+                    dispatch(createNewLot(payload));
                     hide();
                     break;
                   case 'SIGN_OUT':

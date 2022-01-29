@@ -59,7 +59,9 @@ const New = () => {
 
   const formik = useFormik({
     initialValues: {
-      location: '',
+      title: '',
+      price: '',
+      address: '',
       contact: '',
       availability: '',
       typeOfVehicle: '',
@@ -76,10 +78,22 @@ const New = () => {
       <FormikProvider value={formik}>
         <Form>
           <FieldText
+            placeholder="ej: Cochera en alquiler"
+            isGhost={true}
+            label="Título"
+            name="title"
+          />
+          <FieldText
+            placeholder="ej: Evergreen 742"
+            isGhost={true}
+            label="Valor"
+            name="price"
+          />
+          <FieldText
             placeholder="ej: Evergreen 742"
             isGhost={true}
             label="Ubicación"
-            name="location"
+            name="address"
           />
           <FieldText
             placeholder="ej: (555) 555-5555"

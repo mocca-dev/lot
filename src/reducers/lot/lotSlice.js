@@ -4,6 +4,18 @@ export const fecthLot = createAsyncThunk('lot/fecthLot', async () =>
   fetch('api/lot/3').then((response) => response.json())
 );
 
+export const createNewLot = createAsyncThunk('lot/newLot', async (data) => {
+  const resp = await fetch('api/lots', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  }).then((response) => response.json());
+  return resp.lot;
+});
+
 export const lot = createSlice({
   name: 'lot',
   initialState: {
@@ -20,6 +32,9 @@ export const lot = createSlice({
     },
     [fecthLot.rejected]: (state) => {
       state.status = 'failed';
+    },
+    [createNewLot.fulfilled]: (state, action) => {
+      // console.log('fullfillsed', state, action);
     },
   },
 });
