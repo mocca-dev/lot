@@ -1,0 +1,11 @@
+.row-detail-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.row-detail-container img {
+  width: 16px;
+  margin-right: 10px;
+}
