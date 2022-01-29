@@ -1,4 +1,4 @@
-import { createServer } from 'miragejs';
+import { createServer, Model } from 'miragejs';
 
 const PARKING_LOTS_LIST = [
   {
@@ -252,14 +252,23 @@ const NOTIFICATION_LIST = [
 
 export function makeServer() {
   return createServer({
+    models: {
+      lot: Model,
+    },
     routes() {
       this.timing = 1000;
-      this.get('api/parkinglots', () => PARKING_LOTS_LIST);
+      this.get('api/parkinglots', (schema) =>
+        schema.lots.all().models.map((model) => model.attrs)
+      );
       this.get('api/bookmarkedlots', () => BOOKMARKED_LOTS_LIST);
       this.get('api/notifications', () => NOTIFICATION_LIST);
       this.get('api/lot/:id', (schema, request) => {
         let { id } = request.params;
         return PARKING_LOTS_LIST.find((lot) => lot.id === id);
+      });
+      this.post('api/lots', (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        return schema.lots.create(attrs);
       });
     },
   });
