@@ -6,6 +6,7 @@ import showFlagsReducer from '../reducers/showFlags/showFlagsSlice';
 import subHeaderReducer from '../reducers/subHeader/subHeaderSlice';
 import bookmarksReducer from '../reducers/bookmarks/bookmarksSlice';
 import lotReducer from '../reducers/lot/lotSlice';
+import notificationsReducer from '../reducers/notifications/notificationsSlice';
 
 export default configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
     posts: postsReducer,
     bookmarks: bookmarksReducer,
     lot: lotReducer,
+    notifications: notificationsReducer,
   },
 });

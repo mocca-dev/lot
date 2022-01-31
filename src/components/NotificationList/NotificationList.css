@@ -1,10 +1,10 @@
-.results-container {
+.notifications-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.result-container {
+.notifications-container .result-container {
   display: flex;
   width: 100%;
   height: 65px;
@@ -13,40 +13,40 @@
   align-items: center;
 }
 
-.result-container .result-img {
+.notifications-container .result-container .result-img {
   margin-right: 10px;
   border-radius: var(--radius-squircle);
 }
 
-.result-container .result-detail,
-.result-container .result-price {
+.notifications-container .result-container .result-detail,
+.notifications-container .result-container .result-price {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
 }
 
-.result-container .result-detail {
+.notifications-container .result-container .result-detail {
   min-width: 45%;
 }
 
-.result-container .result-price {
+.notifications-container .result-container .result-price {
   font-size: 1.3rem;
   font-weight: 600;
 }
 
-.result-container .result-price .frecuency {
+.notifications-container .result-container .result-price .frecuency {
   font-size: 1rem;
   font-weight: normal;
 }
 
-.result-container .result-price .since {
+.notifications-container .result-container .result-price .since {
   font-weight: normal;
   font-size: 0.75rem;
   color: grey;
 }
 
-.result-container .right-arrow {
+.notifications-container .result-container .right-arrow {
   height: 20px;
   padding-right: 10px;
   transform: rotate(180deg);
