@@ -20,7 +20,7 @@ const Header = () => {
   const disp = useDispatch();
   const navigate = useNavigate();
   const isShowingLogo = useSelector(selecLogo);
-  const [showRight, setShowRight] = useState(false);
+  const [showRight, setShowRight] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
 
   const location = useLocation();
@@ -36,7 +36,11 @@ const Header = () => {
     } else {
       disp(hideFooter());
       disp(hideLogo());
-      if (location.pathname !== '/mylots') setShowRight(false);
+      if (
+        location.pathname !== '/mylots' &&
+        !location.pathname.includes('/lot')
+      )
+        setShowRight(false);
     }
   }, [disp, location]);
 
