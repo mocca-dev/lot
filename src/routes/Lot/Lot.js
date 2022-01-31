@@ -11,6 +11,10 @@ import DetailRow from './DetailRow/DetailRow';
 
 import './Lot.css';
 
+const availability = ['Hora', 'Día', 'Semana', '15 Días', 'Mes'];
+const typeOfVehicles = ['Moto', 'Auto', 'Camioneta', 'Trailer', 'Cuatri'];
+const typeOfCover = ['Sin techo', 'Con techo', 'Cubierta'];
+
 const Lot = () => {
   const dispatch = useDispatch();
   const lot = useSelector(selecLot);
@@ -44,11 +48,17 @@ const Lot = () => {
               />
               <DetailRow content={lot.contact} iconUrl="/icons/telephone.svg" />
               <DetailRow
-                content={lot.availability}
+                content={availability[lot.availability]}
                 iconUrl="/icons/calendar.svg"
               />
-              <DetailRow content={lot.typeOfVehicle} iconUrl="/icons/car.svg" />
-              <DetailRow content={lot.typeOfCover} iconUrl="/icons/roof.svg" />
+              <DetailRow
+                content={typeOfVehicles[lot.typeOfVehicle]}
+                iconUrl="/icons/car.svg"
+              />
+              <DetailRow
+                content={typeOfCover[lot.typeOfCover]}
+                iconUrl="/icons/roof.svg"
+              />
               <DetailRow content={lot.contactName} iconUrl="/icons/user.svg" />
             </div>
             <div className="right-side">
