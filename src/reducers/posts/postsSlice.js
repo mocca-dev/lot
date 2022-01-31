@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const fecthPosts = createAsyncThunk('posts/fecthPosts', async () => {
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   return fetch('api/parkinglots').then((response) => response.json());
 });
 
@@ -17,14 +17,14 @@ export const posts = createSlice({
     status: null,
   },
   extraReducers: {
-    [fecthPosts.pending]: (state) => {
+    [fetchPosts.pending]: (state) => {
       state.status = 'pending';
     },
-    [fecthPosts.fulfilled]: (state, action) => {
+    [fetchPosts.fulfilled]: (state, action) => {
       state.list = action.payload;
       state.status = 'success';
     },
-    [fecthPosts.rejected]: (state) => {
+    [fetchPosts.rejected]: (state) => {
       state.status = 'failed';
     },
     [fetchPostsByTitle.pending]: (state) => {

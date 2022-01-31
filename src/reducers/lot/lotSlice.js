@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const fetchLotById = createAsyncThunk('lot/fecthLot', async (id) =>
+export const fetchLotById = createAsyncThunk('lot/fetchLot', async (id) =>
   fetch(`/api/lot/${id}`).then((response) => response.json())
 );
 

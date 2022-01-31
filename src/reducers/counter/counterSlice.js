@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const fecthCounter = createAsyncThunk(
-  'counter/fecthCounter',
+export const fetchCounter = createAsyncThunk(
+  'counter/fetchCounter',
   async (payload) => {
     return 44;
   }
@@ -25,14 +25,14 @@ export const counterSlice = createSlice({
     },
   },
   extraReducers: {
-    [fecthCounter.pending]: (state, action) => {
+    [fetchCounter.pending]: (state, action) => {
       state.status = 'pending';
     },
-    [fecthCounter.fulfilled]: (state, action) => {
+    [fetchCounter.fulfilled]: (state, action) => {
       state.value = action.payload;
       state.status = 'success';
     },
-    [fecthCounter.rejected]: (state, action) => {
+    [fetchCounter.rejected]: (state, action) => {
       state.status = 'failed';
     },
   },

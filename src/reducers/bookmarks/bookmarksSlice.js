@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const fecthBookmarks = createAsyncThunk(
-  'bookmarks/fecthBookmarks',
+export const fetchBookmarks = createAsyncThunk(
+  'bookmarks/fetchBookmarks',
   async () => {
     return fetch('api/bookmarkedlots').then((response) => response.json());
   }
@@ -20,14 +20,14 @@ export const bookmarks = createSlice({
     status: null,
   },
   extraReducers: {
-    [fecthBookmarks.pending]: (state) => {
+    [fetchBookmarks.pending]: (state) => {
       state.status = 'pending';
     },
-    [fecthBookmarks.fulfilled]: (state, action) => {
+    [fetchBookmarks.fulfilled]: (state, action) => {
       state.list = action.payload;
       state.status = 'success';
     },
-    [fecthBookmarks.rejected]: (state) => {
+    [fetchBookmarks.rejected]: (state) => {
       state.status = 'failed';
     },
     [fetchBookmarksByTitle.pending]: (state) => {

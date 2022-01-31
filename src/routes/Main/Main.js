@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { useSelector } from 'react-redux';
 import {
-  fecthPosts,
+  fetchPosts,
   fetchPostsByTitle,
   selecPosts,
   selecPostsIsFetching,
@@ -21,7 +21,7 @@ const Main = () => {
   const isFetching = useSelector(selecPostsIsFetching);
 
   useEffect(() => {
-    dispatch(fecthPosts());
+    dispatch(fetchPosts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

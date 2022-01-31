@@ -7,7 +7,7 @@ import { FormikProvider, useFormik, Form } from 'formik';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
 import { useSelector } from 'react-redux';
 import {
-  fecthBookmarks,
+  fetchBookmarks,
   fetchBookmarksByTitle,
   selecBookmarks,
   selecBookmarksIsFetching,
@@ -20,7 +20,7 @@ const Bookmarks = () => {
   const isFetching = useSelector(selecBookmarksIsFetching);
 
   useEffect(() => {
-    dispatch(fecthBookmarks());
+    dispatch(fetchBookmarks());
   }, [dispatch]);
 
   useEffect(() => {
