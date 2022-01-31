@@ -1,119 +1,5 @@
 import { createServer, Model } from 'miragejs';
 
-const PARKING_LOTS_LIST = [
-  {
-    id: '0',
-    img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
-    title: 'Cochera amplia',
-    address: 'Calle 123',
-    date: '',
-    price: '140',
-    since: '12',
-    contact: '(555) 555-5555',
-    contactName: 'Inmobiliaria Jorgito',
-    availability: 'Día',
-    typeOfVehicle: 'Auto',
-    typeOfCover: 'Cubierta',
-    description:
-      'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
-  },
-  {
-    id: '1',
-    img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
-    title: 'Alquilo cochera',
-    address: 'Urquiza 345',
-    date: '',
-    price: '86',
-    since: '12',
-    contact: '(555) 555-5555',
-    contactName: 'Inmobiliaria Jorgito',
-    availability: 'Día',
-    typeOfVehicle: 'Auto',
-    typeOfCover: 'Cubierta',
-    description:
-      'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
-  },
-  {
-    id: '2',
-    img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
-    title: 'Cochera en alquiler',
-    address: 'Passo 455',
-    date: '',
-    price: '100',
-    since: '12',
-    contact: '(555) 555-5555',
-    contactName: 'Inmobiliaria Jorgito',
-    availability: 'Día',
-    typeOfVehicle: 'Auto',
-    typeOfCover: 'Cubierta',
-    description:
-      'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
-  },
-  {
-    id: '3',
-    img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
-    title: 'Cocheras cubiertas',
-    address: 'Alsina 954',
-    date: '',
-    price: '45',
-    since: '12',
-    contact: '(555) 555-5555',
-    contactName: 'Inmobiliaria Jorgito',
-    availability: 'Día',
-    typeOfVehicle: 'Auto',
-    typeOfCover: 'Cubierta',
-    description:
-      'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
-  },
-  {
-    id: '4',
-    img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
-    title: 'Autos/Camionetas',
-    address: 'Colon 763',
-    date: '',
-    price: '186',
-    since: '12',
-    contact: '(555) 555-5555',
-    contactName: 'Inmobiliaria Jorgito',
-    availability: 'Día',
-    typeOfVehicle: 'Auto',
-    typeOfCover: 'Cubierta',
-    description:
-      'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
-  },
-  {
-    id: '5',
-    img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
-    title: 'Cochera con baulera',
-    address: 'Luiggi 283',
-    date: '',
-    price: '231',
-    since: '12',
-    contact: '(555) 555-5555',
-    contactName: 'Inmobiliaria Jorgito',
-    availability: 'Día',
-    typeOfVehicle: 'Auto',
-    typeOfCover: 'Cubierta',
-    description:
-      'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
-  },
-  {
-    id: '6',
-    img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
-    title: 'Disponible desde febrero',
-    address: 'Alem 554',
-    date: '',
-    price: '98',
-    since: '12',
-    contact: '(555) 555-5555',
-    contactName: 'Inmobiliaria Jorgito',
-    availability: 'Día',
-    typeOfVehicle: 'Auto',
-    typeOfCover: 'Cubierta',
-    description:
-      'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
-  },
-];
 const BOOKMARKED_LOTS_LIST = [
   {
     id: '0',
@@ -262,7 +148,7 @@ export function makeServer() {
         address: 'Calle 123',
         date: '',
         price: '140',
-        since: '12',
+        since: '2',
         contact: '(555) 555-5555',
         contactName: 'Inmobiliaria Jorgito',
         availability: '1',
@@ -288,7 +174,7 @@ export function makeServer() {
       });
     },
     routes() {
-      this.timing = 1000;
+      // this.timing = 1000;
       this.get('api/parkinglots', (schema) =>
         schema.lots.all().models.map((model) => model.attrs)
       );
@@ -296,7 +182,7 @@ export function makeServer() {
       this.get('api/notifications', () => NOTIFICATION_LIST);
       this.get('api/lot/:id', (schema, request) => {
         let { id } = request.params;
-        return PARKING_LOTS_LIST.find((lot) => lot.id === id);
+        return schema.lots.all().models.find((lot) => lot.id === id);
       });
       this.post('api/lots', (schema, request) => {
         let attrs = JSON.parse(request.requestBody);
@@ -305,3 +191,118 @@ export function makeServer() {
     },
   });
 }
+
+// const PARKING_LOTS_LIST = [
+//   {
+//     id: '0',
+//     img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+//     title: 'Cochera amplia',
+//     address: 'Calle 123',
+//     date: '',
+//     price: '140',
+//     since: '12',
+//     contact: '(555) 555-5555',
+//     contactName: 'Inmobiliaria Jorgito',
+//     availability: 'Día',
+//     typeOfVehicle: 'Auto',
+//     typeOfCover: 'Cubierta',
+//     description:
+//       'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+//   },
+//   {
+//     id: '1',
+//     img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+//     title: 'Alquilo cochera',
+//     address: 'Urquiza 345',
+//     date: '',
+//     price: '86',
+//     since: '12',
+//     contact: '(555) 555-5555',
+//     contactName: 'Inmobiliaria Jorgito',
+//     availability: 'Día',
+//     typeOfVehicle: 'Auto',
+//     typeOfCover: 'Cubierta',
+//     description:
+//       'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+//   },
+//   {
+//     id: '2',
+//     img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+//     title: 'Cochera en alquiler',
+//     address: 'Passo 455',
+//     date: '',
+//     price: '100',
+//     since: '12',
+//     contact: '(555) 555-5555',
+//     contactName: 'Inmobiliaria Jorgito',
+//     availability: 'Día',
+//     typeOfVehicle: 'Auto',
+//     typeOfCover: 'Cubierta',
+//     description:
+//       'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+//   },
+//   {
+//     id: '3',
+//     img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+//     title: 'Cocheras cubiertas',
+//     address: 'Alsina 954',
+//     date: '',
+//     price: '45',
+//     since: '12',
+//     contact: '(555) 555-5555',
+//     contactName: 'Inmobiliaria Jorgito',
+//     availability: 'Día',
+//     typeOfVehicle: 'Auto',
+//     typeOfCover: 'Cubierta',
+//     description:
+//       'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+//   },
+//   {
+//     id: '4',
+//     img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+//     title: 'Autos/Camionetas',
+//     address: 'Colon 763',
+//     date: '',
+//     price: '186',
+//     since: '12',
+//     contact: '(555) 555-5555',
+//     contactName: 'Inmobiliaria Jorgito',
+//     availability: 'Día',
+//     typeOfVehicle: 'Auto',
+//     typeOfCover: 'Cubierta',
+//     description:
+//       'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+//   },
+//   {
+//     id: '5',
+//     img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+//     title: 'Cochera con baulera',
+//     address: 'Luiggi 283',
+//     date: '',
+//     price: '231',
+//     since: '12',
+//     contact: '(555) 555-5555',
+//     contactName: 'Inmobiliaria Jorgito',
+//     availability: 'Día',
+//     typeOfVehicle: 'Auto',
+//     typeOfCover: 'Cubierta',
+//     description:
+//       'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+//   },
+//   {
+//     id: '6',
+//     img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+//     title: 'Disponible desde febrero',
+//     address: 'Alem 554',
+//     date: '',
+//     price: '98',
+//     since: '12',
+//     contact: '(555) 555-5555',
+//     contactName: 'Inmobiliaria Jorgito',
+//     availability: 'Día',
+//     typeOfVehicle: 'Auto',
+//     typeOfCover: 'Cubierta',
+//     description:
+//       'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+//   },
+// ];

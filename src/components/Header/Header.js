@@ -28,7 +28,7 @@ const Header = () => {
     if (
       location.pathname !== '/profile' &&
       location.pathname !== '/mylots' &&
-      location.pathname !== '/lot'
+      !location.pathname.includes('/lot')
     ) {
       disp(showFooter());
       disp(showLogo());

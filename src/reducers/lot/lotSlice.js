@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const fecthLot = createAsyncThunk('lot/fecthLot', async () =>
-  fetch('api/lot/3').then((response) => response.json())
+export const fetchLot = createAsyncThunk('lot/fecthLot', async (id) =>
+  fetch(`/api/lot/${id}`).then((response) => response.json())
 );
 
 export const createNewLot = createAsyncThunk('lot/newLot', async (data) => {
@@ -23,14 +23,14 @@ export const lot = createSlice({
     status: null,
   },
   extraReducers: {
-    [fecthLot.pending]: (state) => {
+    [fetchLot.pending]: (state) => {
       state.status = 'pending';
     },
-    [fecthLot.fulfilled]: (state, action) => {
+    [fetchLot.fulfilled]: (state, action) => {
       state.data = action.payload;
       state.status = 'success';
     },
-    [fecthLot.rejected]: (state) => {
+    [fetchLot.rejected]: (state) => {
       state.status = 'failed';
     },
     [createNewLot.fulfilled]: (state, action) => {
@@ -40,7 +40,7 @@ export const lot = createSlice({
 });
 
 export const selecLot = (state) => {
-  return state.lot.data;
+  return state.lot.data?.lot;
 };
 export const selecLotIsFetching = (state) => state.lot.status === 'pending';
 

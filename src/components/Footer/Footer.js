@@ -12,14 +12,18 @@ const Footer = ({ items }) => {
 
   useEffect(() => {
     let { pathname } = location;
-    if (pathname === '/') pathname = '/search';
-    const markerNode = document.querySelector(`#${pathname.replace('/', '')}`);
+    if (!pathname.includes('/lot/')) {
+      if (pathname === '/') pathname = '/search';
+      const markerNode = document.querySelector(
+        `#${pathname.replace('/', '')}`
+      );
 
-    document.querySelectorAll('.item-container').forEach((item) => {
-      item.classList.remove('active');
-    });
-    markerNode?.classList.toggle('active');
-    setXOffset(markerNode?.offsetLeft);
+      document.querySelectorAll('.item-container').forEach((item) => {
+        item.classList.remove('active');
+      });
+      markerNode?.classList.toggle('active');
+      setXOffset(markerNode?.offsetLeft);
+    }
   }, [setXOffset, location]);
 
   const positionMarker = (e, itemName) => {

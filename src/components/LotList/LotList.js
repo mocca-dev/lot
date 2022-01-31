@@ -18,16 +18,17 @@ const LotList = ({ list, isLoading }) => {
     );
   }
 
-  if (list.length === 0) {
-    return (
-      <div className="no-items-container">No hay resultados para mostrar</div>
-    );
-  }
+  if (list.length === 0)
+    <div className="no-items-container">No hay resultados para mostrar</div>;
 
   return (
     <div className="results-container">
-      {list?.map((lot, id) => (
-        <Link to="/lot" className="result-container" key={id}>
+      {list?.map((lot) => (
+        <Link
+          to={'/lot/?id=' + lot.id}
+          className="result-container"
+          key={lot.id}
+        >
           <img
             className="result-img"
             src="/icons/item-mock.png"

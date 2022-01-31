@@ -63,14 +63,16 @@ function App() {
           <Header />
           <SubHeader />
           <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/bookmark" element={<Bookmarks />}></Route>
-            <Route path="/notification" element={<Notifications />}></Route>
-            <Route path="/new" element={<New />}></Route>
-            <Route path="/map" element={<Map />}></Route>
-            <Route path="/mylots" element={<MyLots />}></Route>
-            <Route path="/lot" element={<Lot />}></Route>
+            <Route exact path="/" element={<Main />} />
+            <Route exact path="/profile" element={<Profile />} />
+            <Route exact path="/bookmark" element={<Bookmarks />} />
+            <Route exact path="/notification" element={<Notifications />} />
+            <Route exact path="/new" element={<New />} />
+            <Route exact path="/map" element={<Map />} />
+            <Route exact path="/mylots" element={<MyLots />} />
+            <Route exact path="/lot" element={<Lot />}>
+              <Route path=":id" element={<Lot />} />
+            </Route>
           </Routes>
           {showFooter && <Footer items={footerItems} />}
         </div>
