@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import {
   fecthPosts,
+  fetchPostsByTitle,
   selecPosts,
   selecPostsIsFetching,
 } from '../../reducers/posts/postsSlice';
@@ -34,7 +35,9 @@ const Main = () => {
     initialValues: {
       searchText: '',
     },
-    onSubmit: async (values) => {},
+    onSubmit: async (values) => {
+      dispatch(fetchPostsByTitle(values.searchText));
+    },
   });
 
   return (

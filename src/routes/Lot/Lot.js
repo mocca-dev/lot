@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
 import { selecLot } from '../../reducers/lot/lotSlice';
-import { fetchLot } from '../../reducers/lot/lotSlice';
+import { fetchLotById } from '../../reducers/lot/lotSlice';
 
 import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
@@ -19,7 +19,7 @@ const Lot = () => {
 
   useEffect(() => {
     const id = new URLSearchParams(location.search).get('id');
-    dispatch(fetchLot(id));
+    dispatch(fetchLotById(id));
   }, [location, dispatch]);
 
   useEffect(() => {

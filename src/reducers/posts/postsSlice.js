@@ -4,6 +4,12 @@ export const fecthPosts = createAsyncThunk('posts/fecthPosts', async () => {
   return fetch('api/parkinglots').then((response) => response.json());
 });
 
+export const fetchPostsByTitle = createAsyncThunk(
+  'posts/fetchPostsByTitle',
+  async (title) =>
+    fetch(`/api/parkinglots/${title}`).then((response) => response.json())
+);
+
 export const posts = createSlice({
   name: 'posts',
   initialState: {
@@ -19,6 +25,16 @@ export const posts = createSlice({
       state.status = 'success';
     },
     [fecthPosts.rejected]: (state) => {
+      state.status = 'failed';
+    },
+    [fetchPostsByTitle.pending]: (state) => {
+      state.status = 'pending';
+    },
+    [fetchPostsByTitle.fulfilled]: (state, action) => {
+      state.list = action.payload;
+      state.status = 'success';
+    },
+    [fetchPostsByTitle.rejected]: (state) => {
       state.status = 'failed';
     },
   },

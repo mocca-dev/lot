@@ -184,6 +184,14 @@ export function makeServer() {
         let { id } = request.params;
         return schema.lots.all().models.find((lot) => lot.id === id);
       });
+      this.get('api/parkinglots/:title', (schema, request) => {
+        let { title } = request.params;
+        return schema.lots
+          .all()
+          .models.filter((lot) =>
+            lot.attrs.title.toLowerCase().includes(title.toLowerCase())
+          );
+      });
       this.post('api/lots', (schema, request) => {
         let attrs = JSON.parse(request.requestBody);
         return schema.lots.create(attrs);
