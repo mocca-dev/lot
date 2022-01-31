@@ -10,7 +10,7 @@ import { set } from '../../reducers/subHeader/subHeaderSlice';
 import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 
 const availabilityList = [
-  { label: 'Hr', value: '0' },
+  { label: 'Hora', value: '0' },
   { label: 'Día', value: '1' },
   { label: 'Semana', value: '2' },
   { label: '15 Días', value: '3' },
