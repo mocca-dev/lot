@@ -25,10 +25,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
 }
 
 .result-container .result-detail {
+  width: 100%;
   min-width: 45%;
 }
 
@@ -42,6 +42,7 @@
 .result-container .result-price {
   font-size: 1.3rem;
   font-weight: 600;
+  align-items: flex-end !important;
 }
 
 .result-container .result-price .frecuency {

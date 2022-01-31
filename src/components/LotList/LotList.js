@@ -49,9 +49,9 @@ const LotList = ({ list, isLoading }) => {
               ${lot.price}
               <span className="frecuency">/día</span>
             </span>
-            <span className="since">{lot.since} días atrás</span>
+            <span className="since">{lot.since}d</span>
           </span>
-          <img className="right-arrow" src="/icons/left-arrow.svg" alt="goto" />
+          {/* <img className="right-arrow" src="/icons/left-arrow.svg" alt="goto" /> */}
         </Link>
       ))}
     </div>
