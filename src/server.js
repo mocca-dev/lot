@@ -255,6 +255,38 @@ export function makeServer() {
     models: {
       lot: Model,
     },
+    seeds(server) {
+      server.create('lot', {
+        img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+        title: 'Cochera amplia',
+        address: 'Calle 123',
+        date: '',
+        price: '140',
+        since: '12',
+        contact: '(555) 555-5555',
+        contactName: 'Inmobiliaria Jorgito',
+        availability: '1',
+        typeOfVehicle: '0',
+        typeOfCover: '1',
+        description:
+          'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+      });
+      server.create('lot', {
+        img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+        title: 'Cochera en alquiler',
+        address: 'Las Heras 342',
+        date: '',
+        price: '45',
+        since: '12',
+        contact: '(555) 555-5555',
+        contactName: 'Inmobiliaria Jorgito',
+        availability: '2',
+        typeOfVehicle: '1',
+        typeOfCover: '0',
+        description:
+          'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+      });
+    },
     routes() {
       this.timing = 1000;
       this.get('api/parkinglots', (schema) =>
