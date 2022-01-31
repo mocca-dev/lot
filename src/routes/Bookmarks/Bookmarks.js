@@ -8,6 +8,7 @@ import { set } from '../../reducers/subHeader/subHeaderSlice';
 import { useSelector } from 'react-redux';
 import {
   fecthBookmarks,
+  fetchBookmarksByTitle,
   selecBookmarks,
   selecBookmarksIsFetching,
 } from '../../reducers/bookmarks/bookmarksSlice';
@@ -31,9 +32,8 @@ const Bookmarks = () => {
     initialValues: {
       searchText: '',
     },
-    onSubmit: async (values) => {
-      // console.log(JSON.stringify(values, null, 2));
-    },
+    onSubmit: async (values) =>
+      dispatch(fetchBookmarksByTitle(values.searchText)),
   });
 
   return (

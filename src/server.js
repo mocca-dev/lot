@@ -1,40 +1,5 @@
 import { createServer, Model } from 'miragejs';
 
-const BOOKMARKED_LOTS_LIST = [
-  {
-    id: '0',
-    img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
-    title: 'Cochera en alquiler',
-    address: 'Passo 455',
-    date: '',
-    price: '100',
-    since: '12',
-    contact: '(555) 555-5555',
-    contactName: 'Inmobiliaria Jorgito',
-    availability: 'Día',
-    typeOfVehicle: 'Auto',
-    typeOfCover: 'Cubierta',
-    description:
-      'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
-  },
-  {
-    id: '1',
-    img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
-    title: 'Cocheras cubiertas',
-    address: 'Alsina 954',
-    date: '',
-    price: '45',
-    since: '12',
-    contact: '(555) 555-5555',
-    contactName: 'Inmobiliaria Jorgito',
-    availability: 'Día',
-    typeOfVehicle: 'Auto',
-    typeOfCover: 'Cubierta',
-    description:
-      'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
-  },
-];
-
 const NOTIFICATION_LIST = [
   {
     id: '0',
@@ -156,6 +121,7 @@ export function makeServer() {
         typeOfCover: '1',
         description:
           'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+        isBookmarked: false,
       });
       server.create('lot', {
         img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
@@ -171,19 +137,35 @@ export function makeServer() {
         typeOfCover: '0',
         description:
           'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+        isBookmarked: true,
       });
+      // server.create('bookmark', {
+      //   img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+      //   title: 'Cochera amplia',
+      //   address: 'Calle 123',
+      //   date: '',
+      //   price: '140',
+      //   since: '2',
+      //   contact: '(555) 555-5555',
+      //   contactName: 'Inmobiliaria Jorgito',
+      //   availability: '1',
+      //   typeOfVehicle: '0',
+      //   typeOfCover: '1',
+      //   description:
+      //     'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+      // });
     },
     routes() {
       // this.timing = 1000;
-      this.get('api/parkinglots', (schema) =>
-        schema.lots.all().models.map((model) => model.attrs)
-      );
-      this.get('api/bookmarkedlots', () => BOOKMARKED_LOTS_LIST);
       this.get('api/notifications', () => NOTIFICATION_LIST);
       this.get('api/lot/:id', (schema, request) => {
         let { id } = request.params;
         return schema.lots.all().models.find((lot) => lot.id === id);
       });
+
+      this.get('api/parkinglots', (schema) =>
+        schema.lots.all().models.map((model) => model.attrs)
+      );
       this.get('api/parkinglots/:title', (schema, request) => {
         let { title } = request.params;
         return schema.lots
@@ -195,6 +177,19 @@ export function makeServer() {
       this.post('api/lots', (schema, request) => {
         let attrs = JSON.parse(request.requestBody);
         return schema.lots.create(attrs);
+      });
+
+      this.get('api/bookmarkedlots', (schema) =>
+        schema.lots.all().models.filter((lot) => lot.attrs.isBookmarked)
+      );
+      this.get('api/bookmarkedlots/:title', (schema, request) => {
+        let { title } = request.params;
+        return schema.lots
+          .all()
+          .models.filter((lot) => lot.attrs.isBookmarked)
+          .filter((lot) =>
+            lot.attrs.title.toLowerCase().includes(title.toLowerCase())
+          );
       });
     },
   });
@@ -304,6 +299,41 @@ export function makeServer() {
 //     address: 'Alem 554',
 //     date: '',
 //     price: '98',
+//     since: '12',
+//     contact: '(555) 555-5555',
+//     contactName: 'Inmobiliaria Jorgito',
+//     availability: 'Día',
+//     typeOfVehicle: 'Auto',
+//     typeOfCover: 'Cubierta',
+//     description:
+//       'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+//   },
+// ];
+
+// const BOOKMARKED_LOTS_LIST = [
+//   {
+//     id: '0',
+//     img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+//     title: 'Cochera en alquiler',
+//     address: 'Passo 455',
+//     date: '',
+//     price: '100',
+//     since: '12',
+//     contact: '(555) 555-5555',
+//     contactName: 'Inmobiliaria Jorgito',
+//     availability: 'Día',
+//     typeOfVehicle: 'Auto',
+//     typeOfCover: 'Cubierta',
+//     description:
+//       'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+//   },
+//   {
+//     id: '1',
+//     img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+//     title: 'Cocheras cubiertas',
+//     address: 'Alsina 954',
+//     date: '',
+//     price: '45',
 //     since: '12',
 //     contact: '(555) 555-5555',
 //     contactName: 'Inmobiliaria Jorgito',

@@ -7,6 +7,12 @@ export const fecthBookmarks = createAsyncThunk(
   }
 );
 
+export const fetchBookmarksByTitle = createAsyncThunk(
+  'bookmarks/fetchBookmarksByTitle',
+  async (title) =>
+    fetch(`/api/bookmarkedlots/${title}`).then((response) => response.json())
+);
+
 export const bookmarks = createSlice({
   name: 'bookmarks',
   initialState: {
@@ -22,6 +28,16 @@ export const bookmarks = createSlice({
       state.status = 'success';
     },
     [fecthBookmarks.rejected]: (state) => {
+      state.status = 'failed';
+    },
+    [fetchBookmarksByTitle.pending]: (state) => {
+      state.status = 'pending';
+    },
+    [fetchBookmarksByTitle.fulfilled]: (state, action) => {
+      state.list = action.payload;
+      state.status = 'success';
+    },
+    [fetchBookmarksByTitle.rejected]: (state) => {
       state.status = 'failed';
     },
   },
