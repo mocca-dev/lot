@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
-import { selecLot } from '../../reducers/lot/lotSlice';
+import { bookmarkLot, selecLot } from '../../reducers/lot/lotSlice';
 import { fetchLotById } from '../../reducers/lot/lotSlice';
 
 import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
@@ -14,7 +14,7 @@ import './Lot.css';
 const Lot = () => {
   const dispatch = useDispatch();
   const lot = useSelector(selecLot);
-  const [isBookmaked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -23,7 +23,10 @@ const Lot = () => {
   }, [location, dispatch]);
 
   useEffect(() => {
-    if (lot) dispatch(set(lot.title));
+    if (lot) {
+      setIsBookmarked(lot.isBookmarked);
+      dispatch(set(lot.title));
+    }
     dispatch(hideFixedContent());
   }, [lot, dispatch]);
 
@@ -51,11 +54,14 @@ const Lot = () => {
             <div className="right-side">
               <button
                 className="bookmark-btn"
-                onClick={() => setIsBookmarked((prevValue) => !prevValue)}
+                onClick={() => {
+                  setIsBookmarked((prevValue) => !prevValue);
+                  dispatch(bookmarkLot(lot.id));
+                }}
               >
                 <img
                   src={
-                    isBookmaked
+                    isBookmarked
                       ? '/icons/bookmarked.svg'
                       : '/icons/bookmark.svg'
                   }

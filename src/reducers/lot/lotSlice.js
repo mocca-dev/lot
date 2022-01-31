@@ -16,6 +16,13 @@ export const createNewLot = createAsyncThunk('lot/newLot', async (data) => {
   return resp.lot;
 });
 
+export const bookmarkLot = createAsyncThunk('lot/bookmark', async (id) => {
+  const resp = await fetch(`/api/bookmark/${id}`, {
+    method: 'PATCH',
+  }).then((response) => response.json());
+  return resp.lot;
+});
+
 export const lot = createSlice({
   name: 'lot',
   initialState: {

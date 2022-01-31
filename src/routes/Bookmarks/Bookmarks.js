@@ -44,7 +44,9 @@ const Bookmarks = () => {
             <SearchBar />
           </Form>
         </FormikProvider>
-        <span className="result-counter">Mostrando {list?.length} de 10</span>
+        <span className="result-counter">
+          Mostrando {list?.length} de 10 resultados
+        </span>
       </span>
       <main>
         <LotList list={list} isLoading={isFetching} />

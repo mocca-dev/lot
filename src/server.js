@@ -191,6 +191,11 @@ export function makeServer() {
             lot.attrs.title.toLowerCase().includes(title.toLowerCase())
           );
       });
+      this.patch('api/bookmark/:id', (schema, request) => {
+        let { id } = request.params;
+        const lot = schema.lots.find(id);
+        return lot.update('isBookmarked', !lot.attrs.isBookmarked);
+      });
     },
   });
 }

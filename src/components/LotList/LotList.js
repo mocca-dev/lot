@@ -19,7 +19,9 @@ const LotList = ({ list, isLoading }) => {
   }
 
   if (list.length === 0)
-    <div className="no-items-container">No hay resultados para mostrar</div>;
+    return (
+      <div className="no-items-container">No hay resultados para mostrar</div>
+    );
 
   return (
     <div className="results-container">
