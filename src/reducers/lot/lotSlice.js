@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { showToast } from '../toaster/toasterSlice';
 
 export const fetchLotById = createAsyncThunk('lot/fetchLot', async (id) =>
   fetch(`/api/lot/${id}`).then((response) => response.json())
@@ -16,12 +17,18 @@ export const createNewLot = createAsyncThunk('lot/newLot', async (data) => {
   return resp.lot;
 });
 
-export const bookmarkLot = createAsyncThunk('lot/bookmark', async (id) => {
-  const resp = await fetch(`/api/bookmark/${id}`, {
-    method: 'PATCH',
-  }).then((response) => response.json());
-  return resp.lot;
-});
+export const bookmarkLot = createAsyncThunk(
+  'lot/bookmark',
+  async (id, { dispatch }) => {
+    const resp = await fetch(`/api/bookmark/${id}`, {
+      method: 'PATCH',
+    }).then((response) => {
+      dispatch(showToast());
+      return response.json();
+    });
+    return resp.lot;
+  }
+);
 
 export const lot = createSlice({
   name: 'lot',

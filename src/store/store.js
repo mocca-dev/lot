@@ -8,6 +8,7 @@ import bookmarksReducer from '../reducers/bookmarks/bookmarksSlice';
 import lotReducer from '../reducers/lot/lotSlice';
 import notificationsReducer from '../reducers/notifications/notificationsSlice';
 import spinnerReducer from '../reducers/spinner/spinnerSlice';
+import toasterReducer from '../reducers/toaster/toasterSlice';
 
 export default configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export default configureStore({
     lot: lotReducer,
     notifications: notificationsReducer,
     spinner: spinnerReducer,
+    toaster: toasterReducer,
   },
 });

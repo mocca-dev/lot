@@ -26,7 +26,7 @@ const Notifications = () => {
     dispatch(hideFixedContent());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(notifications);
+
   return (
     <main>
       <NotificationList list={notifications} isLoading={isFetching} />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
@@ -19,7 +19,6 @@ const typeOfCover = ['Sin techo', 'Con techo', 'Cubierta'];
 const Lot = () => {
   const dispatch = useDispatch();
   const lot = useSelector(selecLot);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -30,7 +29,6 @@ const Lot = () => {
 
   useEffect(() => {
     if (lot) {
-      setIsBookmarked(lot.isBookmarked);
       dispatch(set(lot.title));
       dispatch(hideSpinner());
     } else {
@@ -70,13 +68,13 @@ const Lot = () => {
               <button
                 className="bookmark-btn"
                 onClick={() => {
-                  setIsBookmarked((prevValue) => !prevValue);
                   dispatch(bookmarkLot(lot.id));
+                  dispatch(fetchLotById(lot.id));
                 }}
               >
                 <img
                   src={
-                    isBookmarked
+                    lot.isBookmarked
                       ? '/icons/bookmarked.svg'
                       : '/icons/bookmark.svg'
                   }

@@ -24,6 +24,7 @@ import {
 } from './reducers/showFlags/showFlagsSlice';
 import Lot from './routes/Lot/Lot';
 import Spinner from './components/Spinner/Spinner';
+import Toaster from './components/Toster/Toaster';
 
 makeServer();
 
@@ -80,6 +81,7 @@ function App() {
       </BrowserRouter>
       <ModalWrapper />
       <Spinner />
+      <Toaster />
     </Store.Provider>
   );
 }

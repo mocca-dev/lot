@@ -46,7 +46,7 @@ export function makeServer() {
       });
     },
     routes() {
-      // this.timing = 1000;
+      this.timing = 500;
       this.get('api/notifications', (schema) =>
         schema.notifications.all().models.map((model) => model.attrs)
       );
