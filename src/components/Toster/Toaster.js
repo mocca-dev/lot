@@ -1,20 +1,21 @@
 import { useSelector } from 'react-redux';
-import { selecToaster } from '../../reducers/toaster/toasterSlice';
+import {
+  selecToastContent,
+  selecToastShow,
+} from '../../reducers/toaster/toasterSlice';
 
 import './Toaster.css';
 
 const Toaster = () => {
-  const toaster = useSelector(selecToaster);
+  const show = useSelector(selecToastShow);
+  const content = useSelector(selecToastContent);
+
   return (
-    <>
-      {toaster && (
-        <div className="toaster-container">
-          <div className="toaster-tile">
-            <span>Guardado</span>
-          </div>
-        </div>
-      )}
-    </>
+    <div className={'toaster-container' + (show ? ' show-toaster' : '')}>
+      <div className="toaster-tile">
+        <span>{content}</span>
+      </div>
+    </div>
   );
 };
 

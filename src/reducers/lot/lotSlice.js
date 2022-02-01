@@ -22,9 +22,10 @@ export const bookmarkLot = createAsyncThunk(
   async (id, { dispatch }) => {
     const resp = await fetch(`/api/bookmark/${id}`, {
       method: 'PATCH',
-    }).then((response) => {
-      dispatch(showToast());
-      return response.json();
+    }).then(async (response) => {
+      const resp = await response.json();
+      dispatch(showToast(resp.lot.isBookmarked ? 'Guardado' : 'Sacado'));
+      return;
     });
     return resp.lot;
   }
