@@ -23,6 +23,7 @@ import {
   selecFooter,
 } from './reducers/showFlags/showFlagsSlice';
 import Lot from './routes/Lot/Lot';
+import Spinner from './components/Spinner/Spinner';
 
 makeServer();
 
@@ -78,6 +79,7 @@ function App() {
         </div>
       </BrowserRouter>
       <ModalWrapper />
+      <Spinner />
     </Store.Provider>
   );
 }

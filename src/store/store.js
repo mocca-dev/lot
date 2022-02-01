@@ -7,6 +7,7 @@ import subHeaderReducer from '../reducers/subHeader/subHeaderSlice';
 import bookmarksReducer from '../reducers/bookmarks/bookmarksSlice';
 import lotReducer from '../reducers/lot/lotSlice';
 import notificationsReducer from '../reducers/notifications/notificationsSlice';
+import spinnerReducer from '../reducers/spinner/spinnerSlice';
 
 export default configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export default configureStore({
     bookmarks: bookmarksReducer,
     lot: lotReducer,
     notifications: notificationsReducer,
+    spinner: spinnerReducer,
   },
 });

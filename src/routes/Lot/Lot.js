@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
-import { bookmarkLot, selecLot } from '../../reducers/lot/lotSlice';
+import { bookmarkLot, cleanLot, selecLot } from '../../reducers/lot/lotSlice';
 import { fetchLotById } from '../../reducers/lot/lotSlice';
 
 import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
+import { hideSpinner, showSpinner } from '../../reducers/spinner/spinnerSlice';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
 import DetailRow from './DetailRow/DetailRow';
 
@@ -24,12 +25,16 @@ const Lot = () => {
   useEffect(() => {
     const id = new URLSearchParams(location.search).get('id');
     dispatch(fetchLotById(id));
+    return () => dispatch(cleanLot());
   }, [location, dispatch]);
 
   useEffect(() => {
     if (lot) {
       setIsBookmarked(lot.isBookmarked);
       dispatch(set(lot.title));
+      dispatch(hideSpinner());
+    } else {
+      dispatch(showSpinner());
     }
     dispatch(hideFixedContent());
   }, [lot, dispatch]);

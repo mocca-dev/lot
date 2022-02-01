@@ -24,7 +24,7 @@ export function makeServer() {
         isBookmarked: false,
       });
       server.create('lot', {
-        img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+        img: 'https://images.unsplash.com/photo-1589018055173-87bf23183c90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
         title: 'Cochera en alquiler',
         address: 'Las Heras 342',
         date: '',

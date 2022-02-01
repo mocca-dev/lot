@@ -29,6 +29,12 @@ export const lot = createSlice({
     data: {},
     status: null,
   },
+  reducers: {
+    cleanLot: (state) => {
+      state.data = {};
+      state.status = null;
+    },
+  },
   extraReducers: {
     [fetchLotById.pending]: (state) => {
       state.status = 'pending';
@@ -45,6 +51,8 @@ export const lot = createSlice({
     },
   },
 });
+
+export const { cleanLot } = lot.actions;
 
 export const selecLot = (state) => {
   return state.lot.data?.lot;
