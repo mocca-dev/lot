@@ -32,8 +32,7 @@ body {
 }
 
 .App.without-non-scroll-main {
-  grid-template-rows: auto 70px 1fr auto;
-  grid-template-areas: 'header' 'sub-header' 'main' 'footer';
+  grid-template-rows: auto 70px 0px 1fr auto;
 }
 
 @supports (-webkit-touch-callout: none) {
