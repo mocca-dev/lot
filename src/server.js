@@ -5,6 +5,7 @@ export function makeServer() {
     models: {
       lot: Model,
       notification: Model,
+      myLot: Model,
     },
     seeds(server) {
       server.create('lot', {
@@ -44,6 +45,22 @@ export function makeServer() {
         requestedBy: 'Juan Carlos',
         since: '2',
       });
+      server.create('myLot', {
+        img: 'http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRyBTy_3B-cEArHrOpmwWG8zmC9FIaTPXfDuoETDszqRl8PFqX0-xRpaL97RIoL6TUXa5SkDsaZCJ5lMxKnyP4',
+        title: 'Cochera amplia',
+        address: 'Calle 123',
+        date: '',
+        price: '140',
+        since: '2',
+        contact: '(555) 555-5555',
+        contactName: 'Inmobiliaria Jorgito',
+        availability: '1',
+        typeOfVehicle: '0',
+        typeOfCover: '1',
+        description:
+          'Ubicado a media cuadra del Hospital y muy cercano a los nuevos accesos que el mismo abrió recientemente sobre la calle Potosí, hace que esta ubicación sea ideal para un garaje.',
+        isBookmarked: false,
+      });
     },
     routes() {
       this.timing = 500;
@@ -70,6 +87,10 @@ export function makeServer() {
         let attrs = JSON.parse(request.requestBody);
         return schema.lots.create(attrs);
       });
+
+      this.get('api/myLots', (schema) =>
+        schema.myLots.all().models.map((model) => model.attrs)
+      );
 
       this.get('api/bookmarkedlots', (schema) =>
         schema.lots.all().models.filter((lot) => lot.attrs.isBookmarked)
