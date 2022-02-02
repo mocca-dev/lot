@@ -8,6 +8,12 @@
   font-family: 'Montserrat';
 }
 
+textarea.fieldtext-container.error-border,
+input.fieldtext-container.error-border {
+  border: 2px solid red;
+  padding: 15px;
+}
+
 .fieldtext-container.border {
   background-color: white;
   border: 1px solid #bdbdbd;
@@ -17,6 +23,14 @@
   margin-top: 5px;
 }
 
-.spacer {
-  height: 15px;
+.fieldtext-label {
+  font-size: 1rem;
+}
+
+.error-msg {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: red;
+  font-weight: 600;
+  height: 18px;
 }
