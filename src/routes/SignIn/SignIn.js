@@ -28,6 +28,7 @@ import {
 import { useLocation, useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import { hideSpinner, showSpinner } from '../../reducers/spinner/spinnerSlice';
+import { Link } from 'react-router-dom';
 
 const initialValues = {
   email: '',
@@ -53,15 +54,17 @@ const SignIn = () => {
   const userData = useSelector(selecUser);
 
   useEffect(() => {
-    if (userStatus) {
-      dispatch(showSpinner());
-    } else if (userData) {
-      dispatch(hideSpinner());
-      dispatch(showFooter());
-      dispatch(showHeader());
-      navigate(state.location.pathname);
+    if (state) {
+      if (userStatus) {
+        dispatch(showSpinner());
+      } else if (userData) {
+        dispatch(hideSpinner());
+        dispatch(showFooter());
+        dispatch(showHeader());
+        navigate(state.location.pathname);
+      }
     }
-  }, [userStatus, dispatch, state.location, navigate, userData]);
+  }, [userStatus, dispatch, state, navigate, userData]);
 
   useEffect(() => {
     dispatch(set(''));
@@ -77,7 +80,7 @@ const SignIn = () => {
   return (
     <main className="signin-container">
       <img src="/icons/logo.png" alt="logo" />
-      <h2>Bienvenido!</h2>
+      <h2>¡Bienvenido!</h2>
       <Formik
         initialValues={initialValues}
         onSubmit={submitHandler}
@@ -86,13 +89,15 @@ const SignIn = () => {
         {({ errors, touched, isValid }) => (
           <Form>
             <FieldText
-              placeholder="Correo electrónico"
+              label="Correo electrónico"
+              placeholder="joedoe@gmail.com"
               name="email"
               error={errors.email}
               touched={touched.email}
             />
             <FieldText
-              placeholder="Contraseña"
+              label="Contraseña"
+              placeholder="********"
               name="password"
               error={errors.password}
               touched={touched.password}
@@ -101,6 +106,9 @@ const SignIn = () => {
           </Form>
         )}
       </Formik>
+      <p>
+        Soy nuevo, quiero <Link to="/register">registrarme</Link>.
+      </p>
     </main>
   );
 };
