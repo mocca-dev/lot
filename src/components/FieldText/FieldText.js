@@ -19,7 +19,7 @@ const FieldText = ({
         className={
           'fieldtext-container ' +
           (isGhost ? 'border ' : '') +
-          (touched ? 'error-border ' : '') +
+          (touched && error ? 'error-border ' : '') +
           (label ? 'marginTop' : '')
         }
         type={type}
@@ -33,7 +33,7 @@ const FieldText = ({
         className={
           'fieldtext-container ' +
           (isGhost ? 'border ' : '') +
-          (touched ? 'error-border ' : '') +
+          (touched && error ? 'error-border ' : '') +
           (label ? 'marginTop' : '')
         }
         id={name}
