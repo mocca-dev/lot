@@ -9,6 +9,11 @@ import { Form, Formik } from 'formik';
 import { setModal } from '../../reducers/modal/modalSlice';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
 import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
+import {
+  REQUIRED_ERROR_MSG,
+  TOO_LONG_ERROR_MSG,
+  TOO_SHORT_ERROR_MSG,
+} from '../../constants';
 
 const availabilityList = [
   { label: 'Hora', value: '0' },
@@ -29,10 +34,6 @@ const typeOfCoverageList = [
   { label: 'Con techo', value: '1' },
   { label: 'Cubierta', value: '2' },
 ];
-
-const TOO_SHORT_ERROR_MSG = 'Debe tener al menos 2 letras';
-const TOO_LONG_ERROR_MSG = 'Debe tener 50 letras como máximo';
-const REQUIRED_ERROR_MSG = 'Este campo es requerido';
 
 const showConfirmModal = (dispatch, payload) => {
   const modalConfig = {

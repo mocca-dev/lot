@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../reducers/counter/counterSlice';
+import userReducer from '../reducers/user/userSlice';
 import modalReducer from '../reducers/modal/modalSlice';
 import postsReducer from '../reducers/posts/postsSlice';
 import showFlagsReducer from '../reducers/showFlags/showFlagsSlice';
@@ -13,7 +13,6 @@ import myLotsReducer from '../reducers/myLots/myLotsSlice';
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
     subHeader: subHeaderReducer,
     modal: modalReducer,
     showFlags: showFlagsReducer,
@@ -24,5 +23,6 @@ export default configureStore({
     spinner: spinnerReducer,
     toaster: toasterReducer,
     myLots: myLotsReducer,
+    user: userReducer,
   },
 });
