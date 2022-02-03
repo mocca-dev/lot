@@ -4,6 +4,7 @@ export const showFlags = createSlice({
   name: 'showFLags',
   initialState: {
     logo: true,
+    header: true,
     footer: true,
     fixedContent: true,
   },
@@ -13,6 +14,12 @@ export const showFlags = createSlice({
     },
     hideLogo: (state) => {
       state.logo = false;
+    },
+    showHeader: (state) => {
+      state.header = true;
+    },
+    hideHeader: (state) => {
+      state.header = false;
     },
     showFooter: (state) => {
       state.footer = true;
@@ -32,6 +39,8 @@ export const showFlags = createSlice({
 export const {
   showLogo,
   hideLogo,
+  showHeader,
+  hideHeader,
   showFooter,
   hideFooter,
   showFixedContent,
@@ -39,6 +48,7 @@ export const {
 } = showFlags.actions;
 
 export const selecLogo = (state) => state.showFlags.logo;
+export const selecHeader = (state) => state.showFlags.header;
 export const selecFooter = (state) => state.showFlags.footer;
 export const selecFixedContent = (state) => state.showFlags.fixedContent;
 
