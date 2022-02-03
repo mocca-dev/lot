@@ -15,8 +15,8 @@ export const userSlice = createSlice({
     status: false,
   },
   reducers: {
-    signOut: (state, action) => {
-      state.data = action.payload;
+    signOut: (state) => {
+      state.data = null;
     },
   },
   extraReducers: {

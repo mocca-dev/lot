@@ -1,33 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Btn from '../../components/Btn/Btn';
-import { setModal } from '../../reducers/modal/modalSlice';
+import useSignOutModal from '../../hooks/useSignOutModal';
 import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
 
 import './Profile.css';
 
-const showConfirmModal = (dispatch) => {
-  const modalConfig = {
-    title: '¿Está seguro de cerrar sesión?',
-    show: true,
-    type: 'CONFIRM',
-    action: 'SIGN_OUT',
-    url: '',
-    btns: {
-      left: {
-        text: 'Cancelar',
-      },
-      right: {
-        text: 'Aceptar',
-      },
-    },
-  };
-  dispatch(setModal(modalConfig));
-};
-
 const Profile = () => {
   const dispatch = useDispatch();
+  const showModal = useSignOutModal();
 
   useEffect(() => {
     dispatch(set('Perfil'));
@@ -48,8 +30,8 @@ const Profile = () => {
           <span>juanperez@gmail.com</span>
         </div>
       </main>
-      <footer className="footer-profile-profile">
-        <Btn label="Cerrar sesión" onClick={() => showConfirmModal(dispatch)} />
+      <footer className="footer-profile">
+        <Btn label="Cerrar sesión" onClick={() => showModal()} />
       </footer>
     </>
   );

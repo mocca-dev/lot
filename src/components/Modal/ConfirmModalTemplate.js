@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { createNewLot } from '../../reducers/lot/lotSlice';
+import { signOut } from '../../reducers/user/userSlice';
 
 const ConfirmModalTemplate = ({
   title,
@@ -39,6 +40,7 @@ const ConfirmModalTemplate = ({
                     break;
                   case 'SIGN_OUT':
                     console.log('Sign Out');
+                    dispatch(signOut());
                     hide();
                     break;
                   default:

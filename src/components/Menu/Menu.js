@@ -1,41 +1,17 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import './Menu.css';
 import OutsideClick from './../OutsideClick/OutsideClick';
-import Store from '../../store';
-
-const showConfirmModal = (dispatch) => {
-  const modalConfig = {
-    title: '¿Está seguro de cerrar sesión?',
-    show: true,
-    type: undefined,
-    url: '',
-    btns: {
-      left: {
-        action: () => dispatch({ type: 'HIDE_MODAL' }),
-        text: 'Cancelar',
-      },
-      right: {
-        action: () => {
-          // setUser(null);
-          // localStorage.setItem('user', null);
-          // history.push('/ingreso');
-          dispatch({ type: 'HIDE_MODAL' });
-        },
-        text: 'Aceptar',
-      },
-    },
-  };
-  dispatch({ type: 'SET_MODAL', payload: modalConfig });
-};
+import useSignOutModal from '../../hooks/useSignOutModal';
 
 const Menu = ({ showMenu, setShowMenu }) => {
-  const { dispatch } = useContext(Store);
+  const showModal = useSignOutModal();
+
   const [menuList] = useState([
     { label: 'Mi perfil', action: '/profile' },
     { label: 'Mis publicaciones', action: '/mylots' },
-    { label: 'Cerrar sesión', action: () => showConfirmModal(dispatch) },
+    { label: 'Cerrar sesión', action: () => showModal() },
   ]);
   const navigate = useNavigate();
 
