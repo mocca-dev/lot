@@ -54,15 +54,13 @@ const SignIn = () => {
   const userData = useSelector(selecUser);
 
   useEffect(() => {
-    if (state) {
-      if (userStatus) {
-        dispatch(showSpinner());
-      } else if (userData) {
-        dispatch(hideSpinner());
-        dispatch(showFooter());
-        dispatch(showHeader());
-        navigate(state.location.pathname);
-      }
+    if (userStatus) {
+      dispatch(showSpinner());
+    } else if (userData) {
+      dispatch(hideSpinner());
+      dispatch(showFooter());
+      dispatch(showHeader());
+      navigate(state ? state.location.pathname : '/');
     }
   }, [userStatus, dispatch, state, navigate, userData]);
 

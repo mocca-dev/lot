@@ -28,3 +28,11 @@ header .profile-pic {
 .height50 {
   height: 50px;
 }
+
+.signin-btn {
+  padding: 15px 5px 15px 1px;
+}
+
+.signin-btn img {
+  height: 24px;
+}
