@@ -3,7 +3,7 @@
   padding: 16px;
   border-radius: 10px;
   border: none;
-  background-color: #f8f8f8;
+  background-color: var(--fieldtext-bg);
   font-size: 1rem;
   font-family: 'Montserrat';
 }
@@ -15,7 +15,7 @@ input.fieldtext-container.error-border {
 }
 
 .fieldtext-container.border {
-  background-color: white;
+  background-color: var(--app-bg);
   border: 1px solid #bdbdbd;
 }
 

@@ -3,7 +3,7 @@
   position: absolute;
   top: 60px;
   right: 10px;
-  background-color: white;
+  background-color: var(--scondary-bg);
   padding: 15px 20px;
   box-shadow: 0px 5px 20px 5px rgb(25 31 66 / 15%);
   border-radius: 15px;
@@ -24,7 +24,7 @@
   background: none;
   border: none;
   font-size: 1rem;
-  color: black;
+  color: var(--primary-fg);
 }
 
 .menu-backdrop {

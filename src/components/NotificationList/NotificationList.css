@@ -63,7 +63,7 @@
 .btn-delete img,
 .btn-accept img {
   height: 0.65rem;
-  filter: invert(100%);
+  filter: invert(1);
 }
 
 .btn-delete {

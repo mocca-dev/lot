@@ -1,43 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import './Menu.css';
 import OutsideClick from './../OutsideClick/OutsideClick';
 import useSignOutModal from '../../hooks/useSignOutModal';
+import MenuItem from './MenuItem/MenuItem';
 
 const Menu = ({ showMenu, setShowMenu }) => {
   const showModal = useSignOutModal();
-
-  const [menuList] = useState([
-    { label: 'Mi perfil', action: '/profile' },
-    { label: 'Mis publicaciones', action: '/mylots' },
-    { label: 'Cerrar sesión', action: () => showModal() },
-  ]);
+  const [isLightMode, setIsLightMode] = useState(true);
   const navigate = useNavigate();
 
-  const menuClickItem = (action) => {
-    setShowMenu(false);
-
-    if (typeof action === 'string') {
-      navigate(action);
-    } else {
-      action();
-    }
-  };
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      'data-theme',
+      isLightMode ? 'ligth' : 'dark'
+    );
+  }, [isLightMode]);
 
   return (
     showMenu && (
       <OutsideClick action={() => setShowMenu(false)}>
         <div className="menu">
           <ul>
-            {menuList.map((menuItem) => (
-              <li
-                key={menuItem.label}
-                onClick={() => menuClickItem(menuItem.action)}
-              >
-                {menuItem.label}
-              </li>
-            ))}
+            <MenuItem label="Mi perfíl" action={() => navigate('/profile')} />
+            <MenuItem
+              label={'Mis publicaciones'}
+              action={() => navigate('/mylots')}
+            />
+            <MenuItem
+              label={isLightMode ? 'Modo Claro' : 'Modo Oscuro'}
+              action={() => setIsLightMode(!isLightMode)}
+            />
+            <MenuItem label={'Cerrar sesión'} action={() => showModal()} />
           </ul>
         </div>
       </OutsideClick>

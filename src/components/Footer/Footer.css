@@ -23,6 +23,7 @@
 .item-container img {
   margin: auto;
   height: 20px;
+  filter: invert(var(--svgColor));
 }
 
 .item-container.active img {

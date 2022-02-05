@@ -12,7 +12,7 @@
   font-size: 1rem;
   align-items: center;
   text-decoration: none;
-  color: black;
+  color: var(--primary-fg);
 }
 
 .result-container .result-img {
