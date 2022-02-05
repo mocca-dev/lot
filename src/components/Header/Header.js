@@ -62,12 +62,10 @@ const Header = () => {
     <>
       <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
       <header>
-        <img
+        <div
           className={'left-img ' + (isShowingLogo ? 'big-size' : 'normal-size')}
-          src={isShowingLogo ? '/icons/logo.png' : '/icons/left-arrow.svg'}
-          alt="back"
           onClick={() => goBackOrHome()}
-        />
+        ></div>
         {userData ? (
           showRight && (
             <div onClick={() => setShowMenu(true)} className="height50">

@@ -8,11 +8,19 @@ header {
 }
 
 header .left-img {
-  height: 24px;
+  height: 30px;
+  width: 30px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-image: var(--arrow-url);
 }
 
 header .left-img.big-size {
-  height: 35px;
+  height: 41px;
+  width: 57px;
+  background-size: 55px;
+  background-repeat: no-repeat;
+  background-image: var(--logo-url);
 }
 
 header .profile-pic {
