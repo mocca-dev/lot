@@ -4,13 +4,18 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import LotList from '../../components/LotList/LotList';
-import { fetchMyLots, selecMyLots } from '../../reducers/myLots/myLotsSlice';
+import {
+  fetchMyLots,
+  selecMyLots,
+  selecMyLotsIsFetching,
+} from '../../reducers/myLots/myLotsSlice';
 import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
 
 const MyLots = () => {
   const dispatch = useDispatch();
   const list = useSelector(selecMyLots);
+  const isFetching = useSelector(selecMyLotsIsFetching);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -25,7 +30,7 @@ const MyLots = () => {
 
   return (
     <main>
-      <LotList list={list} />
+      <LotList list={list} isLoading={isFetching} />
     </main>
   );
 };
