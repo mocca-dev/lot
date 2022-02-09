@@ -27,35 +27,38 @@ const showConfirmModal = (dispatch, payload, title) => {
   dispatch(setModal(modalConfig));
 };
 
+const validationSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  price: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  address: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  contact: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  description: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  availability: Yup.string().required(REQUIRED_ERROR_MSG),
+  typeOfVehicle: Yup.string().required(REQUIRED_ERROR_MSG),
+  typeOfCoverage: Yup.string().required(REQUIRED_ERROR_MSG),
+});
+
 const New = () => {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
   let [availabilityList, setAvailabilityList] = useState([]);
   let [typeOfVehicleList, setTypeOfVehicleList] = useState([]);
   let [typeOfCoverageList, setTypeOfCoverageList] = useState([]);
-
-  const validationSchema = Yup.object().shape({
-    title: Yup.string()
-      .min(2, TOO_SHORT_ERROR_MSG)
-      .max(50, TOO_LONG_ERROR_MSG)
-      .required(REQUIRED_ERROR_MSG),
-    price: Yup.string()
-      .min(2, TOO_SHORT_ERROR_MSG)
-      .max(50, TOO_LONG_ERROR_MSG)
-      .required(REQUIRED_ERROR_MSG),
-    address: Yup.string()
-      .min(2, TOO_SHORT_ERROR_MSG)
-      .max(50, TOO_LONG_ERROR_MSG)
-      .required(REQUIRED_ERROR_MSG),
-    contact: Yup.string()
-      .min(2, TOO_SHORT_ERROR_MSG)
-      .max(50, TOO_LONG_ERROR_MSG)
-      .required(REQUIRED_ERROR_MSG),
-    description: Yup.string()
-      .min(2, TOO_SHORT_ERROR_MSG)
-      .max(50, TOO_LONG_ERROR_MSG)
-      .required(REQUIRED_ERROR_MSG),
-  });
 
   useEffect(() => {
     dispatch(set(t('newSubheader')));
@@ -140,16 +143,22 @@ const New = () => {
               label={t('availabilityLabelNew')}
               list={availabilityList}
               name="availability"
+              error={errors.availability}
+              touched={touched.availability}
             />
             <RadioGroup
               label={t('typeOfVehiclesLabelNew')}
               list={typeOfVehicleList}
               name="typeOfVehicle"
+              error={errors.typeOfVehicle}
+              touched={touched.typeOfVehicle}
             />
             <RadioGroup
               label={t('typeOfCoverLabelNew')}
               list={typeOfCoverageList}
               name="typeOfCoverage"
+              error={errors.typeOfCoverage}
+              touched={touched.typeOfCoverage}
             />
             <FieldText
               placeholder="ej: (555) 555-5555"

@@ -8,6 +8,15 @@
   border-right: none;
 }
 
+.radio-btn-container.error-border {
+  border: 2px solid red;
+  border-right: none;
+}
+
+.radio-btn-container.error-border:last-child {
+  border-right: 2px solid red;
+}
+
 .radio-btn-container:first-child .checkmark,
 .radio-btn-container:first-child {
   border-radius: 10px 0 0 10px;
