@@ -1,21 +1,29 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { hideSpinner, showSpinner } from '../spinner/spinnerSlice';
 import { showToast } from '../toaster/toasterSlice';
 
 export const fetchLotById = createAsyncThunk('lot/fetchLot', async (id) =>
   fetch(`/api/lot/${id}`).then((response) => response.json())
 );
 
-export const createNewLot = createAsyncThunk('lot/newLot', async (data) => {
-  const resp = await fetch('api/lots', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  }).then((response) => response.json());
-  return resp.lot;
-});
+export const createNewLot = createAsyncThunk(
+  'lot/newLot',
+  async (data, { dispatch }) => {
+    dispatch(showSpinner());
+    const resp = await fetch('api/lots', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      dispatch(hideSpinner());
+      response.json();
+    });
+    return resp.lot;
+  }
+);
 
 export const bookmarkLot = createAsyncThunk(
   'lot/bookmark',

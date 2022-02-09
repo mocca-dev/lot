@@ -121,8 +121,8 @@ function App() {
           </Routes>
           {showFooter && <Footer items={footerItems} />}
         </div>
+        <ModalWrapper />
       </BrowserRouter>
-      <ModalWrapper />
       <Spinner />
       <Toaster />
     </Store.Provider>
