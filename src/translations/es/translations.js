@@ -38,6 +38,11 @@ const TRANSLATIONS_ES = {
   okBtnLbl: 'Aceptar',
   signOutModalTitle: '¿Está seguro que desea cerrar sesión?',
   newModalTitle: '¿Está seguro que desea publicar?',
+  availabilityHrShortLbl: 'hr',
+  availabilityDayShortLbl: 'día',
+  availabilityWeekShortLbl: 'sem',
+  availabilityFortShortLbl: 'quin',
+  availabilityMonthShortLbl: 'mes',
 };
 
 export default TRANSLATIONS_ES;

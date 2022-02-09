@@ -38,6 +38,11 @@ const TRANSLATIONS_EN = {
   okBtnLbl: 'OK',
   signOutModalTitle: 'Are you sure you want to signout?',
   newModalTitle: 'Are you sure you want to post?',
+  availabilityHrShortLbl: 'hr',
+  availabilityDayShortLbl: 'day',
+  availabilityWeekShortLbl: 'week',
+  availabilityFortShortLbl: 'fort',
+  availabilityMonthShortLbl: 'mon',
 };
 
 export default TRANSLATIONS_EN;

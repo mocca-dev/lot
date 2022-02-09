@@ -1,9 +1,20 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { SpinnerCircularFixed } from 'spinners-react';
 
 import './LotList.css';
 
 const LotList = ({ list, isLoading }) => {
+  const { t } = useTranslation();
+  const getAvailabilityLabel = (id) =>
+    [
+      t('availabilityHrShortLbl'),
+      t('availabilityDayShortLbl'),
+      t('availabilityWeekShortLbl'),
+      t('availabilityFortShortLbl'),
+      t('availabilityMonthShortLbl'),
+    ][id];
+
   if (isLoading) {
     return (
       <div className="spinner-container">
@@ -47,7 +58,9 @@ const LotList = ({ list, isLoading }) => {
           <span className="result-price">
             <span>
               ${lot.price}
-              <span className="frecuency">/día</span>
+              <span className="frecuency">
+                /{getAvailabilityLabel(lot.availability)}
+              </span>
             </span>
             <span className="since">{lot.since}d</span>
           </span>
