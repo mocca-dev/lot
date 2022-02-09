@@ -32,11 +32,17 @@ const Menu = ({ showMenu, setShowMenu }) => {
           <ul>
             <MenuItem
               label={t('menuMyProfile')}
-              action={() => navigate('/profile')}
+              action={() => {
+                navigate('/profile');
+                setShowMenu(false);
+              }}
             />
             <MenuItem
               label={t('menuMyPosts')}
-              action={() => navigate('/mylots')}
+              action={() => {
+                navigate('/mylots');
+                setShowMenu(false);
+              }}
             />
             {/* <MenuItem
               label={isLightMode ? 'Modo Claro' : 'Modo Oscuro'}
@@ -46,7 +52,13 @@ const Menu = ({ showMenu, setShowMenu }) => {
               label={isInEnglish ? 'English' : 'Español'}
               action={() => setIsInEnglish(!isInEnglish)}
             />
-            <MenuItem label={t('menuSignOut')} action={() => showModal()} />
+            <MenuItem
+              label={t('menuSignOut')}
+              action={() => {
+                setShowMenu(false);
+                showModal();
+              }}
+            />
           </ul>
         </div>
       </OutsideClick>
