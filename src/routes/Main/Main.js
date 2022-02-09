@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 import {
   fetchPosts,
   fetchPostsByTitle,
@@ -19,6 +20,7 @@ const Main = () => {
   const dispatch = useDispatch();
   const list = useSelector(selecPosts);
   const isFetching = useSelector(selecPostsIsFetching);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -26,10 +28,9 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(set('Buscar cocheras'));
+    dispatch(set(t('searchSubheader')));
     dispatch(showFixedContent());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, t]);
 
   const formik = useFormik({
     initialValues: {

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
+
 import { bookmarkLot, cleanLot, selecLot } from '../../reducers/lot/lotSlice';
 import { fetchLotById } from '../../reducers/lot/lotSlice';
-
 import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 import { hideSpinner, showSpinner } from '../../reducers/spinner/spinnerSlice';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
@@ -20,6 +20,7 @@ const Lot = () => {
   const dispatch = useDispatch();
   const lot = useSelector(selecLot);
   const location = useLocation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const id = new URLSearchParams(location.search).get('id');
@@ -68,7 +69,13 @@ const Lot = () => {
               <button
                 className="bookmark-btn"
                 onClick={() => {
-                  dispatch(bookmarkLot(lot.id));
+                  dispatch(
+                    bookmarkLot({
+                      id: lot.id,
+                      saved: t('savedToast'),
+                      unsaved: t('unsavedToast'),
+                    })
+                  );
                   dispatch(fetchLotById(lot.id));
                 }}
               >

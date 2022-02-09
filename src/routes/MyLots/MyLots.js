@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import LotList from '../../components/LotList/LotList';
 import { fetchMyLots, selecMyLots } from '../../reducers/myLots/myLotsSlice';
@@ -10,6 +11,7 @@ import { set } from '../../reducers/subHeader/subHeaderSlice';
 const MyLots = () => {
   const dispatch = useDispatch();
   const list = useSelector(selecMyLots);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchMyLots());
@@ -17,10 +19,9 @@ const MyLots = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(set('Mis publicaciones'));
+    dispatch(set(t('myPostsSubheader')));
     dispatch(hideFixedContent());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, t]);
 
   return (
     <main>

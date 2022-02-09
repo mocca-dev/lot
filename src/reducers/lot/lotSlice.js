@@ -19,12 +19,12 @@ export const createNewLot = createAsyncThunk('lot/newLot', async (data) => {
 
 export const bookmarkLot = createAsyncThunk(
   'lot/bookmark',
-  async (id, { dispatch }) => {
-    const resp = await fetch(`/api/bookmark/${id}`, {
+  async (data, { dispatch }) => {
+    const resp = await fetch(`/api/bookmark/${data.id}`, {
       method: 'PATCH',
     }).then(async (response) => {
       const resp = await response.json();
-      dispatch(showToast(resp.lot.isBookmarked ? 'Guardado' : 'Sacado'));
+      dispatch(showToast(resp.lot.isBookmarked ? data.saved : data.unsaved));
       return;
     });
     return resp.lot;

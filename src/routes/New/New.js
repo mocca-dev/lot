@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import FieldText from '../../components/FieldText/FieldText';
 import Btn from '../../components/Btn/Btn';
@@ -15,47 +16,23 @@ import {
   TOO_SHORT_ERROR_MSG,
 } from '../../constants';
 
-const availabilityList = [
-  { label: 'Hora', value: '0' },
-  { label: 'Día', value: '1' },
-  { label: 'Semana', value: '2' },
-  { label: '15 Días', value: '3' },
-  { label: 'Mes', value: '4' },
-];
-const typeOfVehicleList = [
-  { label: 'Moto', value: '0' },
-  { label: 'Auto', value: '1' },
-  { label: 'Camioneta', value: '2' },
-  { label: 'Tariler', value: '3' },
-  { label: 'Cautri', value: '4' },
-];
-const typeOfCoverageList = [
-  { label: 'Sin techo', value: '0' },
-  { label: 'Con techo', value: '1' },
-  { label: 'Cubierta', value: '2' },
-];
-
-const showConfirmModal = (dispatch, payload) => {
+const showConfirmModal = (dispatch, payload, title) => {
   const modalConfig = {
-    title: '¿Está seguro que desea publicar?',
+    title,
     show: true,
     type: 'CONFIRM',
     payload,
     action: 'POST_NEW',
-    btns: {
-      left: {
-        text: 'Cancelar',
-      },
-      right: {
-        text: 'Aceptar',
-      },
-    },
   };
   dispatch(setModal(modalConfig));
 };
 
 const New = () => {
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+  let [availabilityList, setAvailabilityList] = useState([]);
+  let [typeOfVehicleList, setTypeOfVehicleList] = useState([]);
+  let [typeOfCoverageList, setTypeOfCoverageList] = useState([]);
 
   const validationSchema = Yup.object().shape({
     title: Yup.string()
@@ -81,10 +58,31 @@ const New = () => {
   });
 
   useEffect(() => {
-    dispatch(set('Nueva publicación'));
+    dispatch(set(t('newSubheader')));
     dispatch(hideFixedContent());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, t]);
+
+  useEffect(() => {
+    setAvailabilityList([
+      { label: t('availabilityHourLbl'), value: '0' },
+      { label: t('availabilityDayLbl'), value: '1' },
+      { label: t('availabilityWeekLbl'), value: '2' },
+      { label: t('availability15Lbl'), value: '3' },
+      { label: t('availabilityMonthLbl'), value: '4' },
+    ]);
+    setTypeOfVehicleList([
+      { label: t('vehicleMotoLbl'), value: '0' },
+      { label: t('vehicleCarLbl'), value: '1' },
+      { label: t('vehiclePickupLbl'), value: '2' },
+      { label: t('vehicleTrailerLbl'), value: '3' },
+      { label: t('vehicleQuadLbl'), value: '4' },
+    ]);
+    setTypeOfCoverageList([
+      { label: t('coverRooflessLbl'), value: '0' },
+      { label: t('coverRoofLbl'), value: '1' },
+      { label: t('coverCoverLbl'), value: '2' },
+    ]);
+  }, [i18n, t]);
 
   return (
     <main>
@@ -100,7 +98,7 @@ const New = () => {
           description: '',
         }}
         onSubmit={(values) => {
-          showConfirmModal(dispatch, values);
+          showConfirmModal(dispatch, values, t('newModalTitle'));
         }}
         validationSchema={validationSchema}
       >
@@ -109,7 +107,7 @@ const New = () => {
             <FieldText
               placeholder="ej: Cochera en alquiler"
               isGhost={true}
-              label="Título"
+              label={t('titleLabelNew')}
               name="title"
               error={errors.title}
               touched={touched.title}
@@ -117,7 +115,7 @@ const New = () => {
             <FieldText
               placeholder="ej: Evergreen 742"
               isGhost={true}
-              label="Valor"
+              label={t('priceLabelNew')}
               name="price"
               error={errors.price}
               touched={touched.price}
@@ -125,7 +123,7 @@ const New = () => {
             <FieldText
               placeholder="ej: Evergreen 742"
               isGhost={true}
-              label="Ubicación"
+              label={t('addressLabelNew')}
               name="address"
               error={errors.address}
               touched={touched.address}
@@ -133,36 +131,36 @@ const New = () => {
             <FieldText
               placeholder="ej: (555) 555-5555"
               isGhost={true}
-              label="Contacto"
+              label={t('contactLabelNew')}
               name="contact"
               error={errors.contact}
               touched={touched.contact}
             />
             <RadioGroup
-              label="Disponibilidad"
+              label={t('availabilityLabelNew')}
               list={availabilityList}
               name="availability"
             />
             <RadioGroup
-              label="Tipo de vehículos"
+              label={t('typeOfVehiclesLabelNew')}
               list={typeOfVehicleList}
               name="typeOfVehicle"
             />
             <RadioGroup
-              label="Tipo de cobertura"
+              label={t('typeOfCoverLabelNew')}
               list={typeOfCoverageList}
               name="typeOfCoverage"
             />
             <FieldText
               placeholder="ej: (555) 555-5555"
               isGhost={true}
-              label="Descripción"
+              label={t('descriptionLabelNew')}
               type="textarea"
               name="description"
               error={errors.description}
               touched={touched.description}
             />
-            <Btn label="Publicar cochera" type="submit" disabled={!isValid} />
+            <Btn label={t('postBtn')} type="submit" disabled={!isValid} />
           </Form>
         )}
       </Formik>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 import './SignIn.css';
 
@@ -52,6 +53,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const userStatus = useSelector(selecUserStatus);
   const userData = useSelector(selecUser);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (userStatus) {
@@ -100,7 +102,7 @@ const SignIn = () => {
               error={errors.password}
               touched={touched.password}
             />
-            <Btn label="Enviar" type="submit" disabled={!isValid} />
+            <Btn label={t('signInBtn')} type="submit" disabled={!isValid} />
           </Form>
         )}
       </Formik>

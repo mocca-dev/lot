@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { set } from '../../reducers/subHeader/subHeaderSlice';
 import NotificationList from '../../components/NotificationList/NotificationList';
@@ -15,6 +16,7 @@ const Notifications = () => {
   const dispatch = useDispatch();
   const notifications = useSelector(selecNotifications);
   const isFetching = useSelector(selecNotificationsIsFetching);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchNotifications());
@@ -22,10 +24,9 @@ const Notifications = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(set('Notificaciones'));
+    dispatch(set(t('notificationsSubheader')));
     dispatch(hideFixedContent());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, t]);
 
   return (
     <main>

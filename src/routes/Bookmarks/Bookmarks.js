@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { FormikProvider, useFormik, Form } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import LotList from '../../components/LotList/LotList';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { FormikProvider, useFormik, Form } from 'formik';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
-import { useSelector } from 'react-redux';
 import {
   fetchBookmarks,
   fetchBookmarksByTitle,
@@ -18,15 +19,16 @@ const Bookmarks = () => {
   const dispatch = useDispatch();
   const list = useSelector(selecBookmarks);
   const isFetching = useSelector(selecBookmarksIsFetching);
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(fetchBookmarks());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(set('Guardados'));
+    dispatch(set(t('bookmarksSubheader')));
     dispatch(showFixedContent());
-  }, [dispatch]);
+  }, [dispatch, t]);
 
   const formik = useFormik({
     initialValues: {

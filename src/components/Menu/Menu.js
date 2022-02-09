@@ -1,43 +1,52 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 import './Menu.css';
 import OutsideClick from './../OutsideClick/OutsideClick';
 import useSignOutModal from '../../hooks/useSignOutModal';
+import MenuItem from './MenuItem/MenuItem';
 
 const Menu = ({ showMenu, setShowMenu }) => {
   const showModal = useSignOutModal();
-
-  const [menuList] = useState([
-    { label: 'Mi perfil', action: '/profile' },
-    { label: 'Mis publicaciones', action: '/mylots' },
-    { label: 'Cerrar sesión', action: () => showModal() },
-  ]);
+  const [isInEnglish, setIsInEnglish] = useState(false);
+  // const [isLightMode, setIsLightMode] = useState(true);
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
-  const menuClickItem = (action) => {
-    setShowMenu(false);
+  // useEffect(() => {
+  //   document.documentElement.setAttribute(
+  //     'data-theme',
+  //     isLightMode ? 'ligth' : 'dark'
+  //   );
+  // }, [isLightMode]);
 
-    if (typeof action === 'string') {
-      navigate(action);
-    } else {
-      action();
-    }
-  };
+  useEffect(() => {
+    i18n.changeLanguage(isInEnglish ? 'en' : 'es');
+  }, [i18n, isInEnglish]);
 
   return (
     showMenu && (
       <OutsideClick action={() => setShowMenu(false)}>
         <div className="menu">
           <ul>
-            {menuList.map((menuItem) => (
-              <li
-                key={menuItem.label}
-                onClick={() => menuClickItem(menuItem.action)}
-              >
-                {menuItem.label}
-              </li>
-            ))}
+            <MenuItem
+              label={t('menuMyProfile')}
+              action={() => navigate('/profile')}
+            />
+            <MenuItem
+              label={t('menuMyPosts')}
+              action={() => navigate('/mylots')}
+            />
+            {/* <MenuItem
+              label={isLightMode ? 'Modo Claro' : 'Modo Oscuro'}
+              action={() => setIsLightMode(!isLightMode)}
+            /> */}
+            <MenuItem
+              label={isInEnglish ? 'English' : 'Español'}
+              action={() => setIsInEnglish(!isInEnglish)}
+            />
+            <MenuItem label={t('menuSignOut')} action={() => showModal()} />
           </ul>
         </div>
       </OutsideClick>

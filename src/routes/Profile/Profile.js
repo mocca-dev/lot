@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 import Btn from '../../components/Btn/Btn';
 import useSignOutModal from '../../hooks/useSignOutModal';
 import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
@@ -10,12 +12,12 @@ import './Profile.css';
 const Profile = () => {
   const dispatch = useDispatch();
   const showModal = useSignOutModal();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    dispatch(set('Perfil'));
+    dispatch(set(t('profileSubheader')));
     dispatch(hideFixedContent());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, t]);
 
   return (
     <>
@@ -31,7 +33,7 @@ const Profile = () => {
         </div>
       </main>
       <footer className="footer-profile">
-        <Btn label="Cerrar sesión" onClick={() => showModal()} />
+        <Btn label={t('signOutBtn')} onClick={() => showModal()} />
       </footer>
     </>
   );
