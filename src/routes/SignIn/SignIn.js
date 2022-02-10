@@ -100,6 +100,7 @@ const SignIn = () => {
               label="Contraseña"
               placeholder="********"
               name="password"
+              type="password"
               error={errors.password}
               touched={touched.password}
             />
@@ -109,6 +110,11 @@ const SignIn = () => {
       </Formik>
       <p>
         Soy nuevo, quiero <Link to="/register">registrarme</Link>.
+      </p>
+      <p className="tip-container">
+        💡 TIP: This app is already in demo mode. If you want to test it, you
+        can signin simple with mocked data such as E-Mail: demo@demo.com,
+        Password: demo.
       </p>
     </main>
   );

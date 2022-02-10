@@ -14,7 +14,7 @@ const FieldText = ({
 }) => (
   <>
     {label && <label className="fieldtext-label">{label}</label>}
-    {type === 'text' ? (
+    {type === 'text' || type === 'password' ? (
       <Field
         className={
           'fieldtext-container ' +
