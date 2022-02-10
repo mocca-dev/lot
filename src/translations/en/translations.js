@@ -43,6 +43,13 @@ const TRANSLATIONS_EN = {
   availabilityWeekShortLbl: 'week',
   availabilityFortShortLbl: 'fort',
   availabilityMonthShortLbl: 'mon',
+  siginWelcomeMsg: 'Welcome!',
+  siginEmailLbl: 'E-mail',
+  siginPasswordLbl: 'Password',
+  siginRegisterMsg: "I'm new, I want to ",
+  siginRegisterLink: 'register',
+  siginTip:
+    'TIP: This app is already in demo mode. If you want to test it, you can signin simple with mocked data such as E-Mail: demo@demo.com, Password: demo.',
 };
 
 export default TRANSLATIONS_EN;

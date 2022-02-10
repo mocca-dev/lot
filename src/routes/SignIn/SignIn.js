@@ -81,7 +81,7 @@ const SignIn = () => {
   return (
     <main className="signin-container">
       <img src="/icons/logo.png" alt="logo" />
-      <h2>¡Bienvenido!</h2>
+      <h2>{t('siginWelcomeMsg')}</h2>
       <Formik
         initialValues={initialValues}
         onSubmit={submitHandler}
@@ -90,14 +90,14 @@ const SignIn = () => {
         {({ errors, touched, isValid }) => (
           <Form>
             <FieldText
-              label="Correo electrónico"
+              label={t('siginEmailLbl')}
               placeholder="joedoe@gmail.com"
               name="email"
               error={errors.email}
               touched={touched.email}
             />
             <FieldText
-              label="Contraseña"
+              label={t('siginPasswordLbl')}
               placeholder="********"
               name="password"
               type="password"
@@ -109,13 +109,10 @@ const SignIn = () => {
         )}
       </Formik>
       <p>
-        Soy nuevo, quiero <Link to="/register">registrarme</Link>.
+        {t('siginRegisterMsg')}
+        <Link to="/register">{t('siginRegisterLink')}</Link>.
       </p>
-      <p className="tip-container">
-        💡 TIP: This app is already in demo mode. If you want to test it, you
-        can signin simple with mocked data such as E-Mail: demo@demo.com,
-        Password: demo.
-      </p>
+      <p className="tip-container">💡 {t('siginTip')}</p>
     </main>
   );
 };

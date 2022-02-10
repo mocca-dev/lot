@@ -43,6 +43,13 @@ const TRANSLATIONS_ES = {
   availabilityWeekShortLbl: 'sem',
   availabilityFortShortLbl: 'quin',
   availabilityMonthShortLbl: 'mes',
+  siginWelcomeMsg: '¡Bienvenido!',
+  siginEmailLbl: 'Correo electrónico',
+  siginPasswordLbl: 'Contraseña',
+  siginRegisterMsg: 'Soy nuevo, quiero ',
+  siginRegisterLink: 'registrarme',
+  siginTip:
+    'TIP: Esta app esta corriendo en modo demo. Si quieres probarla, puedes ingresar con datos de prueba como E-Mail: demo@demo.com, Password: demo.',
 };
 
 export default TRANSLATIONS_ES;
