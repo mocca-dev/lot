@@ -9,14 +9,15 @@ import {
   showFooter,
   showLogo,
 } from '../../reducers/showFlags/showFlagsSlice';
-import { selecUser } from '../../reducers/user/userSlice';
+import { showSpinner, hideSpinner } from '../../reducers/spinner/spinnerSlice';
+import { selecUser, setUserData } from '../../reducers/user/userSlice';
 
 import Menu from '../Menu/Menu';
 
 import './Header.css';
 
 const Header = () => {
-  const disp = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isShowingLogo = useSelector(selecLogo);
   const [showRight, setShowRight] = useState(true);
@@ -30,19 +31,28 @@ const Header = () => {
       location.pathname !== '/mylots' &&
       !location.pathname.includes('/lot')
     ) {
-      disp(showFooter());
-      disp(showLogo());
+      dispatch(showFooter());
+      dispatch(showLogo());
       setShowRight(true);
     } else {
-      disp(hideFooter());
-      disp(hideLogo());
+      dispatch(hideFooter());
+      dispatch(hideLogo());
       if (
         location.pathname !== '/mylots' &&
         !location.pathname.includes('/lot')
       )
         setShowRight(false);
     }
-  }, [disp, location]);
+  }, [dispatch, location]);
+
+  useEffect(() => {
+    dispatch(showSpinner());
+    const user = localStorage.getItem('user');
+    if (user) {
+      dispatch(setUserData(JSON.parse(user)));
+    }
+    dispatch(hideSpinner());
+  }, [dispatch]);
 
   const goBackOrHome = () => {
     if (isShowingLogo) {

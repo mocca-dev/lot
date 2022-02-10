@@ -74,6 +74,7 @@ const SignIn = () => {
   }, [dispatch]);
 
   const submitHandler = (values) => {
+    localStorage.setItem('user', JSON.stringify(values));
     dispatch(signIn(values));
   };
 

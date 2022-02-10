@@ -11,10 +11,13 @@ export const signIn = createAsyncThunk('user/setUser', async () => {
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    data: {},
+    data: null,
     status: false,
   },
   reducers: {
+    setUserData: (state, action) => {
+      state.data = action.payload;
+    },
     signOut: (state) => {
       state.data = null;
     },
@@ -30,7 +33,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { signOut } = userSlice.actions;
+export const { signOut, setUserData } = userSlice.actions;
 export const selecUser = (state) => state.user.data;
 export const selecUserStatus = (state) => state.user.status;
 

@@ -33,7 +33,7 @@ const ConfirmModalTemplate = ({ title, content, hide, payload, action }) => {
                 navigate('/');
                 break;
               case 'SIGN_OUT':
-                console.log('Sign Out');
+                localStorage.setItem('user', '');
                 dispatch(signOut());
                 hide();
                 break;
