@@ -1,9 +1,7 @@
 import './App.css';
-import { useState, useReducer } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Store from './store';
-import appReducer from './reducers';
 import { makeServer } from './server';
 
 import Footer from './components/Footer/Footer';
@@ -42,25 +40,8 @@ function App() {
     { icon: 'notification', route: '/notification' },
   ]);
 
-  const [state, dispatch] = useReducer(appReducer, {
-    subHeader: 'Buscar cocheras',
-    showLogo: true,
-    showFooter: true,
-    showFixedContent: true,
-    initialMarker: 'search',
-    modal: {
-      show: false,
-      title: '',
-      content: '',
-      btns: {
-        left: { action: null, text: 'cancelar' },
-        right: { action: null, text: 'aceptar' },
-      },
-    },
-  });
-
   return (
-    <Store.Provider value={{ state, dispatch }}>
+    <>
       <BrowserRouter>
         <div
           className={'App' + (!fixedContent ? ' without-non-scroll-main' : '')}
@@ -125,7 +106,7 @@ function App() {
       </BrowserRouter>
       <Spinner />
       <Toaster />
-    </Store.Provider>
+    </>
   );
 }
 

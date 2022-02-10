@@ -11,7 +11,7 @@ export const signIn = createAsyncThunk('user/setUser', async () => {
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    data: null,
+    data: {},
     status: false,
   },
   reducers: {
@@ -24,7 +24,6 @@ export const userSlice = createSlice({
       state.status = true;
     },
     [signIn.fulfilled]: (state, action) => {
-      console.log('fullfilled', action.meta.arg);
       state.data = action.meta.arg;
       state.status = false;
     },

@@ -1,12 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
-import Store from '../../store';
 
 import './Footer.css';
 
 const Footer = ({ items }) => {
-  const { dispatch } = useContext(Store);
   const [xOffset, setXOffset] = useState('');
   const location = useLocation();
 
@@ -26,15 +23,6 @@ const Footer = ({ items }) => {
     }
   }, [setXOffset, location]);
 
-  const positionMarker = (e, itemName) => {
-    if (e.currentTarget.tagName === 'A') {
-      dispatch({
-        type: 'SET_MARKER_POS',
-        payload: itemName,
-      });
-    }
-  };
-
   return (
     <footer className="footer-container">
       <nav className="nav-container">
@@ -44,7 +32,6 @@ const Footer = ({ items }) => {
             key={id}
             className={'item-container ' + (item.initial ? 'initial-item' : '')}
             id={item.icon}
-            onClick={(e) => positionMarker(e, item.icon)}
             to={item.route}
           >
             <img src={`/icons/${item.icon}.svg`} alt="" />

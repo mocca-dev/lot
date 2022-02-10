@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -11,13 +11,11 @@ import {
 } from '../../reducers/showFlags/showFlagsSlice';
 import { selecUser } from '../../reducers/user/userSlice';
 
-import Store from '../../store';
 import Menu from '../Menu/Menu';
 
 import './Header.css';
 
 const Header = () => {
-  const { dispatch } = useContext(Store);
   const disp = useDispatch();
   const navigate = useNavigate();
   const isShowingLogo = useSelector(selecLogo);
@@ -48,10 +46,6 @@ const Header = () => {
 
   const goBackOrHome = () => {
     if (isShowingLogo) {
-      dispatch({
-        type: 'SET_MARKER_POS',
-        payload: 'search',
-      });
       navigate('/');
     } else {
       navigate(-1);
