@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {
+  selecHeader,
+  setHeaderContent,
+} from '../../reducers/header/headerSlice';
 
 import {
   hideFooter,
@@ -24,6 +28,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userData = useSelector(selecUser);
   const location = useLocation();
+  const headerContent = useSelector(selecHeader);
 
   useEffect(() => {
     if (
@@ -33,6 +38,7 @@ const Header = () => {
     ) {
       dispatch(showFooter());
       dispatch(showLogo());
+      dispatch(setHeaderContent(null));
       setShowRight(true);
     } else {
       dispatch(hideFooter());
@@ -70,8 +76,10 @@ const Header = () => {
           className={'left-img ' + (isShowingLogo ? 'big-size' : 'normal-size')}
           onClick={() => goBackOrHome()}
         ></div>
-        {userData ? (
-          showRight && (
+        {showRight &&
+          (headerContent ? (
+            <p>{headerContent}</p>
+          ) : userData ? (
             <div onClick={() => setShowMenu(true)} className="height50">
               <img
                 className="profile-pic"
@@ -79,12 +87,11 @@ const Header = () => {
                 alt="profile"
               />
             </div>
-          )
-        ) : (
-          <Link className="signin-btn" to="/signin">
-            <img src="/icons/user.svg" alt="" />
-          </Link>
-        )}
+          ) : (
+            <Link className="signin-btn" to="/signin">
+              <img src="/icons/user.svg" alt="" />
+            </Link>
+          ))}
       </header>
     </>
   );

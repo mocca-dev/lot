@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux';
 import {
   selecFixedContent,
   selecFooter,
-  selecHeader,
+  selecShowHeader,
 } from './reducers/showFlags/showFlagsSlice';
 import Lot from './routes/Lot/Lot';
 import Spinner from './components/Spinner/Spinner';
@@ -30,7 +30,7 @@ makeServer();
 
 function App() {
   const fixedContent = useSelector(selecFixedContent);
-  const showHeader = useSelector(selecHeader);
+  const showHeader = useSelector(selecShowHeader);
   const showFooter = useSelector(selecFooter);
   const [footerItems] = useState([
     // { icon: 'map', route: '/map' },

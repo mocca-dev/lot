@@ -48,7 +48,7 @@ export const {
 } = showFlags.actions;
 
 export const selecLogo = (state) => state.showFlags.logo;
-export const selecHeader = (state) => state.showFlags.header;
+export const selecShowHeader = (state) => state.showFlags.header;
 export const selecFooter = (state) => state.showFlags.footer;
 export const selecFixedContent = (state) => state.showFlags.fixedContent;
 

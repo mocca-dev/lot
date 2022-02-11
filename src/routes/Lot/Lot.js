@@ -13,6 +13,7 @@ import Btn from '../../components/Btn/Btn';
 
 import './Lot.css';
 import { createNewNotification } from '../../reducers/notifications/notificationsSlice';
+// import { setHeaderContent } from '../../reducers/header/headerSlice';
 
 const availability = ['Hora', 'Día', 'Semana', '15 Días', 'Mes'];
 const typeOfVehicles = ['Moto', 'Auto', 'Camioneta', 'Trailer', 'Cuatri'];
@@ -32,6 +33,9 @@ const Lot = () => {
 
   useEffect(() => {
     if (lot) {
+      // dispatch(
+      //   setHeaderContent('$' + lot.price + '/' + availability[lot.availability])
+      // );
       dispatch(set(lot.title));
       dispatch(hideSpinner());
     } else {
