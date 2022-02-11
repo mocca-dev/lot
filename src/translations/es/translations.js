@@ -50,6 +50,7 @@ const TRANSLATIONS_ES = {
   siginRegisterLink: 'registrarme',
   siginTip:
     'TIP: Esta app esta corriendo en modo demo. Si quieres probarla, puedes ingresar con datos de prueba como E-Mail: demo@demo.com, Password: demo.',
+  lotBtnLbl: 'Consultar datos',
 };
 
 export default TRANSLATIONS_ES;

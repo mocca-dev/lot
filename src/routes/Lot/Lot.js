@@ -9,8 +9,10 @@ import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 import { hideSpinner, showSpinner } from '../../reducers/spinner/spinnerSlice';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
 import DetailRow from './DetailRow/DetailRow';
+import Btn from '../../components/Btn/Btn';
 
 import './Lot.css';
+import { createNewNotification } from '../../reducers/notifications/notificationsSlice';
 
 const availability = ['Hora', 'Día', 'Semana', '15 Días', 'Mes'];
 const typeOfVehicles = ['Moto', 'Auto', 'Camioneta', 'Trailer', 'Cuatri'];
@@ -92,6 +94,22 @@ const Lot = () => {
             </div>
           </div>
           <p>{lot.description}</p>
+          <br />
+          <Btn
+            label={t('lotBtnLbl')}
+            onClick={() => {
+              dispatch(
+                createNewNotification({
+                  title: lot.title,
+                  requestedBy: 'John Doe',
+                  since: '3',
+                })
+              );
+            }}
+            disabled={false}
+          />
+          <br />
+          <br />
         </>
       )}
     </main>

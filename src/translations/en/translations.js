@@ -50,6 +50,7 @@ const TRANSLATIONS_EN = {
   siginRegisterLink: 'register',
   siginTip:
     'TIP: This app is already in demo mode. If you want to test it, you can signin simple with mocked data such as E-Mail: demo@demo.com, Password: demo.',
+  lotBtnLbl: 'Require contact info',
 };
 
 export default TRANSLATIONS_EN;

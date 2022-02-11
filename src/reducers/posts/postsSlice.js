@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  return fetch('api/parkinglots').then((response) => response.json());
+  return fetch('api/lots').then((response) => response.json());
 });
 
 export const fetchPostsByTitle = createAsyncThunk(
   'posts/fetchPostsByTitle',
   async (title) =>
-    fetch(`/api/parkinglots/${title}`).then((response) => response.json())
+    fetch(`/api/lots/${title}`).then((response) => response.json())
 );
 
 export const posts = createSlice({

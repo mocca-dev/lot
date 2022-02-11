@@ -67,15 +67,20 @@ export function makeServer() {
       this.get('api/notifications', (schema) =>
         schema.notifications.all().models.map((model) => model.attrs)
       );
+      this.post('api/notifications', (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        return schema.notifications.create(attrs);
+      });
+
       this.get('api/lot/:id', (schema, request) => {
         let { id } = request.params;
         return schema.lots.all().models.find((lot) => lot.id === id);
       });
 
-      this.get('api/parkinglots', (schema) =>
+      this.get('api/lots', (schema) =>
         schema.lots.all().models.map((model) => model.attrs)
       );
-      this.get('api/parkinglots/:title', (schema, request) => {
+      this.get('api/lots/:title', (schema, request) => {
         let { title } = request.params;
         return schema.lots
           .all()
