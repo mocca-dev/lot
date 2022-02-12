@@ -102,10 +102,6 @@ This app is made with create-react-app so the installation process is simple.
 
 ## Usage
 
-### Home
-
-It's very straightfoward, just enter a GitHub username and click the search button.
-
 ### Signin Screen
 
 <div align="center">
