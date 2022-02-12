@@ -9,10 +9,10 @@
     <img src="readme-imgs/logo.png" alt="Logo" height="100">
   </a>
 
-<h3 align="center">GitSearch</h3>
+<h3 align="center">Lot!å</h3>
 
   <p align="center">
-    This is a simple React app to practice this type of interview excercises, including GraphQL.
+    This app starts that an business idea and then I used to put in practice several concepts and lear about it.
     <br />
     <a href="https://lotapp.surge.sh/">View Demo</a>
   </p>
