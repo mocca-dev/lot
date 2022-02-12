@@ -1,67 +1,64 @@
-import { useContext, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 import './Menu.css';
 import OutsideClick from './../OutsideClick/OutsideClick';
-import Store from '../../store';
-
-const showConfirmModal = (dispatch) => {
-  const modalConfig = {
-    title: '¿Está seguro de cerrar sesión?',
-    show: true,
-    type: undefined,
-    url: '',
-    btns: {
-      left: {
-        action: () => dispatch({ type: 'HIDE_MODAL' }),
-        text: 'Cancelar',
-      },
-      right: {
-        action: () => {
-          // setUser(null);
-          // localStorage.setItem('user', null);
-          // history.push('/ingreso');
-          dispatch({ type: 'HIDE_MODAL' });
-        },
-        text: 'Aceptar',
-      },
-    },
-  };
-  dispatch({ type: 'SET_MODAL', payload: modalConfig });
-};
+import useSignOutModal from '../../hooks/useSignOutModal';
+import MenuItem from './MenuItem/MenuItem';
 
 const Menu = ({ showMenu, setShowMenu }) => {
-  const { dispatch } = useContext(Store);
-  const [menuList] = useState([
-    { label: 'Mi perfil', action: '/profile' },
-    { label: 'Mis publicaciones', action: '/mylots' },
-    { label: 'Cerrar sesión', action: () => showConfirmModal(dispatch) },
-  ]);
+  const showModal = useSignOutModal();
+  const [isInEnglish, setIsInEnglish] = useState(false);
+  // const [isLightMode, setIsLightMode] = useState(true);
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
-  const menuClickItem = (action) => {
-    setShowMenu(false);
-    console.log(typeof action);
-    if (typeof action === 'string') {
-      navigate(action);
-    } else {
-      action();
-    }
-  };
+  // useEffect(() => {
+  //   document.documentElement.setAttribute(
+  //     'data-theme',
+  //     isLightMode ? 'ligth' : 'dark'
+  //   );
+  // }, [isLightMode]);
+
+  useEffect(() => {
+    i18n.changeLanguage(isInEnglish ? 'en' : 'es');
+  }, [i18n, isInEnglish]);
 
   return (
     showMenu && (
       <OutsideClick action={() => setShowMenu(false)}>
         <div className="menu">
           <ul>
-            {menuList.map((menuItem) => (
-              <li
-                key={menuItem.label}
-                onClick={() => menuClickItem(menuItem.action)}
-              >
-                {menuItem.label}
-              </li>
-            ))}
+            <MenuItem
+              label={t('menuMyProfile')}
+              action={() => {
+                navigate('/profile');
+                setShowMenu(false);
+              }}
+            />
+            <MenuItem
+              label={t('menuMyPosts')}
+              action={() => {
+                navigate('/mylots');
+                setShowMenu(false);
+              }}
+            />
+            {/* <MenuItem
+              label={isLightMode ? 'Modo Claro' : 'Modo Oscuro'}
+              action={() => setIsLightMode(!isLightMode)}
+            /> */}
+            <MenuItem
+              label={isInEnglish ? 'English' : 'Español'}
+              action={() => setIsInEnglish(!isInEnglish)}
+            />
+            <MenuItem
+              label={t('menuSignOut')}
+              action={() => {
+                setShowMenu(false);
+                showModal();
+              }}
+            />
           </ul>
         </div>
       </OutsideClick>

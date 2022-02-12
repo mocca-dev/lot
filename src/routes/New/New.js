@@ -1,122 +1,178 @@
-import { useContext, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
+
 import FieldText from '../../components/FieldText/FieldText';
 import Btn from '../../components/Btn/Btn';
-import Store from '../../store';
 import RadioGroup from '../../components/RadioGroup/RadioGroup';
-import { Form, FormikProvider, useFormik } from 'formik';
+import { Form, Formik } from 'formik';
+import { setModal } from '../../reducers/modal/modalSlice';
+import { set } from '../../reducers/subHeader/subHeaderSlice';
+import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
+import {
+  REQUIRED_ERROR_MSG,
+  TOO_LONG_ERROR_MSG,
+  TOO_SHORT_ERROR_MSG,
+} from '../../constants';
 
-const showConfirmModal = (dispatch) => {
-  return new Promise((resolve, reject) => {
-    const modalConfig = {
-      title: '¿Está seguro que desea publicar?',
-      show: true,
-      type: undefined,
-      url: '',
-      btns: {
-        left: {
-          action: () => dispatch({ type: 'HIDE_MODAL' }),
-          text: 'Cancelar',
-        },
-        right: {
-          action: () => {
-            // setUser(null);
-            // localStorage.setItem('user', null);
-            // history.push('/ingreso');
-            resolve();
-            dispatch({ type: 'HIDE_MODAL' });
-          },
-          text: 'Aceptar',
-        },
-      },
-    };
-    dispatch({ type: 'SET_MODAL', payload: modalConfig });
-  });
+const showConfirmModal = (dispatch, payload, title) => {
+  const modalConfig = {
+    title,
+    show: true,
+    type: 'CONFIRM',
+    payload,
+    action: 'POST_NEW',
+  };
+  dispatch(setModal(modalConfig));
 };
 
+const validationSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  price: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  address: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  contact: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  description: Yup.string()
+    .min(2, TOO_SHORT_ERROR_MSG)
+    .max(50, TOO_LONG_ERROR_MSG)
+    .required(REQUIRED_ERROR_MSG),
+  availability: Yup.string().required(REQUIRED_ERROR_MSG),
+  typeOfVehicle: Yup.string().required(REQUIRED_ERROR_MSG),
+  typeOfCoverage: Yup.string().required(REQUIRED_ERROR_MSG),
+});
+
 const New = () => {
-  const { dispatch } = useContext(Store);
-  const availabilityList = [
-    { label: 'Hr', value: '0' },
-    { label: 'Día', value: '1' },
-    { label: 'Semana', value: '2' },
-    { label: '15 Días', value: '3' },
-    { label: 'Mes', value: '4' },
-  ];
-  const typeOfVehicleList = [
-    { label: 'Moto', value: '0' },
-    { label: 'Auto', value: '1' },
-    { label: 'Camioneta', value: '2' },
-    { label: 'Tariler', value: '3' },
-    { label: 'Cautri', value: '4' },
-  ];
-  const typeOfCoverageList = [
-    { label: 'Sin techo', value: '0' },
-    { label: 'Con techo', value: '1' },
-    { label: 'Cubierta', value: '2' },
-  ];
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+  let [availabilityList, setAvailabilityList] = useState([]);
+  let [typeOfVehicleList, setTypeOfVehicleList] = useState([]);
+  let [typeOfCoverageList, setTypeOfCoverageList] = useState([]);
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Nueva publicación' });
-    dispatch({ type: 'HIDE_FIXED_CONTENT' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(set(t('newSubheader')));
+    dispatch(hideFixedContent());
+  }, [dispatch, t]);
 
-  const formik = useFormik({
-    initialValues: {
-      location: '',
-      contact: '',
-      availability: '',
-      typeOfVehicle: '',
-      typeOfCoverage: '',
-      description: '',
-    },
-    onSubmit: async (values) => {
-      await showConfirmModal(dispatch);
-      console.log(JSON.stringify(values, null, 2));
-    },
-  });
+  useEffect(() => {
+    setAvailabilityList([
+      { label: t('availabilityHourLbl'), value: '0' },
+      { label: t('availabilityDayLbl'), value: '1' },
+      { label: t('availabilityWeekLbl'), value: '2' },
+      { label: t('availability15Lbl'), value: '3' },
+      { label: t('availabilityMonthLbl'), value: '4' },
+    ]);
+    setTypeOfVehicleList([
+      { label: t('vehicleMotoLbl'), value: '0' },
+      { label: t('vehicleCarLbl'), value: '1' },
+      { label: t('vehiclePickupLbl'), value: '2' },
+      { label: t('vehicleTrailerLbl'), value: '3' },
+      { label: t('vehicleQuadLbl'), value: '4' },
+    ]);
+    setTypeOfCoverageList([
+      { label: t('coverRooflessLbl'), value: '0' },
+      { label: t('coverRoofLbl'), value: '1' },
+      { label: t('coverCoverLbl'), value: '2' },
+    ]);
+  }, [i18n, t]);
 
   return (
     <main>
-      <FormikProvider value={formik}>
-        <Form>
-          <FieldText
-            placeholder="ej: Evergreen 742"
-            isGhost={true}
-            label="Ubicación"
-            name="location"
-          />
-          <FieldText
-            placeholder="ej: (555) 555-5555"
-            isGhost={true}
-            label="Contacto"
-            name="contact"
-          />
-          <RadioGroup
-            label="Disponibilidad"
-            list={availabilityList}
-            name="availability"
-          />
-          <RadioGroup
-            label="Tipo de vehículos"
-            list={typeOfVehicleList}
-            name="typeOfVehicle"
-          />
-          <RadioGroup
-            label="Tipo de cobertura"
-            list={typeOfCoverageList}
-            name="typeOfCoverage"
-          />
-          <FieldText
-            placeholder="ej: (555) 555-5555"
-            isGhost={true}
-            label="Descripción"
-            type="textarea"
-            name="description"
-          />
-          <Btn label="Publicar cochera" type="submit" />
-        </Form>
-      </FormikProvider>
+      <Formik
+        initialValues={{
+          title: '',
+          price: '',
+          address: '',
+          contact: '',
+          availability: '',
+          typeOfVehicle: '',
+          typeOfCoverage: '',
+          description: '',
+        }}
+        onSubmit={(values) => {
+          showConfirmModal(dispatch, values, t('newModalTitle'));
+        }}
+        validationSchema={validationSchema}
+      >
+        {({ errors, touched, isValid }) => (
+          <Form>
+            <FieldText
+              placeholder="ej: Cochera en alquiler"
+              isGhost={true}
+              label={t('titleLabelNew')}
+              name="title"
+              error={errors.title}
+              touched={touched.title}
+            />
+            <FieldText
+              placeholder="ej: Evergreen 742"
+              isGhost={true}
+              label={t('priceLabelNew')}
+              name="price"
+              error={errors.price}
+              touched={touched.price}
+            />
+            <FieldText
+              placeholder="ej: Evergreen 742"
+              isGhost={true}
+              label={t('addressLabelNew')}
+              name="address"
+              error={errors.address}
+              touched={touched.address}
+            />
+            <FieldText
+              placeholder="ej: (555) 555-5555"
+              isGhost={true}
+              label={t('contactLabelNew')}
+              name="contact"
+              error={errors.contact}
+              touched={touched.contact}
+            />
+            <RadioGroup
+              label={t('availabilityLabelNew')}
+              list={availabilityList}
+              name="availability"
+              error={errors.availability}
+              touched={touched.availability}
+            />
+            <RadioGroup
+              label={t('typeOfVehiclesLabelNew')}
+              list={typeOfVehicleList}
+              name="typeOfVehicle"
+              error={errors.typeOfVehicle}
+              touched={touched.typeOfVehicle}
+            />
+            <RadioGroup
+              label={t('typeOfCoverLabelNew')}
+              list={typeOfCoverageList}
+              name="typeOfCoverage"
+              error={errors.typeOfCoverage}
+              touched={touched.typeOfCoverage}
+            />
+            <FieldText
+              placeholder="ej: (555) 555-5555"
+              isGhost={true}
+              label={t('descriptionLabelNew')}
+              type="textarea"
+              name="description"
+              error={errors.description}
+              touched={touched.description}
+            />
+            <Btn label={t('postBtn')} type="submit" disabled={!isValid} />
+          </Form>
+        )}
+      </Formik>
     </main>
   );
 };

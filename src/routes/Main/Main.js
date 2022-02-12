@@ -1,43 +1,43 @@
-import { useState, useContext, useEffect } from 'react';
-import Store from '../../store';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
+import {
+  fetchPosts,
+  fetchPostsByTitle,
+  selecPosts,
+  selecPostsIsFetching,
+} from '../../reducers/posts/postsSlice';
+import { set } from '../../reducers/subHeader/subHeaderSlice';
 
 import LotList from '../../components/LotList/LotList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { FormikProvider, useFormik, Form } from 'formik';
-
-const fetchParkData = (setResults, setIsFetching) => {
-  setIsFetching(true);
-  fetch('api/parkinglots')
-    .then((response) => response.json())
-    .then((data) => {
-      setResults(data);
-      setIsFetching(false);
-    });
-};
+import { showFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 
 const Main = () => {
-  const [results, setResults] = useState([]);
-  const [isFetching, setIsFetching] = useState([]);
-  const { dispatch } = useContext(Store);
+  const dispatch = useDispatch();
+  const list = useSelector(selecPosts);
+  const isFetching = useSelector(selecPostsIsFetching);
+  const { t } = useTranslation();
 
   useEffect(() => {
-    fetchParkData(setResults, setIsFetching);
-  }, []);
-
-  useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Buscar cocheras' });
-    dispatch({ type: 'SHOW_FIXED_CONTENT' });
+    dispatch(fetchPosts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    dispatch(set(t('searchSubheader')));
+    dispatch(showFixedContent());
+  }, [dispatch, t]);
 
   const formik = useFormik({
     initialValues: {
       searchText: '',
     },
     onSubmit: async (values) => {
-      // console.log(JSON.stringify(values, null, 2));
-      setResults([]);
-      fetchParkData(setResults, setIsFetching);
+      dispatch(fetchPostsByTitle(values.searchText));
     },
   });
 
@@ -50,11 +50,11 @@ const Main = () => {
           </Form>
         </FormikProvider>
         <span className="result-counter">
-          Mostrando {results?.length} de 10 resultados
+          Mostrando {list?.length} de 10 resultados
         </span>
       </span>
       <main>
-        <LotList list={results} isLoading={isFetching} />
+        <LotList list={list} isLoading={isFetching} />
       </main>
     </>
   );

@@ -1,0 +1,22 @@
+.signin-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.signin-container img {
+  width: 100px;
+}
+
+.signin-container form {
+  margin-top: 30px;
+  width: 90%;
+}
+
+.tip-container {
+  margin-top: 5px;
+  padding: 15px;
+  background: rgba(25, 31, 66, 0.1);
+  border-radius: 12px;
+  width: 90%;
+}

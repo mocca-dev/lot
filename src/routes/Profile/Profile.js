@@ -1,42 +1,23 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 import Btn from '../../components/Btn/Btn';
-import Store from '../../store';
+import useSignOutModal from '../../hooks/useSignOutModal';
+import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
+import { set } from '../../reducers/subHeader/subHeaderSlice';
 
 import './Profile.css';
 
-const showConfirmModal = (dispatch) => {
-  const modalConfig = {
-    title: '¿Está seguro de cerrar sesión?',
-    show: true,
-    type: undefined,
-    url: '',
-    btns: {
-      left: {
-        action: () => dispatch({ type: 'HIDE_MODAL' }),
-        text: 'Cancelar',
-      },
-      right: {
-        action: () => {
-          // setUser(null);
-          // localStorage.setItem('user', null);
-          // history.push('/ingreso');
-          dispatch({ type: 'HIDE_MODAL' });
-        },
-        text: 'Aceptar',
-      },
-    },
-  };
-  dispatch({ type: 'SET_MODAL', payload: modalConfig });
-};
-
 const Profile = () => {
-  const { dispatch } = useContext(Store);
+  const dispatch = useDispatch();
+  const showModal = useSignOutModal();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Perfil' });
-    dispatch({ type: 'HIDE_FIXED_CONTENT' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(set(t('profileSubheader')));
+    dispatch(hideFixedContent());
+  }, [dispatch, t]);
 
   return (
     <>
@@ -51,8 +32,8 @@ const Profile = () => {
           <span>juanperez@gmail.com</span>
         </div>
       </main>
-      <footer className="footer-profile-profile">
-        <Btn label="Cerrar sesión" onClick={() => showConfirmModal(dispatch)} />
+      <footer className="footer-profile">
+        <Btn label={t('signOutBtn')} onClick={() => showModal()} />
       </footer>
     </>
   );

@@ -1,35 +1,36 @@
-import { useContext, useEffect, useState } from 'react';
-import NotificationList from '../../components/NotificationList/NotificationList';
-import Store from '../../store';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
-const fetchNotificationsData = (setResults, setIsFetching) => {
-  setIsFetching(true);
-  fetch('api/parkinglots')
-    .then((response) => response.json())
-    .then((data) => {
-      setResults(data);
-      setIsFetching(false);
-    });
-};
+import { set } from '../../reducers/subHeader/subHeaderSlice';
+import NotificationList from '../../components/NotificationList/NotificationList';
+import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
+import {
+  fetchNotifications,
+  selecNotifications,
+  selecNotificationsIsFetching,
+} from '../../reducers/notifications/notificationsSlice';
 
 const Notifications = () => {
-  const { dispatch } = useContext(Store);
-  const [results, setResults] = useState();
-  const [isFetching, setIsFetching] = useState([]);
+  const dispatch = useDispatch();
+  const notifications = useSelector(selecNotifications);
+  const isFetching = useSelector(selecNotificationsIsFetching);
+  const { t } = useTranslation();
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Notificaciones' });
-    dispatch({ type: 'HIDE_FIXED_CONTENT' });
+    dispatch(fetchNotifications());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    fetchNotificationsData(setResults, setIsFetching);
-  }, []);
+    dispatch(set(t('notificationsSubheader')));
+    dispatch(hideFixedContent());
+  }, [dispatch, t]);
 
   return (
     <main>
-      <NotificationList list={results} isLoading={isFetching} />
+      <NotificationList list={notifications} isLoading={isFetching} />
     </main>
   );
 };

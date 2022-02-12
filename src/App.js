@@ -1,79 +1,112 @@
 import './App.css';
-import { useState, useReducer } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Store from './store';
-import appReducer from './reducer';
 import { makeServer } from './server';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
-import Modal from './components/Modal/Modal';
 import Main from './routes/Main/Main';
 import New from './routes/New/New';
-import Map from './routes/Map/Map';
 import Notifications from './routes/Notifications/Notifications';
 import Bookmarks from './routes/Bookmarks/Bookmarks';
 import Profile from './routes/Profile/Profile';
 import MyLots from './routes/MyLots/MyLots';
+import SubHeader from './components/SubHeader/SubHeader';
+import ModalWrapper from './components/Modal/ModalWrapper/ModalWrapper';
+import { useSelector } from 'react-redux';
+import {
+  selecFixedContent,
+  selecFooter,
+  selecShowHeader,
+} from './reducers/showFlags/showFlagsSlice';
+import Lot from './routes/Lot/Lot';
+import Spinner from './components/Spinner/Spinner';
+import Toaster from './components/Toster/Toaster';
+import SignIn from './routes/SignIn/SignIn';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 makeServer();
 
 function App() {
+  const fixedContent = useSelector(selecFixedContent);
+  const showHeader = useSelector(selecShowHeader);
+  const showFooter = useSelector(selecFooter);
   const [footerItems] = useState([
-    { icon: 'map', route: '/map' },
+    // { icon: 'map', route: '/map' },
     { icon: 'bookmark', route: '/bookmark' },
     { icon: 'search', route: '/' },
     { icon: 'new', route: '/new' },
     { icon: 'notification', route: '/notification' },
   ]);
 
-  const [state, dispatch] = useReducer(appReducer, {
-    subHeader: 'Buscar cocheras',
-    showLogo: true,
-    showFooter: true,
-    showFixedContent: true,
-    initialMarker: 'search',
-    modal: {
-      show: false,
-      title: '',
-      content: '',
-      btns: {
-        left: { action: null, text: 'cancelar' },
-        right: { action: null, text: 'aceptar' },
-      },
-    },
-  });
-
   return (
-    <Store.Provider value={{ state, dispatch }}>
+    <>
       <BrowserRouter>
         <div
-          className={
-            'App' + (!state.showFixedContent ? ' without-non-scroll-main' : '')
-          }
+          className={'App' + (!fixedContent ? ' without-non-scroll-main' : '')}
         >
-          <Header />
-          <span className="sub-header">
-            <h2 className="title">{state.subHeader}</h2>
-          </span>
+          {showHeader && <Header />}
+          <SubHeader />
           <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/bookmark" element={<Bookmarks />}></Route>
-            <Route path="/notification" element={<Notifications />}></Route>
-            <Route path="/new" element={<New />}></Route>
-            <Route path="/map" element={<Map />}></Route>
-            <Route path="/mylots" element={<MyLots />}></Route>
+            <Route exact path="/" element={<Main />} />
+            <Route exact path="/lot" element={<Lot />}>
+              <Route path=":id" element={<Lot />} />
+            </Route>
+            <Route
+              exact
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path="/bookmark"
+              element={
+                <PrivateRoute>
+                  <Bookmarks />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path="/notification"
+              element={
+                <PrivateRoute>
+                  <Notifications />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path="/new"
+              element={
+                <PrivateRoute>
+                  <New />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/mylots"
+              element={
+                <PrivateRoute>
+                  <MyLots />
+                </PrivateRoute>
+              }
+            />
+            {/* <Route exact path="/map" element={<Map />} /> */}
+            <Route exact path="/signin" element={<SignIn />} />
           </Routes>
-          {state.showFooter && <Footer items={footerItems} />}
+          {showFooter && <Footer items={footerItems} />}
         </div>
+        <ModalWrapper />
       </BrowserRouter>
-      <Modal
-        config={state.modal}
-        hide={() => dispatch({ type: 'HIDE_MODAL' })}
-      />
-    </Store.Provider>
+      <Spinner />
+      <Toaster />
+    </>
   );
 }
 

@@ -1,8 +1,20 @@
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { SpinnerCircularFixed } from 'spinners-react';
 
 import './LotList.css';
 
 const LotList = ({ list, isLoading }) => {
+  const { t } = useTranslation();
+  const getAvailabilityLabel = (id) =>
+    [
+      t('availabilityHrShortLbl'),
+      t('availabilityDayShortLbl'),
+      t('availabilityWeekShortLbl'),
+      t('availabilityFortShortLbl'),
+      t('availabilityMonthShortLbl'),
+    ][id];
+
   if (isLoading) {
     return (
       <div className="spinner-container">
@@ -17,16 +29,19 @@ const LotList = ({ list, isLoading }) => {
     );
   }
 
-  if (list.length === 0) {
+  if (list.length === 0)
     return (
       <div className="no-items-container">No hay resultados para mostrar</div>
     );
-  }
 
   return (
     <div className="results-container">
-      {list?.map((result, id) => (
-        <div className="result-container" key={id}>
+      {list?.map((lot) => (
+        <Link
+          to={'/lot/?id=' + lot.id}
+          className="result-container"
+          key={lot.id}
+        >
           <img
             className="result-img"
             src="/icons/item-mock.png"
@@ -34,21 +49,23 @@ const LotList = ({ list, isLoading }) => {
             alt=""
           />
           <span className="result-detail">
-            <strong>{result.title}</strong>
+            <strong>{lot.title}</strong>
             <span>
               <img src="/icons/map.svg" height="13px" alt="" />
-              {result.address}
+              {lot.address}
             </span>
           </span>
           <span className="result-price">
             <span>
-              ${result.price}
-              <span className="frecuency">/día</span>
+              ${lot.price}
+              <span className="frecuency">
+                /{getAvailabilityLabel(lot.availability)}
+              </span>
             </span>
-            <span className="since">{result.since} días atrás</span>
+            <span className="since">{lot.since}d</span>
           </span>
-          <img className="right-arrow" src="/icons/left-arrow.svg" alt="goto" />
-        </div>
+          {/* <img className="right-arrow" src="/icons/left-arrow.svg" alt="goto" /> */}
+        </Link>
       ))}
     </div>
   );

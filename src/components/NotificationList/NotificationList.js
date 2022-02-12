@@ -24,7 +24,7 @@ const NotificationList = ({ list, isLoading }) => {
   }
 
   return (
-    <div className="results-container">
+    <div className="notifications-container">
       {list?.map((result, id) => (
         <div className="result-container" key={id}>
           <img
@@ -34,8 +34,9 @@ const NotificationList = ({ list, isLoading }) => {
             alt=""
           />
           <span className="result-detail">
-            <strong>{result.title}</strong>
-            <span className="since">{result.since} días atrás</span>
+            <strong>{result.requestedBy}</strong>
+            <span>{result.title}</span>
+            <span className="since">{result.since}d</span>
           </span>
           <button className="btn-delete">
             <img src="/icons/cross.png" alt="" />

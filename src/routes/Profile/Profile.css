@@ -20,6 +20,7 @@
   margin-bottom: 0;
 }
 
-.footer-profile-profile {
+.footer-profile {
+  z-index: 2;
   margin-bottom: 20px;
 }

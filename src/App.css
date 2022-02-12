@@ -1,11 +1,25 @@
-:root {
+html {
   --radius-squircle: 12px;
   --primary-bg: #191f42;
-}
-
-html {
+  --app-bg: white;
+  --scondary-bg: white;
+  --primary-fg: black;
+  --svgColor: 0;
+  --fieldtext-bg: #f8f8f8;
+  --logo-url: url('../public/icons/logo.png');
+  --arrow-url: url('../public/icons/left-arrow.svg');
   box-sizing: border-box;
   height: -webkit-fill-available;
+}
+
+html[data-theme='dark'] {
+  --app-bg: #181819;
+  --primary-bg: white;
+  --scondary-bg: #28242b;
+  --primary-fg: white;
+  --svgColor: 1;
+  --fieldtext-bg: #3d3a40;
+  --logo-url: url('../public/icons/logo-light.png');
 }
 
 *,
@@ -20,6 +34,8 @@ body {
   min-height: -webkit-fill-available;
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
+  background-color: var(--app-bg);
+  color: var(--primary-fg);
 }
 
 .App {
@@ -32,7 +48,7 @@ body {
 }
 
 .App.without-non-scroll-main {
-  grid-template-rows: auto 70px 1fr auto;
+  grid-template-rows: auto 70px 0px 1fr auto;
 }
 
 @supports (-webkit-touch-callout: none) {

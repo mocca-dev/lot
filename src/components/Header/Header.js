@@ -1,36 +1,67 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {
+  selecHeader,
+  setHeaderContent,
+} from '../../reducers/header/headerSlice';
 
-import Store from '../../store';
+import {
+  hideFooter,
+  hideLogo,
+  selecLogo,
+  showFooter,
+  showLogo,
+} from '../../reducers/showFlags/showFlagsSlice';
+import { showSpinner, hideSpinner } from '../../reducers/spinner/spinnerSlice';
+import { selecUser, setUserData } from '../../reducers/user/userSlice';
+
 import Menu from '../Menu/Menu';
 
 import './Header.css';
 
 const Header = () => {
-  const { dispatch, state } = useContext(Store);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showRight, setShowRight] = useState(false);
+  const isShowingLogo = useSelector(selecLogo);
+  const [showRight, setShowRight] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
-
+  const userData = useSelector(selecUser);
   const location = useLocation();
+  const headerContent = useSelector(selecHeader);
+
   useEffect(() => {
-    if (location.pathname !== '/profile' && location.pathname !== '/mylots') {
-      dispatch({ type: 'SHOW_FOOTER' });
-      dispatch({ type: 'SHOW_LOGO' });
+    if (
+      location.pathname !== '/profile' &&
+      location.pathname !== '/mylots' &&
+      !location.pathname.includes('/lot')
+    ) {
+      dispatch(showFooter());
+      dispatch(showLogo());
+      dispatch(setHeaderContent(null));
       setShowRight(true);
     } else {
-      dispatch({ type: 'HIDE_FOOTER' });
-      dispatch({ type: 'HIDE_LOGO' });
-      if (location.pathname !== '/mylots') setShowRight(false);
+      dispatch(hideFooter());
+      dispatch(hideLogo());
+      if (
+        location.pathname !== '/mylots' &&
+        !location.pathname.includes('/lot')
+      )
+        setShowRight(false);
     }
   }, [dispatch, location]);
 
+  useEffect(() => {
+    dispatch(showSpinner());
+    const user = localStorage.getItem('user');
+    if (user) {
+      dispatch(setUserData(JSON.parse(user)));
+    }
+    dispatch(hideSpinner());
+  }, [dispatch]);
+
   const goBackOrHome = () => {
-    if (state.showLogo) {
-      dispatch({
-        type: 'SET_MARKER_POS',
-        payload: 'search',
-      });
+    if (isShowingLogo) {
       navigate('/');
     } else {
       navigate(-1);
@@ -41,23 +72,26 @@ const Header = () => {
     <>
       <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
       <header>
-        <img
-          className={
-            'left-img ' + (state.showLogo ? 'big-size' : 'normal-size')
-          }
-          src={state.showLogo ? '/icons/logo.png' : '/icons/left-arrow.svg'}
-          alt="back"
+        <div
+          className={'left-img ' + (isShowingLogo ? 'big-size' : 'normal-size')}
           onClick={() => goBackOrHome()}
-        />
-        {showRight && (
-          <div onClick={() => setShowMenu(true)} className="height50">
-            <img
-              className="profile-pic"
-              src="/icons/profile-mock.png"
-              alt="profile"
-            />
-          </div>
-        )}
+        ></div>
+        {showRight &&
+          (headerContent ? (
+            <p>{headerContent}</p>
+          ) : userData ? (
+            <div onClick={() => setShowMenu(true)} className="height50">
+              <img
+                className="profile-pic"
+                src="/icons/profile-mock.png"
+                alt="profile"
+              />
+            </div>
+          ) : (
+            <Link className="signin-btn" to="/signin">
+              <img src="/icons/user.svg" alt="" />
+            </Link>
+          ))}
       </header>
     </>
   );

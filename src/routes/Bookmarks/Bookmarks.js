@@ -1,41 +1,41 @@
-import { useContext, useEffect, useState } from 'react';
-import Store from '../../store';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { FormikProvider, useFormik, Form } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import LotList from '../../components/LotList/LotList';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { FormikProvider, useFormik, Form } from 'formik';
-
-const fetchParkData = (setResults, setIsFetching) => {
-  setIsFetching(true);
-  fetch('api/parkinglots')
-    .then((response) => response.json())
-    .then((data) => {
-      setResults(data);
-      setIsFetching(false);
-    });
-};
+import { set } from '../../reducers/subHeader/subHeaderSlice';
+import {
+  fetchBookmarks,
+  fetchBookmarksByTitle,
+  selecBookmarks,
+  selecBookmarksIsFetching,
+} from '../../reducers/bookmarks/bookmarksSlice';
+import { showFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 
 const Bookmarks = () => {
-  const { dispatch } = useContext(Store);
-  const [results, setResults] = useState([]);
-  const [isFetching, setIsFetching] = useState([]);
+  const dispatch = useDispatch();
+  const list = useSelector(selecBookmarks);
+  const isFetching = useSelector(selecBookmarksIsFetching);
+  const { t } = useTranslation();
 
   useEffect(() => {
-    fetchParkData(setResults, setIsFetching);
-  }, []);
+    dispatch(fetchBookmarks());
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch({ type: 'SET_SUB_HEADER', payload: 'Guardados' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(set(t('bookmarksSubheader')));
+    dispatch(showFixedContent());
+  }, [dispatch, t]);
 
   const formik = useFormik({
     initialValues: {
       searchText: '',
     },
-    onSubmit: async (values) => {
-      console.log(JSON.stringify(values, null, 2));
-    },
+    onSubmit: async (values) =>
+      dispatch(fetchBookmarksByTitle(values.searchText)),
   });
 
   return (
@@ -47,11 +47,11 @@ const Bookmarks = () => {
           </Form>
         </FormikProvider>
         <span className="result-counter">
-          Mostrando {results?.length} de 10
+          Mostrando {list?.length} de 10 resultados
         </span>
       </span>
       <main>
-        <LotList list={results} isLoading={isFetching} />
+        <LotList list={list} isLoading={isFetching} />
       </main>
     </>
   );
