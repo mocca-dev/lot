@@ -12,7 +12,7 @@
 <h3 align="center">Lot!</h3>
 
   <p align="center">
-    This app starts that an business idea and then I used to put in practice several concepts and lear about it.
+    This app start as an business idea and then I ended up using it to put in practice several concepts and lear about it.
     <br />
     <a href="https://lotapp.surge.sh/">View Demo</a>
   </p>
