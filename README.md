@@ -9,7 +9,7 @@
     <img src="readme-imgs/logo.png" alt="Logo" height="100">
   </a>
 
-<h3 align="center">Lot!å</h3>
+<h3 align="center">Lot!</h3>
 
   <p align="center">
     This app starts that an business idea and then I used to put in practice several concepts and lear about it.
