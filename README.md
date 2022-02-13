@@ -19,7 +19,7 @@
 </div>
 
 <div align="center">
-  <img src="readme-imgs/lot-score.png" alt="Logo" height="80">
+  <img src="readme-imgs/lot-score.png" alt="Logo" height="95">
 </div>
 <br>
 
