@@ -8,10 +8,13 @@ import { hideFixedContent } from '../../reducers/showFlags/showFlagsSlice';
 import { set } from '../../reducers/subHeader/subHeaderSlice';
 
 import './Profile.css';
+import { useSelector } from 'react-redux';
+import { selecUser } from '../../reducers/user/userSlice';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const showModal = useSignOutModal();
+  const userData = useSelector(selecUser);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -29,7 +32,7 @@ const Profile = () => {
             alt="profile"
           />
           <h2>Juan Perez</h2>
-          <span>juanperez@gmail.com</span>
+          <span>{userData.email}</span>
         </div>
       </main>
       <footer className="footer-profile">
