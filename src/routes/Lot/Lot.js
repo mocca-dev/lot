@@ -48,7 +48,12 @@ const Lot = () => {
     <main className="lot-container">
       {lot && (
         <>
-          <img className="lot-img" src={lot.img} alt="Foto" />
+          <div className="img-container">
+            <div className="price-availability">
+              {'$' + lot.price + '/' + availability[lot.availability]}
+            </div>
+            <img className="lot-img" src={lot.img} alt="Foto" />
+          </div>
           <div className="lot-body">
             <div className="left-side">
               <DetailRow

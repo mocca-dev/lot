@@ -1,7 +1,30 @@
+.lot-container .img-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
 .lot-img {
   width: 100%;
+  min-height: 150px;
+  background-color: grey;
   border-radius: var(--radius-squircle);
-  margin-bottom: 15px;
+}
+
+.lot-container .price-availability {
+  position: absolute;
+  font-weight: bold;
+  font-size: 1.1rem;
+  bottom: 15px;
+  right: 0;
+  padding: 10px 15px 10px 45px;
+  color: white;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.35) 30%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
 
 .bigger-icon-size img {
