@@ -5,14 +5,14 @@
   bottom: 0;
   left: 0;
   height: 80px;
-  transition: 0.5s;
+  /* transition: 0.5s; */
   opacity: 0;
 }
 
 .show-toaster {
   z-index: 2;
   display: block;
-  transition: 0.5s;
+  /* transition: 0.5s; */
   opacity: 1;
 }
 
