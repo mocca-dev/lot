@@ -15,12 +15,7 @@ const ConfirmModalTemplate = ({ title, content, hide, payload, action }) => {
       <h4>{title}</h4>
       <div>{content && content()}</div>
       <footer className="two-btns">
-        <button
-          className="secondary-btn"
-          onClick={() => {
-            hide();
-          }}
-        >
+        <button className="secondary-btn" onClick={hide}>
           {t('cancelBtnLbl')}
         </button>
         <button

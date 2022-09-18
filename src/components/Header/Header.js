@@ -74,7 +74,7 @@ const Header = () => {
       <header>
         <div
           className={'left-img ' + (isShowingLogo ? 'big-size' : 'normal-size')}
-          onClick={() => goBackOrHome()}
+          onClick={goBackOrHome}
         ></div>
         {showRight &&
           (headerContent ? (

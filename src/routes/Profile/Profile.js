@@ -36,7 +36,7 @@ const Profile = () => {
         </div>
       </main>
       <footer className="footer-profile">
-        <Btn label={t('signOutBtn')} onClick={() => showModal()} />
+        <Btn label={t('signOutBtn')} onClick={showModal} />
       </footer>
     </>
   );
