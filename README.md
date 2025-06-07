@@ -14,7 +14,7 @@
   <p align="center">
     This app start as a business idea and then I ended up using it to put in practice several concepts and lear about it.
     <br />
-    <a href="https://lotapp.surge.sh/">View Demo</a>
+    <a href="https://lot-six.vercel.app">View Demo</a>
   </p>
 </div>
 
