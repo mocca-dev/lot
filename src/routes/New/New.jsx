@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -55,37 +55,42 @@ const validationSchema = Yup.object().shape({
 
 const New = () => {
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
-  let [availabilityList, setAvailabilityList] = useState([]);
-  let [typeOfVehicleList, setTypeOfVehicleList] = useState([]);
-  let [typeOfCoverageList, setTypeOfCoverageList] = useState([]);
-
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch(set(t('newSubheader')));
     dispatch(hideFixedContent());
   }, [dispatch, t]);
 
-  useEffect(() => {
-    setAvailabilityList([
+  // Derived straight from the translation function rather than mirrored into
+  // state by an effect, so the lists are correct on the very first render.
+  const availabilityList = useMemo(
+    () => [
       { label: t('availabilityHourLbl'), value: '0' },
       { label: t('availabilityDayLbl'), value: '1' },
       { label: t('availabilityWeekLbl'), value: '2' },
       { label: t('availability15Lbl'), value: '3' },
       { label: t('availabilityMonthLbl'), value: '4' },
-    ]);
-    setTypeOfVehicleList([
+    ],
+    [t]
+  );
+  const typeOfVehicleList = useMemo(
+    () => [
       { label: t('vehicleMotoLbl'), value: '0' },
       { label: t('vehicleCarLbl'), value: '1' },
       { label: t('vehiclePickupLbl'), value: '2' },
       { label: t('vehicleTrailerLbl'), value: '3' },
       { label: t('vehicleQuadLbl'), value: '4' },
-    ]);
-    setTypeOfCoverageList([
+    ],
+    [t]
+  );
+  const typeOfCoverageList = useMemo(
+    () => [
       { label: t('coverRooflessLbl'), value: '0' },
       { label: t('coverRoofLbl'), value: '1' },
       { label: t('coverCoverLbl'), value: '2' },
-    ]);
-  }, [i18n, t]);
+    ],
+    [t]
+  );
 
   return (
     <main>

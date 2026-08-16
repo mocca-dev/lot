@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 import { bookmarkLot, cleanLot, selecLot } from '../../reducers/lot/lotSlice';
 import { fetchLotById } from '../../reducers/lot/lotSlice';

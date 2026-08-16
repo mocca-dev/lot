@@ -62,9 +62,7 @@ export const lot = createSlice({
     [fetchLotById.rejected]: (state) => {
       state.status = 'failed';
     },
-    [createNewLot.fulfilled]: (state, action) => {
-      // console.log('fullfillsed', state, action);
-    },
+    [createNewLot.fulfilled]: () => {},
   },
 });
 

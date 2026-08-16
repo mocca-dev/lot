@@ -1,7 +1,6 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { createNewLot } from '../../reducers/lot/lotSlice';
 import { signOut } from '../../reducers/user/userSlice';
 
