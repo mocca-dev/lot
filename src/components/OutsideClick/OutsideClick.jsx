@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import PropTypes from "prop-types";
 
 /**
- * Component that alerts if you click outside of it
+ * Component that alerts if you click outside of it.
+ * Expects a single element child, which it wraps in a span to get a ref.
  */
 const OutsideClick = ({ children, action }) => {
   const wrapperRef = useRef(null);
@@ -25,10 +25,6 @@ const OutsideClick = ({ children, action }) => {
   });
 
   return <span ref={wrapperRef}>{children}</span>;
-};
-
-OutsideClick.propTypes = {
-  children: PropTypes.element.isRequired
 };
 
 export default OutsideClick;
