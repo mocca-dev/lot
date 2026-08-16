@@ -16,27 +16,28 @@ export const posts = createSlice({
     list: [],
     status: null,
   },
-  extraReducers: {
-    [fetchPosts.pending]: (state) => {
-      state.status = 'pending';
-    },
-    [fetchPosts.fulfilled]: (state, action) => {
-      state.list = action.payload;
-      state.status = 'success';
-    },
-    [fetchPosts.rejected]: (state) => {
-      state.status = 'failed';
-    },
-    [fetchPostsByTitle.pending]: (state) => {
-      state.status = 'pending';
-    },
-    [fetchPostsByTitle.fulfilled]: (state, action) => {
-      state.list = action.payload;
-      state.status = 'success';
-    },
-    [fetchPostsByTitle.rejected]: (state) => {
-      state.status = 'failed';
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPosts.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.list = action.payload;
+        state.status = 'success';
+      })
+      .addCase(fetchPosts.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(fetchPostsByTitle.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchPostsByTitle.fulfilled, (state, action) => {
+        state.list = action.payload;
+        state.status = 'success';
+      })
+      .addCase(fetchPostsByTitle.rejected, (state) => {
+        state.status = 'failed';
+      });
   },
 });
 

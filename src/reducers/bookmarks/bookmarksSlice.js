@@ -19,27 +19,28 @@ export const bookmarks = createSlice({
     list: [],
     status: null,
   },
-  extraReducers: {
-    [fetchBookmarks.pending]: (state) => {
-      state.status = 'pending';
-    },
-    [fetchBookmarks.fulfilled]: (state, action) => {
-      state.list = action.payload;
-      state.status = 'success';
-    },
-    [fetchBookmarks.rejected]: (state) => {
-      state.status = 'failed';
-    },
-    [fetchBookmarksByTitle.pending]: (state) => {
-      state.status = 'pending';
-    },
-    [fetchBookmarksByTitle.fulfilled]: (state, action) => {
-      state.list = action.payload;
-      state.status = 'success';
-    },
-    [fetchBookmarksByTitle.rejected]: (state) => {
-      state.status = 'failed';
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchBookmarks.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchBookmarks.fulfilled, (state, action) => {
+        state.list = action.payload;
+        state.status = 'success';
+      })
+      .addCase(fetchBookmarks.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(fetchBookmarksByTitle.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchBookmarksByTitle.fulfilled, (state, action) => {
+        state.list = action.payload;
+        state.status = 'success';
+      })
+      .addCase(fetchBookmarksByTitle.rejected, (state) => {
+        state.status = 'failed';
+      });
   },
 });
 
