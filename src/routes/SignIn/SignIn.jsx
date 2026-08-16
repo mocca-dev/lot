@@ -26,7 +26,7 @@ import {
   selecUserStatus,
   signIn,
 } from '../../reducers/user/userSlice';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { hideSpinner, showSpinner } from '../../reducers/spinner/spinnerSlice';
 import { Link } from 'react-router-dom';

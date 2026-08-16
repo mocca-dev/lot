@@ -49,12 +49,11 @@ function App() {
           {showHeader && <Header />}
           <SubHeader />
           <Routes>
-            <Route exact path="/" element={<Main />} />
-            <Route exact path="/lot" element={<Lot />}>
+            <Route path="/" element={<Main />} />
+            <Route path="/lot" element={<Lot />}>
               <Route path=":id" element={<Lot />} />
             </Route>
             <Route
-              exact
               path="/profile"
               element={
                 <PrivateRoute>
@@ -63,7 +62,6 @@ function App() {
               }
             />
             <Route
-              exact
               path="/bookmark"
               element={
                 <PrivateRoute>
@@ -72,7 +70,6 @@ function App() {
               }
             />
             <Route
-              exact
               path="/notification"
               element={
                 <PrivateRoute>
@@ -81,7 +78,6 @@ function App() {
               }
             />
             <Route
-              exact
               path="/new"
               element={
                 <PrivateRoute>
@@ -97,8 +93,8 @@ function App() {
                 </PrivateRoute>
               }
             />
-            {/* <Route exact path="/map" element={<Map />} /> */}
-            <Route exact path="/signin" element={<SignIn />} />
+            {/* <Route path="/map" element={<Map />} /> */}
+            <Route path="/signin" element={<SignIn />} />
           </Routes>
           {showFooter && <Footer items={footerItems} />}
         </div>
