@@ -22,14 +22,15 @@ export const userSlice = createSlice({
       state.data = null;
     },
   },
-  extraReducers: {
-    [signIn.pending]: (state) => {
-      state.status = true;
-    },
-    [signIn.fulfilled]: (state, action) => {
-      state.data = action.meta.arg;
-      state.status = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(signIn.pending, (state) => {
+        state.status = true;
+      })
+      .addCase(signIn.fulfilled, (state, action) => {
+        state.data = action.meta.arg;
+        state.status = false;
+      });
   },
 });
 

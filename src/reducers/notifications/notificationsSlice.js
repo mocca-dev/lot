@@ -34,17 +34,18 @@ export const notifications = createSlice({
     list: [],
     status: null,
   },
-  extraReducers: {
-    [fetchNotifications.pending]: (state) => {
-      state.status = 'pending';
-    },
-    [fetchNotifications.fulfilled]: (state, action) => {
-      state.list = action.payload;
-      state.status = 'success';
-    },
-    [fetchNotifications.rejected]: (state) => {
-      state.status = 'failed';
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchNotifications.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchNotifications.fulfilled, (state, action) => {
+        state.list = action.payload;
+        state.status = 'success';
+      })
+      .addCase(fetchNotifications.rejected, (state) => {
+        state.status = 'failed';
+      });
   },
 });
 

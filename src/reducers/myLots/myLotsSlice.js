@@ -10,17 +10,18 @@ export const myLots = createSlice({
     list: [],
     status: null,
   },
-  extraReducers: {
-    [fetchMyLots.pending]: (state) => {
-      state.status = 'pending';
-    },
-    [fetchMyLots.fulfilled]: (state, action) => {
-      state.list = action.payload;
-      state.status = 'success';
-    },
-    [fetchMyLots.rejected]: (state) => {
-      state.status = 'failed';
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchMyLots.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchMyLots.fulfilled, (state, action) => {
+        state.list = action.payload;
+        state.status = 'success';
+      })
+      .addCase(fetchMyLots.rejected, (state) => {
+        state.status = 'failed';
+      });
   },
 });
 

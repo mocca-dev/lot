@@ -19,14 +19,15 @@ export const toaster = createSlice({
       state.content = action;
     },
   },
-  extraReducers: {
-    [showToast.pending]: (state, action) => {
-      state.content = action.meta.arg;
-      state.show = true;
-    },
-    [showToast.fulfilled]: (state) => {
-      state.show = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(showToast.pending, (state, action) => {
+        state.content = action.meta.arg;
+        state.show = true;
+      })
+      .addCase(showToast.fulfilled, (state) => {
+        state.show = false;
+      });
   },
 });
 

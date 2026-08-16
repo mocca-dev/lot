@@ -51,18 +51,19 @@ export const lot = createSlice({
       state.status = null;
     },
   },
-  extraReducers: {
-    [fetchLotById.pending]: (state) => {
-      state.status = 'pending';
-    },
-    [fetchLotById.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.status = 'success';
-    },
-    [fetchLotById.rejected]: (state) => {
-      state.status = 'failed';
-    },
-    [createNewLot.fulfilled]: () => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchLotById.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(fetchLotById.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.status = 'success';
+      })
+      .addCase(fetchLotById.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(createNewLot.fulfilled, () => {});
   },
 });
 
