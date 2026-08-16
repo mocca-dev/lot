@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
@@ -39,6 +39,10 @@ const Header = () => {
       dispatch(showFooter());
       dispatch(showLogo());
       dispatch(setHeaderContent(null));
+      // showRight is not purely derived from the route: on /mylots and /lot
+      // it deliberately keeps whatever value the previous route left behind,
+      // so collapsing this into render would change behaviour.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowRight(true);
     } else {
       dispatch(hideFooter());

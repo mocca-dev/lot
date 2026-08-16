@@ -32,13 +32,21 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "deploy": "npm run build && cd dist && surge -d https://lotapp.surge.sh && npm run play-finish-sound",
-    "play-finish-sound": "afplay /System/Library/Sounds/Glass.aiff"
+    "play-finish-sound": "afplay /System/Library/Sounds/Glass.aiff",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
     "@vitejs/plugin-react": "^6.0.5",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.4",
+    "globals": "^17.11.0",
     "jsdom": "^30.0.1",
     "vite": "^8.2.1",
     "vite-plugin-pwa": "^1.3.0",

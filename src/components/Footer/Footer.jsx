@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import './Footer.css';
@@ -19,6 +19,10 @@ const Footer = ({ items }) => {
         item.classList.remove('active');
       });
       markerNode?.classList.toggle('active');
+      // The offset can only be read once the nav has been laid out, so this
+      // measurement genuinely belongs in an effect. Removing the state would
+      // mean deriving the marker position without touching the DOM.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setXOffset(markerNode?.offsetLeft);
     }
   }, [setXOffset, location]);
